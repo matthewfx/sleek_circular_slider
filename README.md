@@ -1,14 +1,35 @@
-# sleek_circular_slider
+# Sleek circular slider/progress bar for Flutter
 
-A new Flutter package project.
+A highly customizable circular slider/progress bar for Flutter.
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+- [Installation](#installation)
+- [Basic Usage](#basic-usage)
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+### Installation
+
+Add
+
+```bash
+
+sleek_circular_slider : ^lastest_version
+
+```
+
+to your pubspec.yaml, and run
+
+```bash
+flutter packages get
+```
+
+in your project's root directory.
+
+### Basic Usage
+
+
+Import it to your project file
+
+```dart
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+```
