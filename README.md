@@ -2,12 +2,10 @@
 
 A highly customizable circular slider/progress bar for Flutter.
 
-![Example 01](./doc/sleek_circular_slider00.gif) ![Example 02](./doc/sleek_circular_slider01.gif)
-![Example 03](./doc/sleek_circular_slider02.gif) ![Example 04](./doc/sleek_circular_slider03.gif)
-![Example 05](./doc/sleek_circular_slider04.gif) ![Example 06](./doc/sleek_circular_slider05.gif)
-![Example 07](./doc/sleek_circular_slider06.gif) ![Example 08](./doc/sleek_circular_slider07.gif)
-
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/ECXdRYs89QY/0.jpg)](https://youtu.be/ECXdRYs89QY)
+![Example 01](./docs/sleek_circular_slider00.gif) ![Example 02](./docs/sleek_circular_slider01.gif)
+![Example 03](./docs/sleek_circular_slider02.gif) ![Example 04](./docs/sleek_circular_slider03.gif)
+![Example 05](./docs/sleek_circular_slider04.gif) ![Example 06](./docs/sleek_circular_slider05.gif)
+![Example 07](./docs/sleek_circular_slider06.gif) ![Example 08](./docs/sleek_circular_slider07.gif)
 
 ## Getting Started
 
@@ -77,3 +75,13 @@ final slider = SleekCircularSlider(
 );
 ```
 Slider user's interaction will be disabled if there is either no [onChange] or [onChangeEnd] provided.
+
+| Parameter                 |                       Default                       | Description                                                                                                             |
+| :------------------------ | :-------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------- |
+| appearance *CircularSliderAppearance     |                                                     | A set of objects describing the slider look and feel.                                                             |
+| min                       |                         0                           | The minimum value the user can select.  Must be less than or equal to max. |
+| max                       |                         100                         | The maximum value the user can select. Must be greater than or equal to min.  |
+
+### YouTube video
+
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/ECXdRYs89QY/0.jpg)](https://youtu.be/ECXdRYs89QY)
