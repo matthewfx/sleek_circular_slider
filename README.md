@@ -11,12 +11,12 @@ A highly customizable circular slider/progress bar for Flutter.
 
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
-- [SleekCircularSlider parameters](#sleekCircularSlider_parameters)
-- [CircularSliderAppearance parameters](#circularSliderAppearance_parameters)
-- [CustomSliderWidths parameters](#customSliderWidths_parameters)
-- [CustomSliderColors parameters](#customSliderColors_parameters)
-- [InfoProperties parameters](#infoProperties_parameters)
-- [YouTube video](#youTube_video)
+- [SleekCircularSlider parameters](#sleekcircularslider-parameters)
+- [CircularSliderAppearance parameters](#circularsliderappearance-parameters)
+- [CustomSliderWidths parameters](#customsliderwidths-parameters)
+- [CustomSliderColors parameters](#customslidercolors-parameters)
+- [InfoProperties parameters](#infoproperties-parameters)
+- [YouTube video](#youtube-video)
 
 ### Installation
 
@@ -145,10 +145,15 @@ Slider user's interaction will be disabled if there is either no [onChange] or [
 | **bottomLabelStyle** *TextStyle*     |                                                     | The text style of the bottom text widget.                |
 | **topLabelText** *String*            |                                                     | The text for the top text widget.                           |
 | **bottomLabelText** *String*         |                                                     | The text for the bottom text widget.                    |
-| **modifier** *String PercentageModifier(double percentage)* | closure adding **%** character | The closure allowing to modify how a current value of the slider is displayed. i.e. ```dart String _defaultPercentageModifier(double value) {
-    final roundedValue = (value).ceil().toInt().toString();
+| **modifier** *String PercentageModifier(double percentage)* | closure adding **%** character | The closure allowing to modify how a current value of the slider is displayed. |
+
+**Example of the modifier**
+ ```dart String _defaultPercentageModifier(double value) {
+    final roundedValue = value.ceil().toInt().toString();
     return '$roundedValue %';
-  }``` will convert it to *int* and add the **%** to it. |
+  }
+``` 
+It will convert a current value to *int* and add the **%** sufix to it.
 
 ### YouTube video
 
