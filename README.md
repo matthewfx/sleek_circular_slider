@@ -145,10 +145,11 @@ Slider user's interaction will be disabled if there is either no [onChange] or [
 | **bottomLabelStyle** *TextStyle*     |                                                     | The text style of the bottom text widget.                |
 | **topLabelText** *String*            |                                                     | The text for the top text widget.                           |
 | **bottomLabelText** *String*         |                                                     | The text for the bottom text widget.                    |
-| **modifier** *String PercentageModifier(double percentage)* | closure adding **%** character | The closure allowing to modify how a current value of the slider is displayed. |
+| **modifier** *String PercentageModifier(double percentage)* | closure adding the **%** character | The closure allowing to modify how a current value of the slider is displayed. |
 
 **Example of the modifier**
- ```dart String _defaultPercentageModifier(double value) {
+ ```dart 
+ String percentageModifier(double value) {
     final roundedValue = value.ceil().toInt().toString();
     return '$roundedValue %';
   }
