@@ -6,6 +6,7 @@ A highly customizable circular slider/progress bar for Flutter.
 
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
+- [Customizations](#customizations)
 
 ### Installation
 
@@ -33,3 +34,15 @@ Import it to your project file
 ```dart
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 ```
+
+And add it in its most basic form like it:
+
+```dart
+final slider = SleekCircularSlider(
+                      appearance: CircularSliderAppearance(),
+                      onChange: (double value) {
+                        print(value);
+                      });
+```
+
+### Customizations
