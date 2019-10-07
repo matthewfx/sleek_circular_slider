@@ -15,6 +15,8 @@ A highly customizable circular slider/progress bar for Flutter.
 - [CircularSliderAppearance parameters](#circularSliderAppearance_parameters)
 - [CustomSliderWidths parameters](#customSliderWidths_parameters)
 - [CustomSliderColors parameters](#customSliderColors_parameters)
+- [InfoProperties parameters](#infoProperties_parameters)
+- [YouTube video](#youTube_video)
 
 ### Installation
 
@@ -117,6 +119,7 @@ Slider user's interaction will be disabled if there is either no [onChange] or [
 | **shadowWidht** *double*             |                progressBarWidth * 1.4               | The width of the slider's shadow.  |
 | **handlerSize** *double*             |                progressBarWidth / 5                 | The size of the slider's handler. |
 
+
 ### CustomSliderColors parameters
 
 | Parameter                 |                       Default                       | Description                                                                                                             |
@@ -131,6 +134,21 @@ Slider user's interaction will be disabled if there is either no [onChange] or [
 | **shadowColor** *Color*              |                #2C57C0                              | The color of the shadow. |
 | **shadowMaxOpacity** *double*        |                    0.2                              | The opacity of the shadow in its darker part.             |
 | **shadowStep** *double*              |                                                     | The shadow is being painted with a number of steps. This value determines how big is a width of each step. The more steps are painted the softer the shadow is. For a flat shadow use a difference between the **shadowWidth** and the **progressWidth** for the **shadowStep**.|
+
+
+### InfoProperties parameters
+
+| Parameter                 |                       Default                       | Description                                                                                                             |
+| :------------------------ | :-------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------- |
+| **mainLabelStyle** *TextStyle*       |                                                     | The text style of the main text widget displaying a slider's current value.     |
+| **topLabelStyle** *TextStyle*        |                                                     | The text style of the top text widget.                   |
+| **bottomLabelStyle** *TextStyle*     |                                                     | The text style of the bottom text widget.                |
+| **topLabelText** *String*            |                                                     | The text for the top text widget.                           |
+| **bottomLabelText** *String*         |                                                     | The text for the bottom text widget.                    |
+| **modifier** *String PercentageModifier(double percentage)* | closure adding **%** character | The closure allowing to modify how a current value of the slider is displayed. i.e. ```dart String _defaultPercentageModifier(double value) {
+    final roundedValue = (value).ceil().toInt().toString();
+    return '$roundedValue %';
+  }``` will convert it to *int* and add the **%** to it. |
 
 ### YouTube video
 
