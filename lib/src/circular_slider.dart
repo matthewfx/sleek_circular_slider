@@ -210,9 +210,6 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   }
 
   void _onPanEnd(Offset details) {
-    if (_painter.center == null) {
-      return;
-    }
     _handlePan(details, true);
     widget.onChangeEnd(angleToValue(
         _currentAngle, widget.min, widget.max, widget.appearance.angleRange));
@@ -221,6 +218,9 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   }
 
   void _handlePan(Offset details, bool isPanEnd) {
+    if (_painter.center == null) {
+      return;
+    }
     RenderBox renderBox = context.findRenderObject();
     var position = renderBox.globalToLocal(details);
     _selectedAngle = coordinatesToRadians(_painter.center, position);
