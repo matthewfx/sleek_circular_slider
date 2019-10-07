@@ -2,6 +2,8 @@
 
 A highly customizable circular slider/progress bar for Flutter.
 
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/ECXdRYs89QY/0.jpg)](https://youtu.be/ECXdRYs89QY)
+
 ## Getting Started
 
 - [Installation](#installation)
