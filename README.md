@@ -1,4 +1,5 @@
 # Sleek circular slider/progress bar for Flutter
+[![License: MIT](https://img.shields.io/badge/Licence-MIT-success.svg)](https://opensource.org/licenses/MIT)[![Author's website](https://img.shields.io/badge/Home-MN-blue.svg)](https://nuckowski.com)
 
 A highly customizable circular slider/progress bar for Flutter.
 
