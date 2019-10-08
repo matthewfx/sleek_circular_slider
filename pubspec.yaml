@@ -1,8 +1,8 @@
 name: sleek_circular_slider
 description: A highly customizable circular slider/progress bar for Flutter.
-version: 1.0.2
+version: 1.0.3
 author: Mat Nuckowski <mat@nuckowski.com>
-homepage: https://github.com/matthewfx/sleek-circular-slider.git
+homepage: https://github.com/matthewfx/sleek-circular-slider
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

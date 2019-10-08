@@ -9,3 +9,7 @@
 ## [1.0.2] - 2019-10-08.
 
 * Another attempt to fix gifs in the README.md
+
+## [1.0.3] - 2019-10-08.
+
+* The last attempt to fix it by modifing the homepage in the pubspec.yaml
