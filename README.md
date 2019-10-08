@@ -159,4 +159,4 @@ It will convert a current value to *int* and add the **%** sufix to it.
 
 ### YouTube video
 
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/ECXdRYs89QY/0.jpg)](https://youtu.be/ECXdRYs89QY)
+[![YouTube Video of the example in action](http://img.youtube.com/vi/ECXdRYs89QY/0.jpg)](https://youtu.be/ECXdRYs89QY)
