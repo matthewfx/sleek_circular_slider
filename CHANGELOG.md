@@ -13,3 +13,7 @@
 ## [1.0.3] - 2019-10-08.
 
 * The last attempt to fix it by modifing the homepage in the pubspec.yaml
+
+## [1.0.4] - 2019-10-08.
+
+* Fixed a bug causing an exception to be thrown when onChangeStart or onChangeEnd were null

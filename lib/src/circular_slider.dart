@@ -211,8 +211,10 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
 
   void _onPanEnd(Offset details) {
     _handlePan(details, true);
-    widget.onChangeEnd(angleToValue(
-        _currentAngle, widget.min, widget.max, widget.appearance.angleRange));
+    if (widget.onChangeEnd != null) {
+      widget.onChangeEnd(angleToValue(
+          _currentAngle, widget.min, widget.max, widget.appearance.angleRange));
+    }
 
     _isHandlerSelected = false;
   }
@@ -248,8 +250,10 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     if (isPointAlongCircle(
         position, _painter.center, _painter.radius, touchWidth)) {
       _isHandlerSelected = true;
-      widget.onChangeStart(angleToValue(
-          _currentAngle, widget.min, widget.max, widget.appearance.angleRange));
+      if (widget.onChangeStart != null) {
+        widget.onChangeStart(angleToValue(_currentAngle, widget.min, widget.max,
+            widget.appearance.angleRange));
+      }
       _onPanUpdate(details);
     } else {
       _isHandlerSelected = false;
