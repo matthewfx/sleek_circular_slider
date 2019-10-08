@@ -3,10 +3,10 @@
 
 A highly customizable circular slider/progress bar for Flutter.
 
-![Example 01](./docs/sleek_circular_slider00.GIF) ![Example 02](./docs/sleek_circular_slider01.GIF)
-![Example 03](./docs/sleek_circular_slider02.GIF) ![Example 04](./docs/sleek_circular_slider03.GIF)
-![Example 05](./docs/sleek_circular_slider04.GIF) ![Example 06](./docs/sleek_circular_slider05.GIF)
-![Example 07](./docs/sleek_circular_slider06.GIF) ![Example 08](./docs/sleek_circular_slider07.GIF)
+![Example 01](./doc/sleek_circular_slider00.GIF) ![Example 02](./doc/sleek_circular_slider01.GIF)
+![Example 03](./doc/sleek_circular_slider02.GIF) ![Example 04](./doc/sleek_circular_slider03.GIF)
+![Example 05](./doc/sleek_circular_slider04.GIF) ![Example 06](./doc/sleek_circular_slider05.GIF)
+![Example 07](./doc/sleek_circular_slider06.GIF) ![Example 08](./doc/sleek_circular_slider07.GIF)
 
 ## Getting Started
 
