@@ -127,7 +127,6 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     /// If painter is null there is a need to setup it to prevent exceptions.
     if (_painter == null) {
       _setupPainter();
-      _updateOnChange();
     }
     return RawGestureDetector(
         gestures: <Type, GestureRecognizerFactory>{

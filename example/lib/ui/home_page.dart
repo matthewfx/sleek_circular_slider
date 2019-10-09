@@ -300,7 +300,6 @@ class _HomePageState extends State<HomePage> {
         child: PageView(
       controller: controller,
       children: <Widget>[
-        MyTestPage(),
         example01,
         example03,
         example04,

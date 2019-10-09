@@ -17,3 +17,7 @@
 ## [1.0.4] - 2019-10-08.
 
 * Fixed a bug causing an exception to be thrown when onChangeStart or onChangeEnd were null
+
+## [1.0.5] - 2019-10-09.
+
+* Fixed a bug causing an exception to be thrown when there was the **setState** being called from the **onChange** closure

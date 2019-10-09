@@ -55,21 +55,3 @@ class ExamplePage extends StatelessWidget {
     );
   }
 }
-
-class MyTestPage extends StatelessWidget {
-  const MyTestPage({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: SleekCircularSlider(
-          appearance: CircularSliderAppearance(),
-          onChangeEnd: (double value) {
-            print(value);
-          },
-        ),
-      ),
-    );
-  }
-}
