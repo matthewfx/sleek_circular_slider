@@ -78,7 +78,19 @@ final slider = SleekCircularSlider(
   },
 );
 ```
-Slider user's interaction will be disabled if there is either no [onChange] or [onChangeEnd] provided.
+
+### Use as a progress bar
+Slider user's interaction will be disabled if there is either no [onChange] or [onChangeEnd] provided. That way one can use the widget not as a slider but as a progress bar.
+
+```dart
+final slider = SleekCircularSlider(
+  appearance: CircularSliderAppearance(
+    customWidths: CustomSliderWidths(progressBarWidth: 10)),
+  min: 10,
+  max: 28,
+  initialValue: 14,
+);
+```
 
 
 ### SleekCircularSlider parameters
@@ -117,7 +129,7 @@ Slider user's interaction will be disabled if there is either no [onChange] or [
 | :------------------------ | :-------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------- |
 | **trackWidth** *double*              |                progressBarWidth / 4                 | The width of the slider's track.                        |
 | **progressBarWidth** *double*        |                 slider's size / 10                  | The width of the slider's progress bar.                 |
-| **shadowWidht** *double*             |                progressBarWidth * 1.4               | The width of the slider's shadow.  |
+| **shadowWidth** *double*             |                progressBarWidth * 1.4               | The width of the slider's shadow.  |
 | **handlerSize** *double*             |                progressBarWidth / 5                 | The size of the slider's handler. |
 
 
@@ -160,3 +172,12 @@ It will convert a current value to *int* and add the **%** sufix to it.
 ### YouTube video
 
 [![YouTube Video of the example in action](https://img.youtube.com/vi/ECXdRYs89QY/0.jpg)](https://youtu.be/ECXdRYs89QY)
+
+## Todo
+- [ ] add divisions;
+- [ ] add more comments to document the code;
+
+
+## Acknowledgments
+
+* Hat tip to David Anaya for his awesome [blog post](https://www.davidanaya.io/flutter/circular-slider.html) about building a circular slider in Flutter and radian to degrees conversions which helped me a lot!

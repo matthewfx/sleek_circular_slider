@@ -21,3 +21,6 @@
 ## [1.0.5] - 2019-10-09.
 
 * Fixed a bug causing an exception to be thrown when there was the **setState** being called from the **onChange** closure
+
+## [1.0.6] - 2019-10-17.
+* Changes to the ReadMe.md to fix a spelling in parameters and add some more claryfication about using the widges as a progress bar
