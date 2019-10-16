@@ -117,7 +117,7 @@ Slider user's interaction will be disabled if there is either no [onChange] or [
 | :------------------------ | :-------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------- |
 | **trackWidth** *double*              |                progressBarWidth / 4                 | The width of the slider's track.                        |
 | **progressBarWidth** *double*        |                 slider's size / 10                  | The width of the slider's progress bar.                 |
-| **shadowWidht** *double*             |                progressBarWidth * 1.4               | The width of the slider's shadow.  |
+| **shadowWidth** *double*             |                progressBarWidth * 1.4               | The width of the slider's shadow.  |
 | **handlerSize** *double*             |                progressBarWidth / 5                 | The size of the slider's handler. |
 
 
