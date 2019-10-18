@@ -60,7 +60,6 @@ There are additional optional parameters one can initialize the slider with.
 
 ```dart
 final slider = SleekCircularSlider(
-  appearance: CircularSliderAppearance(),
   min: 0,
   max: 1000,
   initialValue: 426,
@@ -91,7 +90,6 @@ final slider = SleekCircularSlider(
   initialValue: 14,
 );
 ```
-
 
 ### SleekCircularSlider parameters
 

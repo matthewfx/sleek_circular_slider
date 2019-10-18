@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'utils.dart';
 
 typedef String PercentageModifier(double percentage);
 
@@ -8,18 +7,18 @@ class CircularSliderAppearance {
   static const double _defaultStartAngle = 150.0;
   static const double _defaultAngleRange = 240.0;
 
-  Color _defaultTrackColor = HexColor('#DCBEFB');
+  static const Color _defaultTrackColor = Color.fromRGBO(220, 190, 251, 1.0);
 
-  List<Color> _defaultBarColors = [
-    HexColor('#1E003B'),
-    HexColor('#EC008A'),
-    HexColor('#6285DA')
+  static const List<Color> _defaultBarColors = [
+    Color.fromRGBO(30, 0, 59, 1.0),
+    Color.fromRGBO(236, 0, 138, 1.0),
+    Color.fromRGBO(98, 133, 218, 1.0),
   ];
 
   static const double _defaultGradientStartAngle = 0.0;
   static const double _defaultGradientEndAngle = 180.0;
   static const bool _defaultHideShadow = false;
-  Color _defaultShadowColor = HexColor('#2C57C0');
+  static const Color _defaultShadowColor = Color.fromRGBO(44, 87, 192, 1.0);
   static const double _defaultShadowMaxOpacity = 0.2;
   static const Color _defaultDotColor = Colors.white;
 
@@ -113,7 +112,7 @@ class CircularSliderAppearance {
     return TextStyle(
         fontWeight: FontWeight.w100,
         fontSize: size / 5.0,
-        color: HexColor('#1E003B'));
+        color: Color.fromRGBO(30, 0, 59, 1.0));
   }
 
   TextStyle get infoTopLabelStyle {
@@ -121,7 +120,7 @@ class CircularSliderAppearance {
     return TextStyle(
         fontWeight: FontWeight.w600,
         fontSize: size / 10.0,
-        color: HexColor('#935178'));
+        color: Color.fromRGBO(147, 81, 120, 1.0));
   }
 
   TextStyle get infoBottomLabelStyle {
@@ -129,10 +128,10 @@ class CircularSliderAppearance {
     return TextStyle(
         fontWeight: FontWeight.w600,
         fontSize: size / 10.0,
-        color: HexColor('#935178'));
+        color: Color.fromRGBO(147, 81, 120, 1.0));
   }
 
-  CircularSliderAppearance(
+  const CircularSliderAppearance(
       {this.customWidths,
       this.customColors,
       this.size = _defaultSize,

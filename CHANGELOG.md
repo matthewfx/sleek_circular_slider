@@ -24,3 +24,6 @@
 
 ## [1.0.6] - 2019-10-17.
 * Changes to the ReadMe.md to fix a spelling in parameters and add some more claryfication about using the widges as a progress bar
+
+## [1.0.7] - 2019-10-19.
+* Simplified the constructor. There is no longer need to provide the CircularSliderAppearance if one wants to use the default one.
