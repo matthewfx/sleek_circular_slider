@@ -3,12 +3,18 @@ part of circular_slider;
 class _CurvePainter extends CustomPainter {
   final double angle;
   final CircularSliderAppearance appearance;
+  final startAngle;
+  final angleRange;
 
   Offset handler;
   Offset center;
   double radius;
 
-  _CurvePainter({this.appearance, this.angle = 30});
+  _CurvePainter(
+      {this.appearance, this.angle = 30, this.startAngle, this.angleRange})
+      : assert(appearance != null),
+        assert(startAngle != null),
+        assert(angleRange != null);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -22,7 +28,11 @@ class _CurvePainter extends CustomPainter {
       ..strokeWidth = appearance.trackWidth
       ..color = appearance.trackColor;
     drawCircularArc(
-        canvas: canvas, size: size, paint: trackPaint, ignoreAngle: true);
+        canvas: canvas,
+        size: size,
+        paint: trackPaint,
+        ignoreAngle: true,
+        spinnerMode: appearance.spinnerMode);
 
     if (!appearance.hideShadow) {
       drawShadow(canvas: canvas, size: size);
@@ -46,7 +56,7 @@ class _CurvePainter extends CustomPainter {
     var dotPaint = Paint()..color = appearance.dotColor;
 
     Offset handler = degreesToCoordinates(
-        center, -math.pi / 2 + appearance.startAngle + angle + 1.5, radius);
+        center, -math.pi / 2 + startAngle + angle + 1.5, radius);
     canvas.drawCircle(handler, appearance.handlerSize, dotPaint);
   }
 
@@ -54,12 +64,13 @@ class _CurvePainter extends CustomPainter {
       {@required Canvas canvas,
       @required Size size,
       @required Paint paint,
-      bool ignoreAngle = false}) {
-    final double angleValue = ignoreAngle ? 0 : (appearance.angleRange - angle);
+      bool ignoreAngle = false,
+      bool spinnerMode = false}) {
+    final double angleValue = ignoreAngle ? 0 : (angleRange - angle);
     canvas.drawArc(
         Rect.fromCircle(center: center, radius: radius),
-        degreeToRadians(appearance.startAngle),
-        degreeToRadians(appearance.angleRange - angleValue),
+        degreeToRadians(spinnerMode ? 0 : startAngle),
+        degreeToRadians(spinnerMode ? 360 : angleRange - angleValue),
         false,
         paint);
   }

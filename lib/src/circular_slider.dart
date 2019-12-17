@@ -2,8 +2,10 @@ library circular_slider;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:sleek_circular_slider/src/slider_animations.dart';
 import 'utils.dart';
 import 'appearance.dart';
+import 'slider_label.dart';
 import 'dart:math' as math;
 
 part 'curve_painter.dart';
@@ -55,74 +57,157 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   double _oldWidgetAngle;
   double _oldWidgetValue;
   double _currentAngle;
+  double _startAngle;
+  double _angleRange;
   double _selectedAngle;
-  bool _animationCompleted = false;
+  double _rotation;
+  SpinAnimationManager _spinManager;
+  // bool _animationCompleted = false;
 
-  bool get _interactionEnabled =>
-      (widget.onChangeEnd != null || widget.onChange != null);
-  Animation<double> _animation;
-  AnimationController _animController;
+  bool get _interactionEnabled => (widget.onChangeEnd != null ||
+      widget.onChange != null && !widget.appearance.spinnerMode);
+  // Animation<double> _animation;
+  // Animation<double> _animation1;
+  // Animation<double> _animation2;
+  // Animation<double> _animation3;
+  // AnimationController _animController;
 
   @override
   void initState() {
     super.initState();
+    _startAngle = widget.appearance.startAngle;
+    _angleRange = widget.appearance.angleRange;
+
+    // _animController = AnimationController(vsync: this);
+    // _animController.duration = Duration(milliseconds: 3500);
+    // _animController
+    //   ..addListener(() {
+    // setState(() {
+    //   _currentAngle = _animation3 != null ? _animation3.value : 0;
+    //   _startAngle = _animation2 != null ? math.pi * _animation2.value : 0;
+    //   _rotation = _animation1.value;
+    //       // _angleRange = 360 - _animation.value;
+    //       // update painter and the on change closure
+    // _setupPainter();
+    // _updateOnChange();
+    //     });
+    //   })
+    //   ..repeat();
+    // _animation1 = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+    //     parent: _animController,
+    //     curve: const Interval(0.5, 1.0, curve: Curves.linear)));
+    // _animation2 = Tween<double>(begin: -240.0, end: 180.0).animate(
+    //     CurvedAnimation(
+    //         parent: _animController,
+    //         curve: const Interval(0, 1.0, curve: Curves.linear)));
+    // _animation3 = Tween(begin: 0.0, end: 360.0).animate(CurvedAnimation(
+    //     parent: _animController,
+    //     curve: const Interval(0.0, 1.0, curve: SpinnerCurve())));
+
     if (!widget.appearance.animationEnabled) {
       return;
     }
-    _animController = AnimationController(vsync: this);
-    _animate();
+
+    // widget.appearance.spinnerMode ? _spin() : _animate();
   }
 
   @override
   void didUpdateWidget(SleekCircularSlider oldWidget) {
     if (oldWidget.angle != widget.angle) {
-      _animate();
+      // _animate();
     }
     super.didUpdateWidget(oldWidget);
   }
 
-  void _animate() {
-    if (!widget.appearance.animationEnabled || _animController == null) {
-      // if there is no animation we need to update painter and onChange value
-      _setupPainter();
-      _updateOnChange();
-      return;
-    }
+  // void _animate() {
+  //   if (!widget.appearance.animationEnabled || _animController == null) {
+  //     // if there is no animation we need to update painter and onChange value
+  //     _setupPainter();
+  //     _updateOnChange();
+  //     return;
+  //   }
 
-    _animationCompleted = false;
+  //   _animationCompleted = false;
 
-    final duration = valueToDuration(widget.initialValue,
-        _oldWidgetValue ?? widget.min, widget.min, widget.max);
+  //   final duration = valueToDuration(widget.initialValue,
+  //       _oldWidgetValue ?? widget.min, widget.min, widget.max);
 
-    _animController.duration = Duration(milliseconds: duration);
+  //   _animController.duration = Duration(milliseconds: duration);
 
-    final curvedAnimation = CurvedAnimation(
-      parent: _animController,
-      curve: Curves.easeOut,
-    );
+  //   final curvedAnimation = CurvedAnimation(
+  //     parent: _animController,
+  //     curve: Curves.easeOut,
+  //   );
 
-    _animation = Tween<double>(begin: _oldWidgetAngle ?? 0, end: widget.angle)
-        .animate(curvedAnimation)
-          ..addListener(() {
-            setState(() {
-              if (!_animationCompleted) {
-                _currentAngle = _animation.value;
-                // update painter and the on change closure
-                _setupPainter();
-                _updateOnChange();
-              }
-            });
-          })
-          ..addStatusListener((status) {
-            if (status == AnimationStatus.completed) {
-              _animationCompleted = true;
+  //   _animation = Tween<double>(begin: _oldWidgetAngle ?? 0, end: widget.angle)
+  //       .animate(curvedAnimation)
+  //         ..addListener(() {
+  //           setState(() {
+  //             if (!_animationCompleted) {
+  //               _currentAngle = _animation.value;
+  //               // update painter and the on change closure
+  //               _setupPainter();
+  //               _updateOnChange();
+  //             }
+  //           });
+  //         })
+  //         ..addStatusListener((status) {
+  //           if (status == AnimationStatus.completed) {
+  //             _animationCompleted = true;
 
-              _animController.reset();
-              // _animController.dispose();
-            }
+  //             _animController.reset();
+  //           }
+  //         });
+  //   _animController.forward();
+  // }
+
+  void _spin() {
+    _spinManager = SpinAnimationManager(
+        tickerProvider: this,
+        duration: Duration(milliseconds: 3500),
+        animate: ((double anim1, anim2, anim3) {
+          setState(() {
+            _rotation = anim1 != null ? anim1 : 0;
+            _startAngle = anim2 != null ? math.pi * anim2 : 0;
+            _currentAngle = anim3 != null ? anim3 : 0;
+            _setupPainter();
+            _updateOnChange();
           });
-    _animController.forward();
+        }));
+    _spinManager.spin();
   }
+
+  // void _spin() {
+  // if (_animController == null) {
+  //   // if there is no animation we need to update painter and onChange value
+  //   _setupPainter();
+  //   _updateOnChange();
+  //   return;
+  // }
+
+  // final curvedAnimation =
+  //     CurvedAnimation(parent: _animController, curve: Curves.decelerate);
+
+  // _animation = Tween<double>(begin: 0, end: 350).animate(curvedAnimation)
+  //   ..addListener(() {
+  //     setState(() {
+  //       if (!_animationCompleted) {
+  //         _currentAngle = _animation.value;
+  //         _startAngle = _animation.value * 0.2;
+  //         // _angleRange = 360 - _animation.value;
+  //         // update painter and the on change closure
+  //         _setupPainter();
+  //         _updateOnChange();
+  //       }
+  //     });
+  //   })
+  // ..addStatusListener((status) {
+  //   if (status == AnimationStatus.completed) {
+  //     _animController.repeat(min: 0, max: 50);
+  //   }
+  //   });
+  // _animController.forward();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -142,18 +227,14 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
             (_CustomPanGestureRecognizer instance) {},
           ),
         },
-        child: CustomPaint(
-          painter: _painter,
-          child: Container(
-              width: widget.appearance.size,
-              height: widget.appearance.size,
-              child: _buildChildWidget()),
-        ));
+        child: _buildRotatingPainter(
+            rotation: _rotation,
+            size: Size(widget.appearance.size, widget.appearance.size)));
   }
 
   @override
   void dispose() {
-    if (_animController != null) _animController.dispose();
+    // if (_animController != null) _animController.dispose();
     super.dispose();
   }
 
@@ -167,13 +248,15 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     }
 
     _currentAngle = calculateAngle(
-        startAngle: widget.appearance.startAngle,
-        angleRange: widget.appearance.angleRange,
+        startAngle: _startAngle,
+        angleRange: _angleRange,
         selectedAngle: _selectedAngle,
         previousAngle: _currentAngle,
         defaultAngle: defaultAngle);
 
     _painter = _CurvePainter(
+        startAngle: _startAngle,
+        angleRange: _angleRange,
         angle: _currentAngle < 0.5 ? 0.5 : _currentAngle,
         appearance: widget.appearance);
     _oldWidgetAngle = widget.angle;
@@ -182,15 +265,38 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
 
   void _updateOnChange() {
     if (widget.onChange != null) {
-      final value = angleToValue(
-          _currentAngle, widget.min, widget.max, widget.appearance.angleRange);
+      final value =
+          angleToValue(_currentAngle, widget.min, widget.max, _angleRange);
       widget.onChange(value);
     }
   }
 
+  Widget _buildRotatingPainter({double rotation, Size size}) {
+    if (rotation != null) {
+      return Transform(
+          transform: Matrix4.identity()..rotateZ((rotation) * 5 * math.pi / 6),
+          alignment: FractionalOffset.center,
+          child: _buildPainter(size: size));
+    } else {
+      return _buildPainter(size: size);
+    }
+  }
+
+  Widget _buildPainter({Size size}) {
+    return CustomPaint(
+        painter: _painter,
+        child: Container(
+            width: size.width,
+            height: size.height,
+            child: _buildChildWidget()));
+  }
+
   Widget _buildChildWidget() {
-    final value = angleToValue(
-        _currentAngle, widget.min, widget.max, widget.appearance.angleRange);
+    // if (widget.appearance.spinnerMode) {
+    //   return null;
+    // }
+    final value =
+        angleToValue(_currentAngle, widget.min, widget.max, _angleRange);
     final childWidget = widget.innerWidget != null
         ? widget.innerWidget(value)
         : SliderLabel(
@@ -213,8 +319,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   void _onPanEnd(Offset details) {
     _handlePan(details, true);
     if (widget.onChangeEnd != null) {
-      widget.onChangeEnd(angleToValue(
-          _currentAngle, widget.min, widget.max, widget.appearance.angleRange));
+      widget.onChangeEnd(
+          angleToValue(_currentAngle, widget.min, widget.max, _angleRange));
     }
 
     _isHandlerSelected = false;
@@ -252,8 +358,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         position, _painter.center, _painter.radius, touchWidth)) {
       _isHandlerSelected = true;
       if (widget.onChangeStart != null) {
-        widget.onChangeStart(angleToValue(_currentAngle, widget.min, widget.max,
-            widget.appearance.angleRange));
+        widget.onChangeStart(
+            angleToValue(_currentAngle, widget.min, widget.max, _angleRange));
       }
       _onPanUpdate(details);
     } else {
@@ -261,40 +367,5 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     }
 
     return _isHandlerSelected;
-  }
-}
-
-class SliderLabel extends StatelessWidget {
-  final double value;
-  final CircularSliderAppearance appearance;
-  const SliderLabel({Key key, this.value, this.appearance}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: builtInfo(appearance),
-    );
-  }
-
-  List<Widget> builtInfo(CircularSliderAppearance appearance) {
-    var widgets = <Widget>[];
-    if (appearance.infoTopLabelText != null) {
-      widgets.add(Text(
-        appearance.infoTopLabelText,
-        style: appearance.infoTopLabelStyle,
-      ));
-    }
-    final modifier = appearance.infoModifier(value);
-    widgets.add(
-      Text('$modifier', style: appearance.infoMainLabelStyle),
-    );
-    if (appearance.infoBottomLabelText != null) {
-      widgets.add(Text(
-        appearance.infoBottomLabelText,
-        style: appearance.infoBottomLabelStyle,
-      ));
-    }
-    return widgets;
   }
 }
