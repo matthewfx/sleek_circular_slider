@@ -223,14 +223,14 @@ final example06 = ExamplePage(
 
 /// Example 07
 final customWidth07 =
-    CustomSliderWidths(trackWidth: 4, progressBarWidth: 40, shadowWidth: 70);
+    CustomSliderWidths(trackWidth: 2, progressBarWidth: 10, shadowWidth: 15);
 final customColors07 = CustomSliderColors(
     dotColor: Colors.white.withOpacity(0.1),
     trackColor: HexColor('#F9EBE0').withOpacity(0.2),
     progressBarColors: [
-      HexColor('#A586EE').withOpacity(0.3),
-      HexColor('#F9D3D2').withOpacity(0.3),
-      HexColor('#BF79C2').withOpacity(0.3)
+      HexColor('#A586EE'),
+      HexColor('#F9D3D2'),
+      HexColor('#BF79C2')
     ],
     shadowColor: HexColor('#7F5ED9'),
     shadowMaxOpacity: 0.05);
@@ -240,36 +240,12 @@ final CircularSliderAppearance appearance07 = CircularSliderAppearance(
     customColors: customColors07,
     startAngle: 180,
     angleRange: 360,
-    size: 300.0);
+    size: 130.0,
+    spinnerMode: true);
 final viewModel07 = ExampleViewModel(
-    innerWidget: (double value) {
-      return Transform.rotate(
-          angle: degreeToRadians(value),
-          child: Align(
-            alignment: Alignment.center,
-            child: Container(
-                width: value / 2.5,
-                height: value / 2.5,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [
-                        HexColor('#F9D3D2').withOpacity(value / 360),
-                        HexColor('#BF79C2').withOpacity(value / 360)
-                      ],
-                      begin: Alignment.bottomLeft,
-                      end: Alignment.topRight,
-                      tileMode: TileMode.clamp),
-                  // borderRadius: BorderRadius.all(
-                  //   Radius.circular(value / 6),
-                  // ),
-                )),
-          ));
-    },
     appearance: appearance07,
-    min: 0,
-    max: 360,
-    value: 45,
-    pageColors: [HexColor('#4825FF'), HexColor('#FFCAD2')]);
+    value: 50,
+    pageColors: [HexColor('#FFFFFF'), HexColor('#FFCAD2')]);
 final example07 = ExamplePage(
   viewModel: viewModel07,
 );
@@ -300,6 +276,7 @@ class _HomePageState extends State<HomePage> {
         child: PageView(
       controller: controller,
       children: <Widget>[
+        example07,
         example01,
         example03,
         example04,

@@ -12,9 +12,9 @@ class ExampleViewModel {
   ExampleViewModel(
       {@required this.pageColors,
       @required this.appearance,
-      this.min,
-      this.max,
-      this.value,
+      this.min = 0,
+      this.max = 100,
+      this.value = 50,
       this.innerWidget});
 }
 

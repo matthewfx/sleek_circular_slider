@@ -31,7 +31,7 @@ class SpinAnimationManager {
     _animation1 = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
         parent: _animController,
         curve: const Interval(0.5, 1.0, curve: Curves.linear)));
-    _animation2 = Tween<double>(begin: -240.0, end: 180.0).animate(
+    _animation2 = Tween<double>(begin: -80.0, end: 100.0).animate(
         CurvedAnimation(
             parent: _animController,
             curve: const Interval(0, 1.0, curve: Curves.linear)));
@@ -45,39 +45,41 @@ class SpinnerCurve extends Curve {
   const SpinnerCurve();
 
   @override
-  double transform(double t) => (t <= 0.5) ? 2 * t : 2 * (1 - t);
+  double transform(double tr) => (tr <= 0.5) ? 1.9 * tr : 1.85 * (1 - tr);
 }
 
 typedef void ValueChangeAnimation(double animation, bool animationFinished);
 
 class ValueChangedAnimationManager {
   final TickerProvider tickerProvider;
-  final double initialValue;
   final double minValue;
   final double maxValue;
-  final double angle;
 
-  ValueChangedAnimationManager(
-      {@required this.tickerProvider,
-      @required this.initialValue,
-      @required this.minValue,
-      @required this.maxValue,
-      @required this.angle});
+  ValueChangedAnimationManager({
+    @required this.tickerProvider,
+    @required this.minValue,
+    @required this.maxValue,
+  });
+
   Animation<double> _animation;
   bool _animationCompleted = false;
   AnimationController _animController;
 
   void animate(
-      {double oldValue,
+      {double initialValue,
+      double oldValue,
+      double angle,
       double oldAngle,
       ValueChangeAnimation valueChangedAnimation}) {
     _animationCompleted = false;
 
     final duration =
         valueToDuration(initialValue, oldValue ?? minValue, minValue, maxValue);
+    if (_animController == null) {
+      _animController = AnimationController(vsync: tickerProvider);
+    }
 
-    _animController = AnimationController(
-        vsync: tickerProvider, duration: Duration(milliseconds: duration));
+    _animController.duration = Duration(milliseconds: duration);
 
     final curvedAnimation = CurvedAnimation(
       parent: _animController,
@@ -88,21 +90,12 @@ class ValueChangedAnimationManager {
         Tween<double>(begin: oldAngle ?? 0, end: angle).animate(curvedAnimation)
           ..addListener(() {
             valueChangedAnimation(_animation.value, _animationCompleted);
-            // setState(() {
-            //   if (!_animationCompleted) {
-            //     _currentAngle = _animation.value;
-            //     // update painter and the on change closure
-            //     _setupPainter();
-            //     _updateOnChange();
-            //   }
-            // });
           })
           ..addStatusListener((status) {
             if (status == AnimationStatus.completed) {
               _animationCompleted = true;
 
               _animController.reset();
-              _animController.dispose();
             }
           });
     _animController.forward();

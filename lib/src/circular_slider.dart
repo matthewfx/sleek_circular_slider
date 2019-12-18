@@ -94,16 +94,16 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
       _updateOnChange();
       return;
     }
-    // if (_animationManager == null) {
-    _animationManager = ValueChangedAnimationManager(
-      tickerProvider: this,
-      initialValue: widget.initialValue,
-      minValue: widget.min,
-      maxValue: widget.max,
-      angle: widget.angle,
-    );
-    // }
+    if (_animationManager == null) {
+      _animationManager = ValueChangedAnimationManager(
+        tickerProvider: this,
+        minValue: widget.min,
+        maxValue: widget.max,
+      );
+    }
     _animationManager.animate(
+        initialValue: widget.initialValue,
+        angle: widget.angle,
         oldAngle: _oldWidgetAngle,
         oldValue: _oldWidgetValue,
         valueChangedAnimation: ((double anim, bool animationCompleted) {
@@ -117,50 +117,11 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
           });
         }));
   }
-  //     // if there is no animation we need to update painter and onChange value
-  // _setupPainter();
-  // _updateOnChange();
-  // return;
-  //   }
-
-  //   _animationCompleted = false;
-
-  //   final duration = valueToDuration(widget.initialValue,
-  //       _oldWidgetValue ?? widget.min, widget.min, widget.max);
-
-  //   _animController.duration = Duration(milliseconds: duration);
-
-  //   final curvedAnimation = CurvedAnimation(
-  //     parent: _animController,
-  //     curve: Curves.easeOut,
-  //   );
-
-  //   _animation = Tween<double>(begin: _oldWidgetAngle ?? 0, end: widget.angle)
-  //       .animate(curvedAnimation)
-  //         ..addListener(() {
-  //   setState(() {
-  //     if (!_animationCompleted) {
-  //       _currentAngle = _animation.value;
-  //       // update painter and the on change closure
-  //       _setupPainter();
-  //       _updateOnChange();
-  //     }
-  //   });
-  // })
-  //         ..addStatusListener((status) {
-  //           if (status == AnimationStatus.completed) {
-  //             _animationCompleted = true;
-
-  //             _animController.reset();
-  //           }
-  //         });
-  //   _animController.forward();
-  // }
 
   void _spin() {
     _spinManager = SpinAnimationManager(
         tickerProvider: this,
-        duration: Duration(milliseconds: 3500),
+        duration: Duration(milliseconds: widget.appearance.spinnerDuration),
         spinAnimation: ((double anim1, anim2, anim3) {
           setState(() {
             _rotation = anim1 != null ? anim1 : 0;
@@ -172,38 +133,6 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         }));
     _spinManager.spin();
   }
-
-  // void _spin() {
-  // if (_animController == null) {
-  //   // if there is no animation we need to update painter and onChange value
-  //   _setupPainter();
-  //   _updateOnChange();
-  //   return;
-  // }
-
-  // final curvedAnimation =
-  //     CurvedAnimation(parent: _animController, curve: Curves.decelerate);
-
-  // _animation = Tween<double>(begin: 0, end: 350).animate(curvedAnimation)
-  //   ..addListener(() {
-  //     setState(() {
-  //       if (!_animationCompleted) {
-  //         _currentAngle = _animation.value;
-  //         _startAngle = _animation.value * 0.2;
-  //         // _angleRange = 360 - _animation.value;
-  //         // update painter and the on change closure
-  //         _setupPainter();
-  //         _updateOnChange();
-  //       }
-  //     });
-  //   })
-  // ..addStatusListener((status) {
-  //   if (status == AnimationStatus.completed) {
-  //     _animController.repeat(min: 0, max: 50);
-  //   }
-  //   });
-  // _animController.forward();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -288,9 +217,9 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   }
 
   Widget _buildChildWidget() {
-    // if (widget.appearance.spinnerMode) {
-    //   return null;
-    // }
+    if (widget.appearance.spinnerMode) {
+      return null;
+    }
     final value =
         angleToValue(_currentAngle, widget.min, widget.max, _angleRange);
     final childWidget = widget.innerWidget != null

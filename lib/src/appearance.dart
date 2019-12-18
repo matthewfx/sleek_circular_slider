@@ -32,6 +32,7 @@ class CircularSliderAppearance {
   final double angleRange;
   final bool animationEnabled;
   final bool spinnerMode;
+  final int spinnerDuration;
   final CustomSliderWidths customWidths;
   final CustomSliderColors customColors;
   final InfoProperties infoProperties;
@@ -140,7 +141,8 @@ class CircularSliderAppearance {
       this.angleRange = _defaultAngleRange,
       this.infoProperties,
       this.animationEnabled = true,
-      this.spinnerMode = false});
+      this.spinnerMode = false,
+      this.spinnerDuration = 1500});
 }
 
 class CustomSliderWidths {
