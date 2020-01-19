@@ -39,6 +39,10 @@ class SpinAnimationManager {
         parent: _animController,
         curve: const Interval(0.0, 1.0, curve: SpinnerCurve())));
   }
+
+  void dispose() {
+    _animController.dispose();
+  }
 }
 
 class SpinnerCurve extends Curve {
@@ -99,5 +103,9 @@ class ValueChangedAnimationManager {
             }
           });
     _animController.forward();
+  }
+
+  void dispose() {
+    _animController.dispose();
   }
 }

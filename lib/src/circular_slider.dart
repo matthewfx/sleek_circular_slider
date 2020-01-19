@@ -159,7 +159,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
 
   @override
   void dispose() {
-    // if (_animController != null) _animController.dispose();
+    if (_spinManager != null) _spinManager.dispose();
+    if (_animationManager != null) _animationManager.dispose();
     super.dispose();
   }
 
