@@ -223,16 +223,16 @@ final example06 = ExamplePage(
 
 /// Example 07
 final customWidth07 =
-    CustomSliderWidths(trackWidth: 2, progressBarWidth: 10, shadowWidth: 15);
+    CustomSliderWidths(trackWidth: 2, progressBarWidth: 10, shadowWidth: 20);
 final customColors07 = CustomSliderColors(
     dotColor: Colors.white.withOpacity(0.1),
-    trackColor: HexColor('#F9EBE0').withOpacity(0.2),
+    trackColor: HexColor('#7EFFFF').withOpacity(0.2),
     progressBarColors: [
-      HexColor('#A586EE'),
-      HexColor('#F9D3D2'),
-      HexColor('#BF79C2')
+      HexColor('#17C5E5'),
+      HexColor('#DFFF97'),
+      HexColor('#04FFB5')
     ],
-    shadowColor: HexColor('#7F5ED9'),
+    shadowColor: HexColor('#0CA1BD'),
     shadowMaxOpacity: 0.05);
 
 final CircularSliderAppearance appearance07 = CircularSliderAppearance(
@@ -245,9 +245,42 @@ final CircularSliderAppearance appearance07 = CircularSliderAppearance(
 final viewModel07 = ExampleViewModel(
     appearance: appearance07,
     value: 50,
-    pageColors: [HexColor('#FFFFFF'), HexColor('#FFCAD2')]);
+    pageColors: [HexColor('#FFFFFF'), HexColor('#93EBEB')]);
 final example07 = ExamplePage(
   viewModel: viewModel07,
+);
+
+/// Example 08
+final customWidth08 =
+    CustomSliderWidths(trackWidth: 1, progressBarWidth: 15, shadowWidth: 50);
+final customColors08 = CustomSliderColors(
+    dotColor: Colors.white.withOpacity(0.5),
+    trackColor: HexColor('#7EFFFF').withOpacity(0.1),
+    progressBarColors: [
+      HexColor('#3586FC').withOpacity(0.1),
+      HexColor('#FF8876').withOpacity(0.25),
+      HexColor('#FAFF76').withOpacity(0.5)
+    ],
+    shadowColor: HexColor('#133657'),
+    shadowMaxOpacity: 0.02);
+
+final CircularSliderAppearance appearance08 = CircularSliderAppearance(
+    customWidths: customWidth08,
+    customColors: customColors08,
+    startAngle: 180,
+    angleRange: 360,
+    size: 230.0,
+    spinnerMode: true,
+    spinnerDuration: 1000);
+final viewModel08 =
+    ExampleViewModel(appearance: appearance08, value: 50, pageColors: [
+  HexColor('#EA875A'),
+  HexColor('#9EAABB'),
+  HexColor('#3272AE'),
+  HexColor('#041529')
+]);
+final example08 = ExamplePage(
+  viewModel: viewModel08,
 );
 
 String printDuration(Duration duration) {
@@ -276,13 +309,14 @@ class _HomePageState extends State<HomePage> {
         child: PageView(
       controller: controller,
       children: <Widget>[
-        example07,
         example01,
         example03,
         example04,
         example02,
         example05,
         example06,
+        example07,
+        example08,
         RandomValuePage(),
         Clock(),
       ],
