@@ -73,7 +73,7 @@ double calculateAngle(
 
 int valueToDuration(double value, double previous, double min, double max) {
   final divider = (max - min) / 100;
-  return (value - previous).abs() ~/ divider * 15;
+  return divider != 0 ? (value - previous).abs() ~/ divider * 15 : 0;
 }
 
 double valueToPercentage(double value, double min, double max) {
