@@ -164,7 +164,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     super.dispose();
   }
 
-  void _setupPainter() {
+  void _setupPainter({bool counterClockwise = false}) {
     var defaultAngle = _currentAngle ?? widget.angle;
     if (_oldWidgetAngle != null) {
       if (_oldWidgetAngle != widget.angle) {
@@ -178,7 +178,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         angleRange: _angleRange,
         selectedAngle: _selectedAngle,
         previousAngle: _currentAngle,
-        defaultAngle: defaultAngle);
+        defaultAngle: defaultAngle,
+        counterClockwise: counterClockwise);
 
     _painter = _CurvePainter(
         startAngle: _startAngle,
@@ -260,7 +261,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     var position = renderBox.globalToLocal(details);
     _selectedAngle = coordinatesToRadians(_painter.center, position);
     // setup painter with new angle values and update onChange
-    _setupPainter();
+    _setupPainter(counterClockwise: widget.appearance.counterClockwise);
     _updateOnChange();
     setState(() {});
   }

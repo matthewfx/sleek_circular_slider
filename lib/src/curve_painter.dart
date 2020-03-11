@@ -55,8 +55,10 @@ class _CurvePainter extends CustomPainter {
 
     var dotPaint = Paint()..color = appearance.dotColor;
 
+    final currentAngle = appearance.counterClockwise ? -angle : angle;
+
     Offset handler = degreesToCoordinates(
-        center, -math.pi / 2 + startAngle + angle + 1.5, radius);
+        center, -math.pi / 2 + startAngle + currentAngle + 1.5, radius);
     canvas.drawCircle(handler, appearance.handlerSize, dotPaint);
   }
 
@@ -67,10 +69,12 @@ class _CurvePainter extends CustomPainter {
       bool ignoreAngle = false,
       bool spinnerMode = false}) {
     final double angleValue = ignoreAngle ? 0 : (angleRange - angle);
+    final range = appearance.counterClockwise ? -angleRange : angleRange;
+    final currentAngle = appearance.counterClockwise ? angleValue : -angleValue;
     canvas.drawArc(
         Rect.fromCircle(center: center, radius: radius),
         degreeToRadians(spinnerMode ? 0 : startAngle),
-        degreeToRadians(spinnerMode ? 360 : angleRange - angleValue),
+        degreeToRadians(spinnerMode ? 360 : range + currentAngle),
         false,
         paint);
   }

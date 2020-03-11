@@ -53,10 +53,18 @@ double calculateAngle(
     @required double angleRange,
     @required selectedAngle,
     @required previousAngle,
-    @required defaultAngle}) {
+    @required defaultAngle,
+    bool counterClockwise = false}) {
   if (selectedAngle == null) {
     return defaultAngle;
-    // return previousAngle ?? defaultAngle;
+  }
+
+  if (counterClockwise) {
+    return calculateAngleCounterClockwise(
+        startAngle: startAngle,
+        angleRange: angleRange,
+        selectedAngle: selectedAngle,
+        previousAngle: previousAngle);
   }
 
   double angle = radiansToDegrees(selectedAngle);
@@ -66,6 +74,25 @@ double calculateAngle(
   } else if (angle <= (startAngle + angleRange) - 360.0) {
     return 360.0 - startAngle + angle;
   } else if (angle > (startAngle + angleRange) - 360.0) {
+    return previousAngle >= angleRange / 2.0 ? angleRange : 0.0;
+  }
+  return previousAngle;
+}
+
+double calculateAngleCounterClockwise(
+    {@required double startAngle,
+    @required double angleRange,
+    @required selectedAngle,
+    @required previousAngle}) {
+  double angle = radiansToDegrees(selectedAngle);
+
+  if (angle < startAngle && startAngle - angle < angleRange) {
+    return startAngle - angle;
+  } else if (angle < startAngle && startAngle - angle >= angleRange) {
+    return angleRange;
+  } else if (360.0 - angle <= angleRange - startAngle) {
+    return startAngle + 360.0 - angle;
+  } else if (360.0 - angle > angleRange - startAngle) {
     return previousAngle >= angleRange / 2.0 ? angleRange : 0.0;
   }
   return previousAngle;

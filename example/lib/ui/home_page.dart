@@ -283,6 +283,88 @@ final example08 = ExamplePage(
   viewModel: viewModel08,
 );
 
+/// Example 09
+final customWidth09 =
+    CustomSliderWidths(trackWidth: 1, progressBarWidth: 15, shadowWidth: 50);
+final customColors09 = CustomSliderColors(
+    dotColor: Colors.white.withOpacity(0.5),
+    trackColor: HexColor('#000000').withOpacity(0.1),
+    progressBarColors: [
+      HexColor('#3586FC').withOpacity(0.1),
+      HexColor('#FF8876').withOpacity(0.25),
+      HexColor('#3586FC').withOpacity(0.5)
+    ],
+    shadowColor: HexColor('#133657'),
+    shadowMaxOpacity: 0.02);
+
+final CircularSliderAppearance appearance09 = CircularSliderAppearance(
+    customWidths: customWidth09,
+    customColors: customColors09,
+    startAngle: 55,
+    angleRange: 110,
+    size: 230.0,
+    counterClockwise: true);
+final viewModel09 =
+    ExampleViewModel(appearance: appearance09, value: 50, pageColors: [
+  HexColor('#FFFFFF'),
+  HexColor('#EEEEEE'),
+  HexColor('#FFFFFF'),
+  HexColor('#DDDDDD')
+]);
+final example09 = ExamplePage(
+  viewModel: viewModel09,
+);
+
+/// Example 09
+final customWidth10 =
+    CustomSliderWidths(trackWidth: 1, progressBarWidth: 28, shadowWidth: 60);
+final customColors10 = CustomSliderColors(
+    dotColor: Colors.white.withOpacity(0.5),
+    trackColor: HexColor('#000000').withOpacity(0.1),
+    progressBarColors: [
+      HexColor('#76E2FF').withOpacity(0.5),
+      HexColor('4E09ED').withOpacity(0.5),
+      HexColor('#F7E4FF').withOpacity(0.3)
+    ],
+    shadowColor: HexColor('#55B3E4'),
+    shadowMaxOpacity: 0.02);
+
+final info10 = InfoProperties(
+    bottomLabelStyle: TextStyle(
+        color: HexColor('#5F9DF5'), fontSize: 24, fontWeight: FontWeight.w200),
+    bottomLabelText: 'Volume',
+    mainLabelStyle: TextStyle(
+        color: HexColor('#FF6BD9'),
+        fontSize: 60.0,
+        fontWeight: FontWeight.w100),
+    modifier: (double value) {
+      final volume = value.toInt();
+      return '$volume db';
+    });
+
+final CircularSliderAppearance appearance10 = CircularSliderAppearance(
+    customWidths: customWidth10,
+    customColors: customColors10,
+    startAngle: 180,
+    angleRange: 240,
+    infoProperties: info10,
+    size: 280.0,
+    counterClockwise: true);
+final viewModel10 = ExampleViewModel(
+    appearance: appearance10,
+    min: -25,
+    max: 0,
+    value: -17,
+    pageColors: [
+      HexColor('#FFFFFF'),
+      HexColor('#D7F2FD'),
+      HexColor('#FFFFFF'),
+      HexColor('#FFFFFF')
+    ]);
+final example10 = ExamplePage(
+  viewModel: viewModel10,
+);
+
 String printDuration(Duration duration) {
   String twoDigits(int n) {
     if (n >= 10) return "$n";
@@ -310,14 +392,16 @@ class _HomePageState extends State<HomePage> {
       controller: controller,
       children: <Widget>[
         example01,
+        example10,
+        RandomValuePage(),
         example03,
         example04,
         example02,
         example05,
+        example09,
+        example08,
         example06,
         example07,
-        example08,
-        RandomValuePage(),
         Clock(),
       ],
     ));
