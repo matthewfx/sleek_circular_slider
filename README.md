@@ -1,7 +1,7 @@
-# Sleek circular slider/progress bar for Flutter
+# Sleek circular slider/progress bar & spinner for Flutter
 [![License: MIT](https://img.shields.io/badge/Licence-MIT-success.svg)](https://opensource.org/licenses/MIT)[![Author's website](https://img.shields.io/badge/Home-MN-blue.svg)](https://nuckowski.com)
 
-A highly customizable circular slider/progress bar for Flutter.
+A highly customizable circular slider/progress bar & spinner for Flutter.
 
 ![Example 01](doc/slider00.gif) ![Example 02](doc/slider01.gif)
 ![Example 03](doc/slider02.gif) ![Example 04](doc/slider03.gif)
@@ -91,6 +91,16 @@ final slider = SleekCircularSlider(
 );
 ```
 
+### Use as a spinner
+There is one more use case for the library. It's a spinner which can be shown to user while loading etc. In this mode the widget is not interactive and ignores all angles so there is no need to provide them.
+
+```dart
+final slider = SleekCircularSlider(
+  appearance: CircularSliderAppearance(
+    spinnerMode: true,
+));
+```
+
 ### SleekCircularSlider parameters
 
 
@@ -113,11 +123,14 @@ final slider = SleekCircularSlider(
 | :------------------------ | :-------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------- |
 | **size** *double*                    |                        150                          | The width & height value for the slider.                    |
 | **startAngle** *double*              |                        150                          | The angle (in degrees) the slider begins with.            |
-| **angleRange** *double*              |                        240                          | The angle range (in degrees) the slider reaches when maximum value set.  |
+| **angleRange** *double*              |                        240                          | The angle range (in degrees) the slider reaches when maximum value set. |
+| **counterClockwise** *bool*          |                       false                         | The setting indicating direction of the widget.                         |
 | **customWidths** *CustomSliderWidths*|                                                     | The object with a set of widths for the track, bar, shadow etc.        |
 | **customColors** *CustomSliderColors*|                                                     | The object with a set of colors for the track, bar, shadow etc.        |
 | **infoProperties** *InfoProperties*  |                                                     | The object with a set of properties for internal labels displaying a current slider value. |
 | **animationEnabled** *bool*          |                       true                          | The setting indicating whether external changes of a slider value should be animated.  |
+| **spinnerMode** *bool*               |                       false                         | The setting turning the widget into a spinner.                        |
+| **spinnerDuration** *int*            |                        1500                         | The spinner animation duration in miliseconds                            |
 
 
 
@@ -172,8 +185,18 @@ It will convert a current value to *int* and add the **%** sufix to it.
 [![YouTube Video of the example in action](https://img.youtube.com/vi/ECXdRYs89QY/0.jpg)](https://youtu.be/ECXdRYs89QY)
 
 ## Todo
-- [ ] add divisions;
-- [ ] add more comments to document the code;
+- 
+- [ ] add divisions
+
+- [ ] add more comments to document the code
+
+- [x] add the counterclockwise direction
+
+- [x] add the spinner mode
+
+- [ ] add the second handle (interval selection)
+
+- [ ] add text labels on a curved path
 
 
 ## Acknowledgments
