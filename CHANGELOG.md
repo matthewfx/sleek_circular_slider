@@ -28,7 +28,7 @@
 ## [1.0.7] - 2019-10-19.
 * Simplified the constructor. There is no longer need to provide the CircularSliderAppearance if one wants to use the default one.
 
-## [1.1] - 2020-03-12
+## [1.1.0] - 2020-03-12
 * Added the spinner mode.
 * Added the clockwise direction.
 * Fixed a bug - an unhandled exception when the min and max values were equal.
