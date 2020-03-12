@@ -267,8 +267,6 @@ final customColors08 = CustomSliderColors(
 final CircularSliderAppearance appearance08 = CircularSliderAppearance(
     customWidths: customWidth08,
     customColors: customColors08,
-    startAngle: 180,
-    angleRange: 360,
     size: 230.0,
     spinnerMode: true,
     spinnerDuration: 1000);
