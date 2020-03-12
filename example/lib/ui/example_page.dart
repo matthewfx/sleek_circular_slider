@@ -12,9 +12,9 @@ class ExampleViewModel {
   ExampleViewModel(
       {@required this.pageColors,
       @required this.appearance,
-      this.min,
-      this.max,
-      this.value,
+      this.min = 0,
+      this.max = 100,
+      this.value = 50,
       this.innerWidget});
 }
 
@@ -38,12 +38,8 @@ class ExamplePage extends StatelessWidget {
         child: SafeArea(
           child: Center(
               child: SleekCircularSlider(
-            onChangeStart: (double value) {
-              print(value);
-            },
-            onChangeEnd: (double value) {
-              print(value);
-            },
+            onChangeStart: (double value) {},
+            onChangeEnd: (double value) {},
             innerWidget: viewModel.innerWidget,
             appearance: viewModel.appearance,
             min: viewModel.min,
