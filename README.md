@@ -7,6 +7,8 @@ A highly customizable circular slider/progress bar & spinner for Flutter.
 ![Example 03](doc/slider02.gif) ![Example 04](doc/slider03.gif)
 ![Example 05](doc/slider04.gif) ![Example 06](doc/slider05.gif)
 ![Example 07](doc/slider06.gif) ![Example 08](doc/slider07.gif)
+![Example 09](doc/slider08.gif) ![Example 10](doc/slider09.gif)
+![Example 11](doc/slider10.gif) ![Example 12](doc/slider11.gif)
 
 ## Getting Started
 
@@ -92,7 +94,7 @@ final slider = SleekCircularSlider(
 ```
 
 ### Use as a spinner
-There is one more use case for the library. It's a spinner which can be shown to user while loading etc. In this mode the widget is not interactive and ignores all angles so there is no need to provide them.
+There is one more use case for the library. It's a spinner which can be shown to users while loading etc. In this mode the widget is not interactive and ignores all angles so there is no need to provide them.
 
 ```dart
 final slider = SleekCircularSlider(
@@ -185,7 +187,7 @@ It will convert a current value to *int* and add the **%** sufix to it.
 [![YouTube Video of the example in action](https://img.youtube.com/vi/ECXdRYs89QY/0.jpg)](https://youtu.be/ECXdRYs89QY)
 
 ## Todo
-- 
+
 - [ ] add divisions
 
 - [ ] add more comments to document the code
