@@ -61,6 +61,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   double _angleRange;
   double _selectedAngle;
   double _rotation;
+  int _appearanceHashCode;
   SpinAnimationManager _spinManager;
   ValueChangedAnimationManager _animationManager;
 
@@ -72,6 +73,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     super.initState();
     _startAngle = widget.appearance.startAngle;
     _angleRange = widget.appearance.angleRange;
+    _appearanceHashCode = widget.appearance.hashCode;
 
     if (!widget.appearance.animationEnabled) {
       return;
@@ -136,8 +138,9 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
 
   @override
   Widget build(BuildContext context) {
-    /// If painter is null there is a need to setup it to prevent exceptions.
-    if (_painter == null) {
+    /// _setupPainter excution when _painter is null or appearance has changed.
+    if (_painter == null || _appearanceHashCode != widget.appearance.hashCode) {
+      _appearanceHashCode = widget.appearance.hashCode;
       _setupPainter();
     }
     return RawGestureDetector(
