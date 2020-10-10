@@ -133,6 +133,7 @@ final slider = SleekCircularSlider(
 | **animationEnabled** *bool*          |                       true                          | The setting indicating whether external changes of a slider value should be animated.  |
 | **spinnerMode** *bool*               |                       false                         | The setting turning the widget into a spinner.                        |
 | **spinnerDuration** *int*            |                        1500                         | The spinner animation duration in miliseconds                            |
+| **animDurationMultiplier** *double*  |                        1.0                          | The multiplier of duration for the animation when value changed                           |
 
 
 

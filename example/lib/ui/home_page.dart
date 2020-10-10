@@ -347,7 +347,8 @@ final CircularSliderAppearance appearance10 = CircularSliderAppearance(
     angleRange: 240,
     infoProperties: info10,
     size: 280.0,
-    counterClockwise: true);
+    counterClockwise: true,
+    animDurationMultiplier: 3);
 final viewModel10 = ExampleViewModel(
     appearance: appearance10,
     min: -25,

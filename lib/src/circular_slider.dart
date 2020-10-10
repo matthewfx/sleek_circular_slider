@@ -100,6 +100,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         tickerProvider: this,
         minValue: widget.min,
         maxValue: widget.max,
+        durationMultiplier: widget.appearance.animDurationMultiplier,
       );
     }
     _animationManager.animate(

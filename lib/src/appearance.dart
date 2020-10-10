@@ -33,6 +33,7 @@ class CircularSliderAppearance {
   final bool animationEnabled;
   final bool spinnerMode;
   final bool counterClockwise;
+  final double animDurationMultiplier;
   final int spinnerDuration;
   final CustomSliderWidths customWidths;
   final CustomSliderColors customColors;
@@ -144,7 +145,8 @@ class CircularSliderAppearance {
       this.animationEnabled = true,
       this.counterClockwise = false,
       this.spinnerMode = false,
-      this.spinnerDuration = 1500});
+      this.spinnerDuration = 1500,
+      this.animDurationMultiplier = 1.0});
 }
 
 class CustomSliderWidths {
