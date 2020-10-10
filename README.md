@@ -156,6 +156,7 @@ final slider = SleekCircularSlider(
 | **progressBarColors** *List<Color>*  |      [#1E003B, #EC008A, #6285DA]                    | The list of colors for the progress bar's gradient.       |
 | **gradientStartAngle** *double*      |                   0                                 | The start angle for the progress bar's gradient.           |
 | **gradientEndAngle** *double*        |                  180                                | The end angle for the progress bar's gradient.           |
+| **dynamicGradient** *bool*           |                  false                              | The gradient angles will change dynamically with value changing. If true it will ignore both the grandientStartAngle and gradientEndAngle          |
 | **dotColor** *Color*                 |                #FFFFFF                              | The color of the slider's handle.                       |
 | **hideShadow** *bool*                |                  false                              | The setting indicating whether the shadow should be showed. |
 | **shadowColor** *Color*              |                #2C57C0                              | The color of the shadow. |

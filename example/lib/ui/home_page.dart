@@ -59,6 +59,7 @@ final customColors03 = CustomSliderColors(
     trackColor: HexColor('#90E3D0'),
     progressBarColors: [HexColor('#FFC84B'), HexColor('#00BFD5')],
     shadowColor: HexColor('#5FC7B0'),
+    dynamicGradient: true,
     shadowMaxOpacity: 0.05);
 
 final info03 = InfoProperties(
@@ -321,9 +322,10 @@ final customColors10 = CustomSliderColors(
     trackColor: HexColor('#000000').withOpacity(0.1),
     progressBarColors: [
       HexColor('#76E2FF').withOpacity(0.5),
-      HexColor('4E09ED').withOpacity(0.5),
+      HexColor('#4E09ED').withOpacity(0.5),
       HexColor('#F7E4FF').withOpacity(0.3)
     ],
+    dynamicGradient: true,
     shadowColor: HexColor('#55B3E4'),
     shadowMaxOpacity: 0.02);
 

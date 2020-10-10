@@ -17,6 +17,7 @@ class CircularSliderAppearance {
 
   static const double _defaultGradientStartAngle = 0.0;
   static const double _defaultGradientEndAngle = 180.0;
+  static const bool _defaultDynamicGradient = false;
   static const bool _defaultHideShadow = false;
   static const Color _defaultShadowColor = Color.fromRGBO(44, 87, 192, 1.0);
   static const double _defaultShadowMaxOpacity = 0.2;
@@ -70,6 +71,8 @@ class CircularSliderAppearance {
       customColors != null ? customColors.gradientStartAngle : null;
   double get _gradientEndAngle =>
       customColors != null ? customColors.gradientEndAngle : null;
+  bool get _dynamicGradient =>
+      customColors != null ? customColors.dynamicGradient : null;
   Color get _customShadowColor =>
       customColors != null ? customColors.shadowColor : null;
   double get _customShadowMaxOpacity =>
@@ -86,6 +89,7 @@ class CircularSliderAppearance {
   double get gradientStartAngle =>
       _gradientStartAngle ?? _defaultGradientStartAngle;
   double get gradientStopAngle => _gradientEndAngle ?? _defaultGradientEndAngle;
+  bool get dynamicGradient => _dynamicGradient ?? _defaultDynamicGradient;
   bool get hideShadow => _hideShadow ?? _defaultHideShadow;
   Color get shadowColor => _customShadowColor ?? _defaultShadowColor;
   double get shadowMaxOpacity =>
@@ -168,6 +172,7 @@ class CustomSliderColors {
   final List<Color> progressBarColors;
   final double gradientStartAngle;
   final double gradientEndAngle;
+  final bool dynamicGradient;
   final bool hideShadow;
   final Color shadowColor;
   final double shadowMaxOpacity;
@@ -184,7 +189,8 @@ class CustomSliderColors {
       this.shadowColor,
       this.shadowMaxOpacity,
       this.shadowStep,
-      this.dotColor});
+      this.dotColor,
+      this.dynamicGradient = false});
 }
 
 class InfoProperties {

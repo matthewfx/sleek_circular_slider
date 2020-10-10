@@ -38,12 +38,37 @@ class _CurvePainter extends CustomPainter {
       drawShadow(canvas: canvas, size: size);
     }
 
+    final currentAngle = appearance.counterClockwise ? -angle : angle;
     final progressBarRect = Rect.fromLTWH(0.0, 0.0, size.width, size.width);
+    final dynamicGradient =
+        appearance.dynamicGradient != null ? appearance.dynamicGradient : false;
+    final gradientRotationAngle = dynamicGradient
+        ? appearance.counterClockwise
+            ? startAngle + 10.0
+            : startAngle - 10.0
+        : 0.0;
+    final GradientRotation rotation =
+        GradientRotation(degreeToRadians(gradientRotationAngle));
+
+    final gradientStartAngle = dynamicGradient
+        ? appearance.counterClockwise
+            ? 360.0 - currentAngle.abs()
+            : 0.0
+        : appearance.gradientStartAngle;
+    final gradientEndAngle = dynamicGradient
+        ? appearance.counterClockwise
+            ? 360.0
+            : currentAngle.abs()
+        : appearance.gradientStopAngle;
+    final colors = dynamicGradient && appearance.counterClockwise
+        ? appearance.progressBarColors.reversed.toList()
+        : appearance.progressBarColors;
     final progressBarGradient = SweepGradient(
-      startAngle: degreeToRadians(appearance.gradientStartAngle),
-      endAngle: degreeToRadians(appearance.gradientStopAngle),
+      transform: rotation,
+      startAngle: degreeToRadians(gradientStartAngle),
+      endAngle: degreeToRadians(gradientEndAngle),
       tileMode: TileMode.mirror,
-      colors: appearance.progressBarColors,
+      colors: colors,
     );
 
     final progressBarPaint = Paint()
@@ -54,8 +79,6 @@ class _CurvePainter extends CustomPainter {
     drawCircularArc(canvas: canvas, size: size, paint: progressBarPaint);
 
     var dotPaint = Paint()..color = appearance.dotColor;
-
-    final currentAngle = appearance.counterClockwise ? -angle : angle;
 
     Offset handler = degreesToCoordinates(
         center, -math.pi / 2 + startAngle + currentAngle + 1.5, radius);
