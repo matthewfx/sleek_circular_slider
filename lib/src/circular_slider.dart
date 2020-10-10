@@ -53,6 +53,7 @@ class SleekCircularSlider extends StatefulWidget {
 class _SleekCircularSliderState extends State<SleekCircularSlider>
     with SingleTickerProviderStateMixin {
   bool _isHandlerSelected;
+  bool _animationInProgress = false;
   _CurvePainter _painter;
   double _oldWidgetAngle;
   double _oldWidgetValue;
@@ -107,6 +108,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         oldAngle: _oldWidgetAngle,
         oldValue: _oldWidgetValue,
         valueChangedAnimation: ((double anim, bool animationCompleted) {
+          _animationInProgress = !animationCompleted;
           setState(() {
             if (!animationCompleted) {
               _currentAngle = anim;
@@ -191,7 +193,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   }
 
   void _updateOnChange() {
-    if (widget.onChange != null) {
+    if (widget.onChange != null && !_animationInProgress) {
       final value =
           angleToValue(_currentAngle, widget.min, widget.max, _angleRange);
       widget.onChange(value);
