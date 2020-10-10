@@ -152,6 +152,9 @@ final slider = SleekCircularSlider(
 | Parameter                 |                       Default                       | Description                                                                                                             |
 | :------------------------ | :-------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------- |
 | **trackColor** *Color*               |                #DCBEFB                              | The color of the slider's track.                        |
+| **trackColors** *List<Color>*        |                  null                               | The list of colors for the track's gradient.                  |                 
+| **trackGradientStartAngle** *double* |                   0                                 | The start angle for the track's gradient.           |
+| **trackGradientEndAngle** *double*   |                  180                                | The end angle for the track's gradient.           |
 | **progressBarColor** *Color*         |                                                     | The color of the slider's progress bar. Won't be used if the slider uses gradient **progressBarColors != null**  |
 | **progressBarColors** *List<Color>*  |      [#1E003B, #EC008A, #6285DA]                    | The list of colors for the progress bar's gradient.       |
 | **gradientStartAngle** *double*      |                   0                                 | The start angle for the progress bar's gradient.           |

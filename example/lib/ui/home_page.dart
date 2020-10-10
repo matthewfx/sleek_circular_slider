@@ -54,9 +54,9 @@ final example02 = ExamplePage(
 
 /// Example 03
 final customWidth03 =
-    CustomSliderWidths(trackWidth: 1, progressBarWidth: 20, shadowWidth: 50);
+    CustomSliderWidths(trackWidth: 22, progressBarWidth: 20, shadowWidth: 50);
 final customColors03 = CustomSliderColors(
-    trackColor: HexColor('#90E3D0'),
+    trackColors: [HexColor('#FFF8CB'), HexColor('#B9FFFF')],
     progressBarColors: [HexColor('#FFC84B'), HexColor('#00BFD5')],
     shadowColor: HexColor('#5FC7B0'),
     dynamicGradient: true,
