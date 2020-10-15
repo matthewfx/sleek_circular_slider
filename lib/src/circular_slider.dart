@@ -180,7 +180,6 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         startAngle: _startAngle,
         angleRange: _angleRange,
         selectedAngle: _selectedAngle,
-        previousAngle: _currentAngle,
         defaultAngle: defaultAngle,
         counterClockwise: counterClockwise);
 
@@ -262,11 +261,17 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     }
     RenderBox renderBox = context.findRenderObject();
     var position = renderBox.globalToLocal(details);
-    _selectedAngle = coordinatesToRadians(_painter.center, position);
-    // setup painter with new angle values and update onChange
-    _setupPainter(counterClockwise: widget.appearance.counterClockwise);
-    _updateOnChange();
-    setState(() {});
+    final double touchWidth = widget.appearance.progressBarWidth >= 25.0
+        ? widget.appearance.progressBarWidth
+        : 25.0;
+    if (isPointAlongCircle(
+        position, _painter.center, _painter.radius, touchWidth)) {
+      _selectedAngle = coordinatesToRadians(_painter.center, position);
+      // setup painter with new angle values and update onChange
+      _setupPainter(counterClockwise: widget.appearance.counterClockwise);
+      _updateOnChange();
+      setState(() {});
+    }
   }
 
   bool _onPanDown(Offset details) {
@@ -277,6 +282,16 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     var position = renderBox.globalToLocal(details);
 
     if (position == null) {
+      return false;
+    }
+
+    final angleWithinRange = isAngleWithinRange(
+        startAngle: _startAngle,
+        angleRange: _angleRange,
+        touchAngle: coordinatesToRadians(_painter.center, position),
+        previousAngle: _currentAngle,
+        counterClockwise: widget.appearance.counterClockwise);
+    if (!angleWithinRange) {
       return false;
     }
 
