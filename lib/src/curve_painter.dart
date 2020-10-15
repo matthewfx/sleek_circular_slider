@@ -39,12 +39,17 @@ class _CurvePainter extends CustomPainter {
     }
 
     final progressBarRect = Rect.fromLTWH(0.0, 0.0, size.width, size.width);
-    final progressBarGradient = SweepGradient(
-      startAngle: degreeToRadians(appearance.gradientStartAngle),
-      endAngle: degreeToRadians(appearance.gradientStopAngle),
-      tileMode: TileMode.mirror,
-      colors: appearance.progressBarColors,
-    );
+    final progressBarGradient = kIsWeb
+        ? LinearGradient(
+          tileMode: TileMode.mirror,
+          colors: appearance.progressBarColors,
+        )
+        : SweepGradient(
+          startAngle: degreeToRadians(appearance.gradientStartAngle),
+          endAngle: degreeToRadians(appearance.gradientStopAngle),
+          tileMode: TileMode.mirror,
+          colors: appearance.progressBarColors,
+        );
 
     final progressBarPaint = Paint()
       ..shader = progressBarGradient.createShader(progressBarRect)
