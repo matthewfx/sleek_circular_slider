@@ -32,3 +32,9 @@
 * Added the spinner mode.
 * Added the clockwise direction.
 * Fixed a bug - an unhandled exception when the min and max values were equal.
+
+## [1.2.0+web] - 2020-10-2020
+* Fixed some small issues
+* Implemented the animation duration multiplier
+* Implemented the dynamic gradient
+* Implemented the gradient for the track
