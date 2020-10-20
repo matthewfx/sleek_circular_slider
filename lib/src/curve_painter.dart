@@ -22,11 +22,28 @@ class _CurvePainter extends CustomPainter {
         appearance.progressBarWidth * 0.5;
     center = Offset(size.width / 2, size.height / 2);
 
-    final trackPaint = Paint()
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = appearance.trackWidth
-      ..color = appearance.trackColor;
+    final progressBarRect = Rect.fromLTWH(0.0, 0.0, size.width, size.width);
+
+    Paint trackPaint;
+    if (appearance.trackColors != null) {
+      final trackGradient = SweepGradient(
+        startAngle: degreeToRadians(appearance.trackGradientStartAngle),
+        endAngle: degreeToRadians(appearance.trackGradientStopAngle),
+        tileMode: TileMode.mirror,
+        colors: appearance.trackColors,
+      );
+      trackPaint = Paint()
+        ..shader = trackGradient.createShader(progressBarRect)
+        ..strokeCap = StrokeCap.round
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = appearance.trackWidth;
+    } else {
+      trackPaint = Paint()
+        ..strokeCap = StrokeCap.round
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = appearance.trackWidth
+        ..color = appearance.trackColor;
+    }
     drawCircularArc(
         canvas: canvas,
         size: size,
@@ -38,18 +55,43 @@ class _CurvePainter extends CustomPainter {
       drawShadow(canvas: canvas, size: size);
     }
 
-    final progressBarRect = Rect.fromLTWH(0.0, 0.0, size.width, size.width);
+    final currentAngle = appearance.counterClockwise ? -angle : angle;
+    final dynamicGradient =
+        appearance.dynamicGradient != null ? appearance.dynamicGradient : false;
+    final gradientRotationAngle = dynamicGradient
+        ? appearance.counterClockwise
+            ? startAngle + 10.0
+            : startAngle - 10.0
+        : 0.0;
+    final GradientRotation rotation =
+        GradientRotation(degreeToRadians(gradientRotationAngle));
+
+    final gradientStartAngle = dynamicGradient
+        ? appearance.counterClockwise
+            ? 360.0 - currentAngle.abs()
+            : 0.0
+        : appearance.gradientStartAngle;
+    final gradientEndAngle = dynamicGradient
+        ? appearance.counterClockwise
+            ? 360.0
+            : currentAngle.abs()
+        : appearance.gradientStopAngle;
+    final colors = dynamicGradient && appearance.counterClockwise
+        ? appearance.progressBarColors.reversed.toList()
+        : appearance.progressBarColors;
+
     final progressBarGradient = kIsWeb
         ? LinearGradient(
-          tileMode: TileMode.mirror,
-          colors: appearance.progressBarColors,
-        )
+            tileMode: TileMode.mirror,
+            colors: colors,
+          )
         : SweepGradient(
-          startAngle: degreeToRadians(appearance.gradientStartAngle),
-          endAngle: degreeToRadians(appearance.gradientStopAngle),
-          tileMode: TileMode.mirror,
-          colors: appearance.progressBarColors,
-        );
+            transform: rotation,
+            startAngle: degreeToRadians(gradientStartAngle),
+            endAngle: degreeToRadians(gradientEndAngle),
+            tileMode: TileMode.mirror,
+            colors: colors,
+          );
 
     final progressBarPaint = Paint()
       ..shader = progressBarGradient.createShader(progressBarRect)
@@ -59,8 +101,6 @@ class _CurvePainter extends CustomPainter {
     drawCircularArc(canvas: canvas, size: size, paint: progressBarPaint);
 
     var dotPaint = Paint()..color = appearance.dotColor;
-
-    final currentAngle = appearance.counterClockwise ? -angle : angle;
 
     Offset handler = degreesToCoordinates(
         center, -math.pi / 2 + startAngle + currentAngle + 1.5, radius);

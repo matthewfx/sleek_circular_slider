@@ -17,6 +17,9 @@ class CircularSliderAppearance {
 
   static const double _defaultGradientStartAngle = 0.0;
   static const double _defaultGradientEndAngle = 180.0;
+  static const double _defaultTrackGradientStartAngle = 0.0;
+  static const double _defaultTrackGradientEndAngle = 180.0;
+  static const bool _defaultDynamicGradient = false;
   static const bool _defaultHideShadow = false;
   static const Color _defaultShadowColor = Color.fromRGBO(44, 87, 192, 1.0);
   static const double _defaultShadowMaxOpacity = 0.2;
@@ -33,6 +36,7 @@ class CircularSliderAppearance {
   final bool animationEnabled;
   final bool spinnerMode;
   final bool counterClockwise;
+  final double animDurationMultiplier;
   final int spinnerDuration;
   final CustomSliderWidths customWidths;
   final CustomSliderColors customColors;
@@ -65,10 +69,27 @@ class CircularSliderAppearance {
     return null;
   }
 
+  List<Color> get _customTrackColors {
+    if (customColors != null) {
+      if (customColors.trackColors != null) {
+        return customColors.trackColors;
+      } else {
+        return null;
+      }
+    }
+    return null;
+  }
+
   double get _gradientStartAngle =>
       customColors != null ? customColors.gradientStartAngle : null;
   double get _gradientEndAngle =>
       customColors != null ? customColors.gradientEndAngle : null;
+  double get _trackGradientStartAngle =>
+      customColors != null ? customColors.trackGradientStartAngle : null;
+  double get _trackGradientEndAngle =>
+      customColors != null ? customColors.trackGradientEndAngle : null;
+  bool get _dynamicGradient =>
+      customColors != null ? customColors.dynamicGradient : null;
   Color get _customShadowColor =>
       customColors != null ? customColors.shadowColor : null;
   double get _customShadowMaxOpacity =>
@@ -80,11 +101,17 @@ class CircularSliderAppearance {
   bool get _hideShadow => customColors != null ? customColors.hideShadow : null;
 
   Color get trackColor => _customTrackColor ?? _defaultTrackColor;
+  List<Color> get trackColors => _customTrackColors ?? null;
   List<Color> get progressBarColors =>
       _customProgressBarColors ?? _defaultBarColors;
   double get gradientStartAngle =>
       _gradientStartAngle ?? _defaultGradientStartAngle;
   double get gradientStopAngle => _gradientEndAngle ?? _defaultGradientEndAngle;
+  double get trackGradientStartAngle =>
+      _trackGradientStartAngle ?? _defaultTrackGradientStartAngle;
+  double get trackGradientStopAngle =>
+      _trackGradientEndAngle ?? _defaultTrackGradientEndAngle;
+  bool get dynamicGradient => _dynamicGradient ?? _defaultDynamicGradient;
   bool get hideShadow => _hideShadow ?? _defaultHideShadow;
   Color get shadowColor => _customShadowColor ?? _defaultShadowColor;
   double get shadowMaxOpacity =>
@@ -144,7 +171,8 @@ class CircularSliderAppearance {
       this.animationEnabled = true,
       this.counterClockwise = false,
       this.spinnerMode = false,
-      this.spinnerDuration = 1500});
+      this.spinnerDuration = 1500,
+      this.animDurationMultiplier = 1.0});
 }
 
 class CustomSliderWidths {
@@ -166,6 +194,10 @@ class CustomSliderColors {
   final List<Color> progressBarColors;
   final double gradientStartAngle;
   final double gradientEndAngle;
+  final List<Color> trackColors;
+  final double trackGradientStartAngle;
+  final double trackGradientEndAngle;
+  final bool dynamicGradient;
   final bool hideShadow;
   final Color shadowColor;
   final double shadowMaxOpacity;
@@ -178,11 +210,15 @@ class CustomSliderColors {
       this.progressBarColors,
       this.gradientStartAngle,
       this.gradientEndAngle,
+      this.trackColors,
+      this.trackGradientStartAngle,
+      this.trackGradientEndAngle,
       this.hideShadow,
       this.shadowColor,
       this.shadowMaxOpacity,
       this.shadowStep,
-      this.dotColor});
+      this.dotColor,
+      this.dynamicGradient = false});
 }
 
 class InfoProperties {

@@ -48,54 +48,71 @@ bool isPointAlongCircle(
   return (distance - radius).abs() < width;
 }
 
+double calculateRawAngle(
+    {@required double startAngle,
+    @required double angleRange,
+    @required double selectedAngle,
+    bool counterClockwise = false}) {
+  double angle = radiansToDegrees(selectedAngle);
+
+  double calcAngle = 0.0;
+  if (!counterClockwise) {
+    if (angle >= startAngle && angle <= 360.0) {
+      calcAngle = angle - startAngle;
+    } else {
+      calcAngle = 360.0 - startAngle + angle;
+    }
+  } else {
+    if (angle <= startAngle) {
+      calcAngle = startAngle - angle;
+    } else {
+      calcAngle = 360.0 - angle + startAngle;
+    }
+  }
+  return calcAngle;
+}
+
 double calculateAngle(
     {@required double startAngle,
     @required double angleRange,
     @required selectedAngle,
-    @required previousAngle,
     @required defaultAngle,
     bool counterClockwise = false}) {
   if (selectedAngle == null) {
     return defaultAngle;
   }
 
-  if (counterClockwise) {
-    return calculateAngleCounterClockwise(
-        startAngle: startAngle,
-        angleRange: angleRange,
-        selectedAngle: selectedAngle,
-        previousAngle: previousAngle);
+  double calcAngle = calculateRawAngle(
+      startAngle: startAngle,
+      angleRange: angleRange,
+      selectedAngle: selectedAngle,
+      counterClockwise: counterClockwise);
+
+  if (calcAngle - angleRange > (360.0 - angleRange) * 0.5) {
+    return 0.0;
+  } else if (calcAngle > angleRange) {
+    return angleRange;
   }
 
-  double angle = radiansToDegrees(selectedAngle);
-
-  if (angle >= startAngle && angle <= angleRange + startAngle) {
-    return angle - startAngle;
-  } else if (angle <= (startAngle + angleRange) - 360.0) {
-    return 360.0 - startAngle + angle;
-  } else if (angle > (startAngle + angleRange) - 360.0) {
-    return previousAngle >= angleRange / 2.0 ? angleRange : 0.0;
-  }
-  return previousAngle;
+  return calcAngle;
 }
 
-double calculateAngleCounterClockwise(
+bool isAngleWithinRange(
     {@required double startAngle,
     @required double angleRange,
-    @required selectedAngle,
-    @required previousAngle}) {
-  double angle = radiansToDegrees(selectedAngle);
+    @required touchAngle,
+    @required previousAngle,
+    bool counterClockwise = false}) {
+  double calcAngle = calculateRawAngle(
+      startAngle: startAngle,
+      angleRange: angleRange,
+      selectedAngle: touchAngle,
+      counterClockwise: counterClockwise);
 
-  if (angle < startAngle && startAngle - angle < angleRange) {
-    return startAngle - angle;
-  } else if (angle < startAngle && startAngle - angle >= angleRange) {
-    return angleRange;
-  } else if (360.0 - angle <= angleRange - startAngle) {
-    return startAngle + 360.0 - angle;
-  } else if (360.0 - angle > angleRange - startAngle) {
-    return previousAngle >= angleRange / 2.0 ? angleRange : 0.0;
+  if (calcAngle > angleRange) {
+    return false;
   }
-  return previousAngle;
+  return true;
 }
 
 int valueToDuration(double value, double previous, double min, double max) {

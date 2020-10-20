@@ -56,6 +56,7 @@ typedef void ValueChangeAnimation(double animation, bool animationFinished);
 
 class ValueChangedAnimationManager {
   final TickerProvider tickerProvider;
+  final double durationMultiplier;
   final double minValue;
   final double maxValue;
 
@@ -63,6 +64,7 @@ class ValueChangedAnimationManager {
     @required this.tickerProvider,
     @required this.minValue,
     @required this.maxValue,
+    this.durationMultiplier = 1.0,
   });
 
   Animation<double> _animation;
@@ -77,8 +79,10 @@ class ValueChangedAnimationManager {
       ValueChangeAnimation valueChangedAnimation}) {
     _animationCompleted = false;
 
-    final duration =
-        valueToDuration(initialValue, oldValue ?? minValue, minValue, maxValue);
+    final duration = (durationMultiplier *
+            valueToDuration(
+                initialValue, oldValue ?? minValue, minValue, maxValue))
+        .toInt();
     if (_animController == null) {
       _animController = AnimationController(vsync: tickerProvider);
     }
