@@ -10,9 +10,12 @@ class _CurvePainter extends CustomPainter {
   Offset center;
   double radius;
 
-  _CurvePainter(
-      {this.appearance, this.angle = 30, this.startAngle, this.angleRange})
-      : assert(appearance != null),
+  _CurvePainter({
+    this.appearance,
+    this.angle = 30,
+    this.startAngle,
+    this.angleRange,
+  })  : assert(appearance != null),
         assert(startAngle != null),
         assert(angleRange != null);
 

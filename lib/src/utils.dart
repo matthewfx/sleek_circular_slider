@@ -1,34 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-
-double degreeToRadians(double degree) {
-  return (math.pi / 180) * degree;
-}
-
-double radiansToDegrees(double radians) {
-  return radians * (180 / math.pi);
-}
-
-Offset degreesToCoordinates(Offset center, double degrees, double radius) {
-  return radiansToCoordinates(center, degreeToRadians(degrees), radius);
-}
-
-Offset radiansToCoordinates(Offset center, double radians, double radius) {
-  var dx = center.dx + radius * math.cos(radians);
-  var dy = center.dy + radius * math.sin(radians);
-  return Offset(dx, dy);
-}
-
-double coordinatesToRadians(Offset center, Offset coords) {
-  var a = coords.dx - center.dx;
-  var b = center.dy - coords.dy;
-  return radiansNormalized(math.atan2(b, a));
-}
-
-double radiansNormalized(double radians) {
-  var normalized = radians < 0 ? -radians : 2 * math.pi - radians;
-  return normalized;
-}
+import 'package:sleek_circular_slider/src/unit_conversions.dart';
 
 bool isPointInsideCircle(Offset point, Offset center, double rradius) {
   var radius = rradius * 1.2;
@@ -39,7 +11,11 @@ bool isPointInsideCircle(Offset point, Offset center, double rradius) {
 }
 
 bool isPointAlongCircle(
-    Offset point, Offset center, double radius, double width) {
+  Offset point,
+  Offset center,
+  double radius,
+  double width,
+) {
   // distance is root(sqr(x2 - x1) + sqr(y2 - y1))
   // i.e., (7,8) and (3,2) -> 7.21
   var dx = math.pow(point.dx - center.dx, 2);
