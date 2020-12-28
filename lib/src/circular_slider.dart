@@ -21,16 +21,14 @@ class SleekCircularSlider extends StatefulWidget {
   final double min;
   final double max;
   final CircularSliderAppearance appearance;
-  final CircularSliderSettings settings;
   final OnChange onChange;
   final OnChange onChangeStart;
   final OnChange onChangeEnd;
   final InnerWidget innerWidget;
   static const defaultAppearance = CircularSliderAppearance();
-  static const defaultSettings = CircularSliderSettings();
 
   double get angle {
-    return valueToAngle(initialValue, min, max, settings.angleRange);
+    return valueToAngle(initialValue, min, max, appearance.settings.angleRange);
   }
 
   const SleekCircularSlider(
@@ -38,7 +36,6 @@ class SleekCircularSlider extends StatefulWidget {
       this.initialValue = 50,
       this.min = 0,
       this.max = 100,
-      this.settings = defaultSettings,
       this.appearance = defaultAppearance,
       this.onChange,
       this.onChangeStart,
@@ -76,8 +73,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   @override
   void initState() {
     super.initState();
-    _startAngle = widget.settings.startAngle;
-    _angleRange = widget.settings.angleRange;
+    _startAngle = widget.appearance.settings.startAngle;
+    _angleRange = widget.appearance.settings.angleRange;
 
     if (!widget.appearance.animationEnabled) {
       return;
@@ -162,7 +159,10 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         },
         child: _buildRotatingPainter(
             rotation: _rotation,
-            size: Size(widget.settings.size, widget.settings.size)));
+            size: Size(
+              widget.appearance.settings.size,
+              widget.appearance.settings.size,
+            )));
   }
 
   @override
