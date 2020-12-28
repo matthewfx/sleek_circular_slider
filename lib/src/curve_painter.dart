@@ -27,7 +27,11 @@ class _CurvePainter extends CustomPainter {
 
     final progressBarRect = Rect.fromLTWH(0.0, 0.0, size.width, size.width);
 
-    Paint trackPaint;
+    Paint trackPaint = Paint()
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = appearance.trackWidth;
+
     if (appearance.trackColors != null) {
       final trackGradient = SweepGradient(
         startAngle: degreeToRadians(appearance.trackGradientStartAngle),
@@ -35,17 +39,9 @@ class _CurvePainter extends CustomPainter {
         tileMode: TileMode.mirror,
         colors: appearance.trackColors,
       );
-      trackPaint = Paint()
-        ..shader = trackGradient.createShader(progressBarRect)
-        ..strokeCap = StrokeCap.round
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = appearance.trackWidth;
+      trackPaint..shader = trackGradient.createShader(progressBarRect);
     } else {
-      trackPaint = Paint()
-        ..strokeCap = StrokeCap.round
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = appearance.trackWidth
-        ..color = appearance.trackColor;
+      trackPaint..color = appearance.trackColor;
     }
     drawCircularArc(
         canvas: canvas,
@@ -59,27 +55,28 @@ class _CurvePainter extends CustomPainter {
     }
 
     final currentAngle = appearance.counterClockwise ? -angle : angle;
-    final dynamicGradient =
-        appearance.dynamicGradient != null ? appearance.dynamicGradient : false;
-    final gradientRotationAngle = dynamicGradient
+
+    final gradientRotationAngle = appearance.dynamicGradient
         ? appearance.counterClockwise
             ? startAngle + 10.0
             : startAngle - 10.0
         : 0.0;
-    final GradientRotation rotation =
-        GradientRotation(degreeToRadians(gradientRotationAngle));
 
-    final gradientStartAngle = dynamicGradient
+    final gradientStartAngle = appearance.dynamicGradient
         ? appearance.counterClockwise
             ? 360.0 - currentAngle.abs()
             : 0.0
         : appearance.gradientStartAngle;
-    final gradientEndAngle = dynamicGradient
+    final gradientEndAngle = appearance.dynamicGradient
         ? appearance.counterClockwise
             ? 360.0
             : currentAngle.abs()
         : appearance.gradientStopAngle;
-    final colors = dynamicGradient && appearance.counterClockwise
+
+    final GradientRotation rotation =
+        GradientRotation(degreeToRadians(gradientRotationAngle));
+
+    final colors = appearance.dynamicGradient && appearance.counterClockwise
         ? appearance.progressBarColors.reversed.toList()
         : appearance.progressBarColors;
 

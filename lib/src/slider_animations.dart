@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'utils.dart';
+import 'package:sleek_circular_slider/src/unit_conversions.dart';
 
 typedef void SpinAnimation(
     double animation1, double animation2, double animation3);
@@ -79,15 +79,19 @@ class ValueChangedAnimationManager {
       ValueChangeAnimation valueChangedAnimation}) {
     _animationCompleted = false;
 
-    final duration = (durationMultiplier *
-            valueToDuration(
-                initialValue, oldValue ?? minValue, minValue, maxValue))
-        .toInt();
+    final _duration = valueToDuration(
+      initialValue,
+      oldValue ?? minValue,
+      minValue,
+      maxValue,
+    );
+
+    final multipliedDuration = (durationMultiplier * _duration).toInt();
     if (_animController == null) {
       _animController = AnimationController(vsync: tickerProvider);
     }
 
-    _animController.duration = Duration(milliseconds: duration);
+    _animController.duration = Duration(milliseconds: multipliedDuration);
 
     final curvedAnimation = CurvedAnimation(
       parent: _animController,
