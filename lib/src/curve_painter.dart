@@ -32,16 +32,16 @@ class _CurvePainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = appearance.trackWidth;
 
-    if (appearance.trackColors != null) {
+    if (appearance.colors.trackColors != null) {
       final trackGradient = SweepGradient(
         startAngle: degreeToRadians(appearance.trackGradientStartAngle),
         endAngle: degreeToRadians(appearance.trackGradientStopAngle),
         tileMode: TileMode.mirror,
-        colors: appearance.trackColors,
+        colors: appearance.colors.trackColors,
       );
       trackPaint..shader = trackGradient.createShader(progressBarRect);
     } else {
-      trackPaint..color = appearance.trackColor;
+      trackPaint..color = appearance.colors.trackColor;
     }
     drawCircularArc(
         canvas: canvas,
@@ -77,8 +77,8 @@ class _CurvePainter extends CustomPainter {
         GradientRotation(degreeToRadians(gradientRotationAngle));
 
     final colors = appearance.dynamicGradient && appearance.counterClockwise
-        ? appearance.progressBarColors.reversed.toList()
-        : appearance.progressBarColors;
+        ? appearance.colors.barColors.reversed.toList()
+        : appearance.colors.barColors;
 
     final progressBarGradient = kIsWeb
         ? LinearGradient(
@@ -100,7 +100,7 @@ class _CurvePainter extends CustomPainter {
       ..strokeWidth = appearance.progressBarWidth;
     drawCircularArc(canvas: canvas, size: size, paint: progressBarPaint);
 
-    var dotPaint = Paint()..color = appearance.dotColor;
+    var dotPaint = Paint()..color = appearance.colors.dotColor;
 
     Offset handler = degreesToCoordinates(
         center, -math.pi / 2 + startAngle + currentAngle + 1.5, radius);
@@ -138,7 +138,7 @@ class _CurvePainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
     for (int i = 1; i <= repetitions; i++) {
       shadowPaint.strokeWidth = appearance.progressBarWidth + i * shadowStep;
-      shadowPaint.color = appearance.shadowColor
+      shadowPaint.color = appearance.colors.shadowColor
           .withOpacity(maxOpacity - (opacityStep * (i - 1)));
       drawCircularArc(canvas: canvas, size: size, paint: shadowPaint);
     }

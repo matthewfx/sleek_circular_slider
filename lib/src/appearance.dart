@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 typedef String PercentageModifier(double percentage);
 
+class BarColorHelper {
+  static List<Color> createBarColorList(Color barColor) => [barColor, barColor];
+}
+
 class CircularSliderDefaultSettings {
   static const double defaultSize = 150;
   static const double defaultStartAngle = 150;
@@ -20,20 +24,39 @@ class CircularSliderSettings {
   });
 }
 
+class CircularSliderDefaultColors {
+  static const Color defaultTrackColor = Color.fromRGBO(220, 190, 251, 1.0);
+  static const Color defaultDotColor = Colors.white;
+  static const Color defaultShadowColor = Color.fromRGBO(44, 87, 192, 1.0);
+
+  static const List<Color> defaultBarColors = [
+    Color.fromRGBO(30, 0, 59, 1.0),
+    Color.fromRGBO(236, 0, 138, 1.0),
+    Color.fromRGBO(98, 133, 218, 1.0),
+  ];
+}
+
+class CircularSliderColors {
+  final Color trackColor;
+  final List<Color> trackColors;
+  final Color dotColor;
+  final Color shadowColor;
+  final List<Color> barColors;
+
+  const CircularSliderColors({
+    this.trackColor = CircularSliderDefaultColors.defaultTrackColor,
+    this.trackColors,
+    this.dotColor = CircularSliderDefaultColors.defaultDotColor,
+    this.shadowColor = CircularSliderDefaultColors.defaultShadowColor,
+    this.barColors = CircularSliderDefaultColors.defaultBarColors,
+  });
+}
+
 class CircularSliderAppearance {
   static const double _defaultGradientStartAngle = 0.0;
   static const double _defaultGradientEndAngle = 180.0;
   static const double _defaultTrackGradientStartAngle = 0.0;
   static const double _defaultTrackGradientEndAngle = 180.0;
-
-  static const List<Color> _defaultBarColors = [
-    Color.fromRGBO(30, 0, 59, 1.0),
-    Color.fromRGBO(236, 0, 138, 1.0),
-    Color.fromRGBO(98, 133, 218, 1.0),
-  ];
-  static const Color _defaultTrackColor = Color.fromRGBO(220, 190, 251, 1.0);
-  static const Color _defaultDotColor = Colors.white;
-  static const Color _defaultShadowColor = Color.fromRGBO(44, 87, 192, 1.0);
   static const double _defaultShadowMaxOpacity = 0.2;
 
   static const bool _defaultDynamicGradient = false;
@@ -44,7 +67,11 @@ class CircularSliderAppearance {
     return '$roundedValue %';
   }
 
+  static const defaultSettings = CircularSliderSettings();
+  static const defaultColors = CircularSliderColors();
+
   final CircularSliderSettings settings;
+  final CircularSliderColors colors;
 
   final bool animationEnabled;
   final bool spinnerMode;
@@ -61,25 +88,6 @@ class CircularSliderAppearance {
   double get handlerSize => customWidths?.handlerSize ?? progressBarWidth / 5.0;
   double get shadowWidth => customWidths?.shadowWidth ?? progressBarWidth * 1.4;
 
-  Color get _customTrackColor =>
-      customColors != null ? customColors.trackColor : null;
-  List<Color> get _customProgressBarColors {
-    if (customColors != null) {
-      if (customColors.progressBarColors != null) {
-        return customColors.progressBarColors;
-      } else if (customColors.progressBarColor != null) {
-        return [customColors.progressBarColor, customColors.progressBarColor];
-      }
-    }
-    return null;
-  }
-
-  List<Color> get _customTrackColors => customColors?.trackColors;
-
-  Color get trackColor => _customTrackColor ?? _defaultTrackColor;
-  List<Color> get trackColors => _customTrackColors ?? null;
-  List<Color> get progressBarColors =>
-      _customProgressBarColors ?? _defaultBarColors;
   double get gradientStartAngle =>
       customColors?.gradientStartAngle ?? _defaultGradientStartAngle;
   double get gradientStopAngle =>
@@ -91,11 +99,10 @@ class CircularSliderAppearance {
   bool get dynamicGradient =>
       customColors?.dynamicGradient ?? _defaultDynamicGradient;
   bool get hideShadow => customColors?.hideShadow ?? _defaultHideShadow;
-  Color get shadowColor => customColors?.shadowColor ?? _defaultShadowColor;
+
   double get shadowMaxOpacity =>
       customColors?.shadowMaxOpacity ?? _defaultShadowMaxOpacity;
-  double get shadowStep => customColors.shadowStep;
-  Color get dotColor => customColors?.dotColor ?? _defaultDotColor;
+  double get shadowStep => customColors?.shadowStep;
 
   PercentageModifier get infoModifier =>
       infoProperties?.modifier ?? _defaultPercentageModifier;
@@ -124,7 +131,8 @@ class CircularSliderAppearance {
           color: Color.fromRGBO(147, 81, 120, 1.0));
 
   const CircularSliderAppearance({
-    this.settings,
+    this.settings = defaultSettings,
+    this.colors = defaultColors,
     this.customWidths,
     this.customColors,
     this.infoProperties,
@@ -150,35 +158,23 @@ class CustomSliderWidths {
 }
 
 class CustomSliderColors {
-  final Color trackColor;
-  final Color progressBarColor;
-  final List<Color> progressBarColors;
   final double gradientStartAngle;
   final double gradientEndAngle;
-  final List<Color> trackColors;
   final double trackGradientStartAngle;
   final double trackGradientEndAngle;
   final bool dynamicGradient;
   final bool hideShadow;
-  final Color shadowColor;
   final double shadowMaxOpacity;
   final double shadowStep;
-  final Color dotColor;
 
   CustomSliderColors(
-      {this.trackColor,
-      this.progressBarColor,
-      this.progressBarColors,
-      this.gradientStartAngle,
+      {this.gradientStartAngle,
       this.gradientEndAngle,
-      this.trackColors,
       this.trackGradientStartAngle,
       this.trackGradientEndAngle,
       this.hideShadow,
-      this.shadowColor,
       this.shadowMaxOpacity,
       this.shadowStep,
-      this.dotColor,
       this.dynamicGradient = false});
 }
 

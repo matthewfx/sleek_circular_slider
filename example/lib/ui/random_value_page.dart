@@ -61,22 +61,26 @@ class _RandomValuePageState extends State<RandomValuePage> {
 
 final customWidth01 =
     CustomSliderWidths(trackWidth: 2, progressBarWidth: 20, shadowWidth: 50);
-final customColors01 = CustomSliderColors(
-    dotColor: Colors.white.withOpacity(0.8),
-    trackColor: HexColor('#FF8282').withOpacity(0.6),
-    progressBarColors: [
-      HexColor('#FFE2E2').withOpacity(0.9),
-      HexColor('#FFAD8D').withOpacity(0.9),
-      HexColor('#FE6490').withOpacity(0.5)
-    ],
-    shadowColor: HexColor('#FFD7E2'),
-    shadowMaxOpacity: 0.08);
+
+final circularSliderColors01 = CircularSliderColors(
+  dotColor: Colors.white.withOpacity(0.8),
+  trackColor: HexColor('#FF8282').withOpacity(0.6),
+  barColors: [
+    HexColor('#FFE2E2').withOpacity(0.9),
+    HexColor('#FFAD8D').withOpacity(0.9),
+    HexColor('#FE6490').withOpacity(0.5)
+  ],
+  shadowColor: HexColor('#FFD7E2'),
+);
+
+final customColors01 = CustomSliderColors(shadowMaxOpacity: 0.08);
 
 final info = InfoProperties(
     mainLabelStyle: TextStyle(
         color: Colors.white, fontSize: 60, fontWeight: FontWeight.w100));
 
 final CircularSliderAppearance appearance01 = CircularSliderAppearance(
+  colors: circularSliderColors01,
   customWidths: customWidth01,
   customColors: customColors01,
   infoProperties: info,

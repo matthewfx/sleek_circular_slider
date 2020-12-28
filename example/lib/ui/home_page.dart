@@ -20,10 +20,12 @@ final example01 = ExamplePage(
 
 /// Example 02
 final customWidth02 = CustomSliderWidths(trackWidth: 1, progressBarWidth: 2);
-final customColors02 = CustomSliderColors(
-    trackColor: Colors.white,
-    progressBarColor: Colors.orange,
-    hideShadow: true);
+final circularSliderColors02 = CircularSliderColors(
+  trackColor: Colors.white,
+  barColors: BarColorHelper.createBarColorList(Colors.orange),
+);
+
+final customColors02 = CustomSliderColors(hideShadow: true);
 final info02 = InfoProperties(
     topLabelStyle: TextStyle(
         color: Colors.orangeAccent, fontSize: 30, fontWeight: FontWeight.w600),
@@ -35,6 +37,7 @@ final info02 = InfoProperties(
       return '\$ $budget';
     });
 final CircularSliderAppearance appearance02 = CircularSliderAppearance(
+    colors: circularSliderColors02,
     customWidths: customWidth02,
     customColors: customColors02,
     infoProperties: info02,
@@ -57,12 +60,15 @@ final example02 = ExamplePage(
 /// Example 03
 final customWidth03 =
     CustomSliderWidths(trackWidth: 22, progressBarWidth: 20, shadowWidth: 50);
-final customColors03 = CustomSliderColors(
-    trackColors: [HexColor('#FFF8CB'), HexColor('#B9FFFF')],
-    progressBarColors: [HexColor('#FFC84B'), HexColor('#00BFD5')],
-    shadowColor: HexColor('#5FC7B0'),
-    dynamicGradient: true,
-    shadowMaxOpacity: 0.05);
+
+final circularSliderColors03 = CircularSliderColors(
+  trackColors: [HexColor('#FFF8CB'), HexColor('#B9FFFF')],
+  barColors: [HexColor('#FFC84B'), HexColor('#00BFD5')],
+  shadowColor: HexColor('#5FC7B0'),
+);
+
+final customColors03 =
+    CustomSliderColors(dynamicGradient: true, shadowMaxOpacity: 0.05);
 
 final info03 = InfoProperties(
     bottomLabelStyle: TextStyle(
@@ -76,7 +82,9 @@ final info03 = InfoProperties(
       final kcal = value.toInt();
       return '$kcal kCal';
     });
+
 final CircularSliderAppearance appearance03 = CircularSliderAppearance(
+  colors: circularSliderColors03,
   customWidths: customWidth03,
   customColors: customColors03,
   infoProperties: info03,
@@ -99,10 +107,14 @@ final example03 = ExamplePage(
 /// Example 04
 final customWidth04 =
     CustomSliderWidths(trackWidth: 4, progressBarWidth: 20, shadowWidth: 40);
+
+final circularSliderColors04 = CircularSliderColors(
+  trackColor: HexColor('#CCFF63'),
+  barColors: BarColorHelper.createBarColorList(HexColor('#00FF89')),
+  shadowColor: HexColor('#B0FFDA'),
+);
+
 final customColors04 = CustomSliderColors(
-    trackColor: HexColor('#CCFF63'),
-    progressBarColor: HexColor('#00FF89'),
-    shadowColor: HexColor('#B0FFDA'),
     shadowMaxOpacity: 0.5, //);
     shadowStep: 20);
 final info04 = InfoProperties(
@@ -118,6 +130,7 @@ final info04 = InfoProperties(
       return '$temp ˚C';
     });
 final CircularSliderAppearance appearance04 = CircularSliderAppearance(
+    colors: circularSliderColors04,
     customWidths: customWidth04,
     customColors: customColors04,
     infoProperties: info04,
@@ -140,12 +153,15 @@ final example04 = ExamplePage(
 /// Example 05
 final customWidth05 =
     CustomSliderWidths(trackWidth: 4, progressBarWidth: 45, shadowWidth: 70);
-final customColors05 = CustomSliderColors(
-    dotColor: HexColor('#FFB1B2'),
-    trackColor: HexColor('#E9585A'),
-    progressBarColors: [HexColor('#FB9967'), HexColor('#E9585A')],
-    shadowColor: HexColor('#FFB1B2'),
-    shadowMaxOpacity: 0.05);
+
+final circularSliderColors05 = CircularSliderColors(
+  dotColor: HexColor('#FFB1B2'),
+  trackColor: HexColor('#E9585A'),
+  barColors: [HexColor('#FB9967'), HexColor('#E9585A')],
+  shadowColor: HexColor('#FFB1B2'),
+);
+
+final customColors05 = CustomSliderColors(shadowMaxOpacity: 0.05);
 final info05 = InfoProperties(
     topLabelStyle: TextStyle(
         color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
@@ -160,6 +176,7 @@ final info05 = InfoProperties(
       return '$time';
     });
 final CircularSliderAppearance appearance05 = CircularSliderAppearance(
+  colors: circularSliderColors05,
   customWidths: customWidth05,
   customColors: customColors05,
   infoProperties: info05,
@@ -182,18 +199,21 @@ final example05 = ExamplePage(
 /// Example 06
 final customWidth06 =
     CustomSliderWidths(trackWidth: 4, progressBarWidth: 40, shadowWidth: 70);
-final customColors06 = CustomSliderColors(
-    dotColor: Colors.white.withOpacity(0.1),
-    trackColor: HexColor('#F9EBE0').withOpacity(0.2),
-    progressBarColors: [
-      HexColor('#A586EE').withOpacity(0.3),
-      HexColor('#F9D3D2').withOpacity(0.3),
-      HexColor('#BF79C2').withOpacity(0.3)
-    ],
-    shadowColor: HexColor('#7F5ED9'),
-    shadowMaxOpacity: 0.05);
+
+final circularSliderColors06 = CircularSliderColors(
+  dotColor: Colors.white.withOpacity(0.1),
+  trackColor: HexColor('#F9EBE0').withOpacity(0.2),
+  barColors: [
+    HexColor('#A586EE').withOpacity(0.3),
+    HexColor('#F9D3D2').withOpacity(0.3),
+    HexColor('#BF79C2').withOpacity(0.3)
+  ],
+  shadowColor: HexColor('#7F5ED9'),
+);
+final customColors06 = CustomSliderColors(shadowMaxOpacity: 0.05);
 
 final CircularSliderAppearance appearance06 = CircularSliderAppearance(
+  colors: circularSliderColors06,
   customWidths: customWidth06,
   customColors: customColors06,
   settings: CircularSliderSettings(
@@ -238,18 +258,17 @@ final example06 = ExamplePage(
 /// Example 07
 final customWidth07 =
     CustomSliderWidths(trackWidth: 2, progressBarWidth: 10, shadowWidth: 20);
-final customColors07 = CustomSliderColors(
-    dotColor: Colors.white.withOpacity(0.1),
-    trackColor: HexColor('#7EFFFF').withOpacity(0.2),
-    progressBarColors: [
-      HexColor('#17C5E5'),
-      HexColor('#DFFF97'),
-      HexColor('#04FFB5')
-    ],
-    shadowColor: HexColor('#0CA1BD'),
-    shadowMaxOpacity: 0.05);
+
+final circularSliderColors07 = CircularSliderColors(
+  dotColor: Colors.white.withOpacity(0.1),
+  trackColor: HexColor('#7EFFFF').withOpacity(0.2),
+  barColors: [HexColor('#17C5E5'), HexColor('#DFFF97'), HexColor('#04FFB5')],
+  shadowColor: HexColor('#0CA1BD'),
+);
+final customColors07 = CustomSliderColors(shadowMaxOpacity: 0.05);
 
 final CircularSliderAppearance appearance07 = CircularSliderAppearance(
+    colors: circularSliderColors07,
     customWidths: customWidth07,
     customColors: customColors07,
     settings: CircularSliderSettings(
@@ -269,18 +288,21 @@ final example07 = ExamplePage(
 /// Example 08
 final customWidth08 =
     CustomSliderWidths(trackWidth: 1, progressBarWidth: 15, shadowWidth: 50);
-final customColors08 = CustomSliderColors(
-    dotColor: Colors.white.withOpacity(0.5),
-    trackColor: HexColor('#7EFFFF').withOpacity(0.1),
-    progressBarColors: [
-      HexColor('#3586FC').withOpacity(0.1),
-      HexColor('#FF8876').withOpacity(0.25),
-      HexColor('#FAFF76').withOpacity(0.5)
-    ],
-    shadowColor: HexColor('#133657'),
-    shadowMaxOpacity: 0.02);
+
+final circularSliderColors08 = CircularSliderColors(
+  dotColor: Colors.white.withOpacity(0.5),
+  trackColor: HexColor('#7EFFFF').withOpacity(0.1),
+  barColors: [
+    HexColor('#3586FC').withOpacity(0.1),
+    HexColor('#FF8876').withOpacity(0.25),
+    HexColor('#FAFF76').withOpacity(0.5)
+  ],
+  shadowColor: HexColor('#133657'),
+);
+final customColors08 = CustomSliderColors(shadowMaxOpacity: 0.02);
 
 final CircularSliderAppearance appearance08 = CircularSliderAppearance(
+    colors: circularSliderColors08,
     customWidths: customWidth08,
     customColors: customColors08,
     settings: CircularSliderSettings(
@@ -302,18 +324,21 @@ final example08 = ExamplePage(
 /// Example 09
 final customWidth09 =
     CustomSliderWidths(trackWidth: 1, progressBarWidth: 15, shadowWidth: 50);
-final customColors09 = CustomSliderColors(
-    dotColor: Colors.white.withOpacity(0.5),
-    trackColor: HexColor('#000000').withOpacity(0.1),
-    progressBarColors: [
-      HexColor('#3586FC').withOpacity(0.1),
-      HexColor('#FF8876').withOpacity(0.25),
-      HexColor('#3586FC').withOpacity(0.5)
-    ],
-    shadowColor: HexColor('#133657'),
-    shadowMaxOpacity: 0.02);
+
+final circularSliderColors09 = CircularSliderColors(
+  dotColor: Colors.white.withOpacity(0.5),
+  trackColor: HexColor('#000000').withOpacity(0.1),
+  barColors: [
+    HexColor('#3586FC').withOpacity(0.1),
+    HexColor('#FF8876').withOpacity(0.25),
+    HexColor('#3586FC').withOpacity(0.5)
+  ],
+  shadowColor: HexColor('#133657'),
+);
+final customColors09 = CustomSliderColors(shadowMaxOpacity: 0.02);
 
 final CircularSliderAppearance appearance09 = CircularSliderAppearance(
+    colors: circularSliderColors09,
     customWidths: customWidth09,
     customColors: customColors09,
     settings: CircularSliderSettings(
@@ -336,17 +361,20 @@ final example09 = ExamplePage(
 /// Example 09
 final customWidth10 =
     CustomSliderWidths(trackWidth: 1, progressBarWidth: 28, shadowWidth: 60);
-final customColors10 = CustomSliderColors(
-    dotColor: Colors.white.withOpacity(0.5),
-    trackColor: HexColor('#000000').withOpacity(0.1),
-    progressBarColors: [
-      HexColor('#76E2FF').withOpacity(0.5),
-      HexColor('#4E09ED').withOpacity(0.5),
-      HexColor('#F7E4FF').withOpacity(0.3)
-    ],
-    dynamicGradient: true,
-    shadowColor: HexColor('#55B3E4'),
-    shadowMaxOpacity: 0.02);
+
+final circularSliderColors10 = CircularSliderColors(
+  dotColor: Colors.white.withOpacity(0.5),
+  trackColor: HexColor('#000000').withOpacity(0.1),
+  barColors: [
+    HexColor('#76E2FF').withOpacity(0.5),
+    HexColor('#4E09ED').withOpacity(0.5),
+    HexColor('#F7E4FF').withOpacity(0.3)
+  ],
+  shadowColor: HexColor('#55B3E4'),
+);
+
+final customColors10 =
+    CustomSliderColors(dynamicGradient: true, shadowMaxOpacity: 0.02);
 
 final info10 = InfoProperties(
     bottomLabelStyle: TextStyle(
@@ -362,6 +390,7 @@ final info10 = InfoProperties(
     });
 
 final CircularSliderAppearance appearance10 = CircularSliderAppearance(
+    colors: circularSliderColors10,
     customWidths: customWidth10,
     customColors: customColors10,
     settings: CircularSliderSettings(
