@@ -179,11 +179,12 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     }
 
     _currentAngle = calculateAngle(
-        startAngle: _startAngle,
-        angleRange: _angleRange,
-        selectedAngle: _selectedAngle,
-        defaultAngle: defaultAngle,
-        counterClockwise: counterClockwise);
+      _startAngle,
+      _angleRange,
+      _selectedAngle,
+      defaultAngle,
+      counterClockwise,
+    );
 
     _painter = _CurvePainter(
         startAngle: _startAngle,
@@ -287,12 +288,14 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
       return false;
     }
 
+    final _touchAngle = coordinatesToRadians(_painter.center, position);
     final angleWithinRange = isAngleWithinRange(
-        startAngle: _startAngle,
-        angleRange: _angleRange,
-        touchAngle: coordinatesToRadians(_painter.center, position),
-        previousAngle: _currentAngle,
-        counterClockwise: widget.appearance.counterClockwise);
+      _startAngle,
+      _angleRange,
+      _touchAngle,
+      _currentAngle,
+      widget.appearance.counterClockwise,
+    );
     if (!angleWithinRange) {
       return false;
     }
