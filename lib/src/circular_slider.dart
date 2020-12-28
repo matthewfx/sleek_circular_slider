@@ -68,7 +68,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   ValueChangedAnimationManager _animationManager;
 
   bool get _interactionEnabled => (widget.onChangeEnd != null ||
-      widget.onChange != null && !widget.appearance.spinnerMode);
+      widget.onChange != null && !widget.appearance.features.spinnerMode);
 
   @override
   void initState() {
@@ -76,11 +76,11 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     _startAngle = widget.appearance.settings.startAngle;
     _angleRange = widget.appearance.settings.angleRange;
 
-    if (!widget.appearance.animationEnabled) {
+    if (!widget.appearance.features.animationEnabled) {
       return;
     }
 
-    widget.appearance.spinnerMode ? _spin() : _animate();
+    widget.appearance.features.spinnerMode ? _spin() : _animate();
   }
 
   @override
@@ -92,7 +92,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   }
 
   void _animate() {
-    if (!widget.appearance.animationEnabled || widget.appearance.spinnerMode) {
+    if (!widget.appearance.features.animationEnabled ||
+        widget.appearance.features.spinnerMode) {
       _setupPainter();
       _updateOnChange();
       return;
@@ -227,7 +228,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   }
 
   Widget _buildChildWidget() {
-    if (widget.appearance.spinnerMode) {
+    if (widget.appearance.features.spinnerMode) {
       return null;
     }
     final value =
@@ -274,7 +275,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         position, _painter.center, _painter.radius, touchWidth)) {
       _selectedAngle = coordinatesToRadians(_painter.center, position);
       // setup painter with new angle values and update onChange
-      _setupPainter(counterClockwise: widget.appearance.counterClockwise);
+      _setupPainter(
+          counterClockwise: widget.appearance.features.counterClockwise);
       _updateOnChange();
       setState(() {});
     }
@@ -297,7 +299,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
       _angleRange,
       _touchAngle,
       _currentAngle,
-      widget.appearance.counterClockwise,
+      widget.appearance.features.counterClockwise,
     );
     if (!angleWithinRange) {
       return false;

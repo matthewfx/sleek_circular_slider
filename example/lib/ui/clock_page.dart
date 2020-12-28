@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:example/utils.dart';
+import 'package:sleek_circular_slider/configuration/CircularSliderColors.dart';
+import 'package:sleek_circular_slider/configuration/CircularSliderFeatures.dart';
+import 'package:sleek_circular_slider/configuration/CircularSliderGeometry.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class Clock extends StatefulWidget {
@@ -127,16 +130,19 @@ final customColors01 = CustomSliderColors(
   shadowMaxOpacity: 0.6,
 );
 
+final features01 = CircularSliderFeatures(animationEnabled: false);
+
 final CircularSliderAppearance appearance01 = CircularSliderAppearance(
-    colors: circularSliderColors01,
-    customWidths: customWidth01,
-    customColors: customColors01,
-    settings: CircularSliderSettings(
-      startAngle: 270,
-      angleRange: 360,
-      size: 350.0,
-    ),
-    animationEnabled: false);
+  colors: circularSliderColors01,
+  features: features01,
+  customWidths: customWidth01,
+  customColors: customColors01,
+  settings: CircularSliderGeometry(
+    startAngle: 270,
+    angleRange: 360,
+    size: 350.0,
+  ),
+);
 
 final customWidth02 = CustomSliderWidths(
   trackWidth: 5,
@@ -154,16 +160,19 @@ final circularSliderColors02 = CircularSliderColors(
 final customColors02 =
     CustomSliderColors(shadowStep: 15.0, shadowMaxOpacity: 0.3);
 
+final features02 = CircularSliderFeatures(animationEnabled: false);
+
 final CircularSliderAppearance appearance02 = CircularSliderAppearance(
-    colors: circularSliderColors02,
-    customWidths: customWidth02,
-    customColors: customColors02,
-    settings: CircularSliderSettings(
-      startAngle: 270,
-      angleRange: 360,
-      size: 290.0,
-    ),
-    animationEnabled: false);
+  colors: circularSliderColors02,
+  features: features02,
+  customWidths: customWidth02,
+  customColors: customColors02,
+  settings: CircularSliderGeometry(
+    startAngle: 270,
+    angleRange: 360,
+    size: 290.0,
+  ),
+);
 
 final customWidth03 =
     CustomSliderWidths(trackWidth: 8, progressBarWidth: 20, shadowWidth: 40);
@@ -178,13 +187,16 @@ final circularSliderColors03 = CircularSliderColors(
 final customColors03 =
     CustomSliderColors(shadowStep: 20.0, shadowMaxOpacity: 0.3);
 
+final features03 = CircularSliderFeatures(animationEnabled: false);
+
 final CircularSliderAppearance appearance03 = CircularSliderAppearance(
-    colors: circularSliderColors03,
-    customWidths: customWidth03,
-    customColors: customColors03,
-    settings: CircularSliderSettings(
-      startAngle: 270,
-      angleRange: 360,
-      size: 210.0,
-    ),
-    animationEnabled: false);
+  colors: circularSliderColors03,
+  features: features03,
+  customWidths: customWidth03,
+  customColors: customColors03,
+  settings: CircularSliderGeometry(
+    startAngle: 270,
+    angleRange: 360,
+    size: 210.0,
+  ),
+);

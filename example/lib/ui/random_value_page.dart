@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:example/utils.dart';
 
 import 'package:flutter/material.dart';
+import 'package:sleek_circular_slider/configuration/CircularSliderColors.dart';
+import 'package:sleek_circular_slider/configuration/CircularSliderGeometry.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class RandomValuePage extends StatefulWidget {
@@ -84,7 +86,7 @@ final CircularSliderAppearance appearance01 = CircularSliderAppearance(
   customWidths: customWidth01,
   customColors: customColors01,
   infoProperties: info,
-  settings: CircularSliderSettings(
+  settings: CircularSliderGeometry(
     startAngle: 180,
     angleRange: 180,
     size: 250.0,

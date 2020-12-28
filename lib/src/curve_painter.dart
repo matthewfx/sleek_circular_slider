@@ -48,27 +48,27 @@ class _CurvePainter extends CustomPainter {
         size: size,
         paint: trackPaint,
         ignoreAngle: true,
-        spinnerMode: appearance.spinnerMode);
+        spinnerMode: appearance.features.spinnerMode);
 
-    if (!appearance.hideShadow) {
+    if (!appearance.features.hideShadow) {
       drawShadow(canvas: canvas, size: size);
     }
 
-    final currentAngle = appearance.counterClockwise ? -angle : angle;
+    final currentAngle = appearance.features.counterClockwise ? -angle : angle;
 
     final gradientRotationAngle = appearance.dynamicGradient
-        ? appearance.counterClockwise
+        ? appearance.features.counterClockwise
             ? startAngle + 10.0
             : startAngle - 10.0
         : 0.0;
 
     final gradientStartAngle = appearance.dynamicGradient
-        ? appearance.counterClockwise
+        ? appearance.features.counterClockwise
             ? 360.0 - currentAngle.abs()
             : 0.0
         : appearance.gradientStartAngle;
     final gradientEndAngle = appearance.dynamicGradient
-        ? appearance.counterClockwise
+        ? appearance.features.counterClockwise
             ? 360.0
             : currentAngle.abs()
         : appearance.gradientStopAngle;
@@ -76,9 +76,10 @@ class _CurvePainter extends CustomPainter {
     final GradientRotation rotation =
         GradientRotation(degreeToRadians(gradientRotationAngle));
 
-    final colors = appearance.dynamicGradient && appearance.counterClockwise
-        ? appearance.colors.barColors.reversed.toList()
-        : appearance.colors.barColors;
+    final colors =
+        appearance.dynamicGradient && appearance.features.counterClockwise
+            ? appearance.colors.barColors.reversed.toList()
+            : appearance.colors.barColors;
 
     final progressBarGradient = kIsWeb
         ? LinearGradient(
@@ -114,8 +115,10 @@ class _CurvePainter extends CustomPainter {
       bool ignoreAngle = false,
       bool spinnerMode = false}) {
     final double angleValue = ignoreAngle ? 0 : (angleRange - angle);
-    final range = appearance.counterClockwise ? -angleRange : angleRange;
-    final currentAngle = appearance.counterClockwise ? angleValue : -angleValue;
+    final range =
+        appearance.features.counterClockwise ? -angleRange : angleRange;
+    final currentAngle =
+        appearance.features.counterClockwise ? angleValue : -angleValue;
     canvas.drawArc(
         Rect.fromCircle(center: center, radius: radius),
         degreeToRadians(spinnerMode ? 0 : startAngle),
