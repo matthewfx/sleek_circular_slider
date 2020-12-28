@@ -77,9 +77,12 @@ final info = InfoProperties(
         color: Colors.white, fontSize: 60, fontWeight: FontWeight.w100));
 
 final CircularSliderAppearance appearance01 = CircularSliderAppearance(
-    customWidths: customWidth01,
-    customColors: customColors01,
-    infoProperties: info,
+  customWidths: customWidth01,
+  customColors: customColors01,
+  infoProperties: info,
+  settings: CircularSliderSettings(
     startAngle: 180,
     angleRange: 180,
-    size: 250.0);
+    size: 250.0,
+  ),
+);

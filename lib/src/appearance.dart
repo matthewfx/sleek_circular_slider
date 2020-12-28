@@ -2,10 +2,25 @@ import 'package:flutter/material.dart';
 
 typedef String PercentageModifier(double percentage);
 
+class CircularSliderDefaultSettings {
+  static const double defaultSize = 150;
+  static const double defaultStartAngle = 150;
+  static const double defaultAngleRange = 240;
+}
+
+class CircularSliderSettings {
+  final double size;
+  final double startAngle;
+  final double angleRange;
+
+  const CircularSliderSettings({
+    this.size = CircularSliderDefaultSettings.defaultSize,
+    this.startAngle = CircularSliderDefaultSettings.defaultStartAngle,
+    this.angleRange = CircularSliderDefaultSettings.defaultAngleRange,
+  });
+}
+
 class CircularSliderAppearance {
-  static const double _defaultSize = 150.0;
-  static const double _defaultStartAngle = 150.0;
-  static const double _defaultAngleRange = 240.0;
   static const double _defaultGradientStartAngle = 0.0;
   static const double _defaultGradientEndAngle = 180.0;
   static const double _defaultTrackGradientStartAngle = 0.0;
@@ -29,9 +44,7 @@ class CircularSliderAppearance {
     return '$roundedValue %';
   }
 
-  final double size;
-  final double startAngle;
-  final double angleRange;
+  final CircularSliderSettings settings;
 
   final bool animationEnabled;
   final bool spinnerMode;
@@ -43,7 +56,8 @@ class CircularSliderAppearance {
   final InfoProperties infoProperties;
 
   double get trackWidth => customWidths?.trackWidth ?? progressBarWidth / 4.0;
-  double get progressBarWidth => customWidths?.progressBarWidth ?? size / 10.0;
+  double get progressBarWidth =>
+      customWidths?.progressBarWidth ?? settings.size / 10.0;
   double get handlerSize => customWidths?.handlerSize ?? progressBarWidth / 5.0;
   double get shadowWidth => customWidths?.shadowWidth ?? progressBarWidth * 1.4;
 
@@ -92,35 +106,34 @@ class CircularSliderAppearance {
       infoProperties?.mainLabelStyle ??
       TextStyle(
           fontWeight: FontWeight.w100,
-          fontSize: size / 5.0,
+          fontSize: settings.size / 5.0,
           color: Color.fromRGBO(30, 0, 59, 1.0));
 
   TextStyle get infoTopLabelStyle =>
       infoProperties?.topLabelStyle ??
       TextStyle(
           fontWeight: FontWeight.w600,
-          fontSize: size / 10.0,
+          fontSize: settings.size / 10.0,
           color: Color.fromRGBO(147, 81, 120, 1.0));
 
   TextStyle get infoBottomLabelStyle =>
       infoProperties?.bottomLabelStyle ??
       TextStyle(
           fontWeight: FontWeight.w600,
-          fontSize: size / 10.0,
+          fontSize: settings.size / 10.0,
           color: Color.fromRGBO(147, 81, 120, 1.0));
 
-  const CircularSliderAppearance(
-      {this.customWidths,
-      this.customColors,
-      this.size = _defaultSize,
-      this.startAngle = _defaultStartAngle,
-      this.angleRange = _defaultAngleRange,
-      this.infoProperties,
-      this.animationEnabled = true,
-      this.counterClockwise = false,
-      this.spinnerMode = false,
-      this.spinnerDuration = 1500,
-      this.animDurationMultiplier = 1.0});
+  const CircularSliderAppearance({
+    this.settings,
+    this.customWidths,
+    this.customColors,
+    this.infoProperties,
+    this.animationEnabled = true,
+    this.counterClockwise = false,
+    this.spinnerMode = false,
+    this.spinnerDuration = 1500,
+    this.animDurationMultiplier = 1.0,
+  });
 }
 
 class CustomSliderWidths {

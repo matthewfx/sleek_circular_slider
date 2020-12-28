@@ -38,9 +38,11 @@ final CircularSliderAppearance appearance02 = CircularSliderAppearance(
     customWidths: customWidth02,
     customColors: customColors02,
     infoProperties: info02,
-    startAngle: 180,
-    angleRange: 270,
-    size: 200.0,
+    settings: CircularSliderSettings(
+      startAngle: 180,
+      angleRange: 270,
+      size: 200.0,
+    ),
     animationEnabled: false);
 final viewModel02 = ExampleViewModel(
     appearance: appearance02,
@@ -75,12 +77,15 @@ final info03 = InfoProperties(
       return '$kcal kCal';
     });
 final CircularSliderAppearance appearance03 = CircularSliderAppearance(
-    customWidths: customWidth03,
-    customColors: customColors03,
-    infoProperties: info03,
+  customWidths: customWidth03,
+  customColors: customColors03,
+  infoProperties: info03,
+  settings: CircularSliderSettings(
     size: 250.0,
     startAngle: 180,
-    angleRange: 340);
+    angleRange: 340,
+  ),
+);
 final viewModel03 = ExampleViewModel(
     appearance: appearance03,
     min: 500,
@@ -116,9 +121,11 @@ final CircularSliderAppearance appearance04 = CircularSliderAppearance(
     customWidths: customWidth04,
     customColors: customColors04,
     infoProperties: info04,
-    startAngle: 90,
-    angleRange: 90,
-    size: 200.0,
+    settings: CircularSliderSettings(
+      startAngle: 90,
+      angleRange: 90,
+      size: 200.0,
+    ),
     animationEnabled: true);
 final viewModel04 = ExampleViewModel(
     appearance: appearance04,
@@ -153,12 +160,15 @@ final info05 = InfoProperties(
       return '$time';
     });
 final CircularSliderAppearance appearance05 = CircularSliderAppearance(
-    customWidths: customWidth05,
-    customColors: customColors05,
-    infoProperties: info05,
+  customWidths: customWidth05,
+  customColors: customColors05,
+  infoProperties: info05,
+  settings: CircularSliderSettings(
     startAngle: 270,
     angleRange: 360,
-    size: 350.0);
+    size: 350.0,
+  ),
+);
 final viewModel05 = ExampleViewModel(
     appearance: appearance05,
     min: 0,
@@ -184,11 +194,14 @@ final customColors06 = CustomSliderColors(
     shadowMaxOpacity: 0.05);
 
 final CircularSliderAppearance appearance06 = CircularSliderAppearance(
-    customWidths: customWidth06,
-    customColors: customColors06,
+  customWidths: customWidth06,
+  customColors: customColors06,
+  settings: CircularSliderSettings(
     startAngle: 180,
     angleRange: 360,
-    size: 300.0);
+    size: 300.0,
+  ),
+);
 final viewModel06 = ExampleViewModel(
     innerWidget: (double value) {
       return Transform.rotate(
@@ -239,9 +252,11 @@ final customColors07 = CustomSliderColors(
 final CircularSliderAppearance appearance07 = CircularSliderAppearance(
     customWidths: customWidth07,
     customColors: customColors07,
-    startAngle: 180,
-    angleRange: 360,
-    size: 130.0,
+    settings: CircularSliderSettings(
+      startAngle: 180,
+      angleRange: 360,
+      size: 130.0,
+    ),
     spinnerMode: true);
 final viewModel07 = ExampleViewModel(
     appearance: appearance07,
@@ -268,7 +283,9 @@ final customColors08 = CustomSliderColors(
 final CircularSliderAppearance appearance08 = CircularSliderAppearance(
     customWidths: customWidth08,
     customColors: customColors08,
-    size: 230.0,
+    settings: CircularSliderSettings(
+      size: 230.0,
+    ),
     spinnerMode: true,
     spinnerDuration: 1000);
 final viewModel08 =
@@ -299,9 +316,11 @@ final customColors09 = CustomSliderColors(
 final CircularSliderAppearance appearance09 = CircularSliderAppearance(
     customWidths: customWidth09,
     customColors: customColors09,
-    startAngle: 55,
-    angleRange: 110,
-    size: 230.0,
+    settings: CircularSliderSettings(
+      startAngle: 55,
+      angleRange: 110,
+      size: 230.0,
+    ),
     counterClockwise: true);
 final viewModel09 =
     ExampleViewModel(appearance: appearance09, value: 50, pageColors: [
@@ -345,10 +364,12 @@ final info10 = InfoProperties(
 final CircularSliderAppearance appearance10 = CircularSliderAppearance(
     customWidths: customWidth10,
     customColors: customColors10,
-    startAngle: 180,
-    angleRange: 240,
+    settings: CircularSliderSettings(
+      startAngle: 180,
+      angleRange: 240,
+      size: 280.0,
+    ),
     infoProperties: info10,
-    size: 280.0,
     counterClockwise: true,
     animDurationMultiplier: 3);
 final viewModel10 = ExampleViewModel(
