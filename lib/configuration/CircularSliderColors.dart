@@ -4,7 +4,6 @@ class CircularSliderColors {
   final Color trackColor;
   final List<Color> trackColors;
   final Color dotColor;
-  final Color shadowColor;
   final List<Color> barColors;
 
   final double barGradientStartAngle;
@@ -17,7 +16,6 @@ class CircularSliderColors {
     this.trackColor = DefaultColors.trackColor,
     this.trackColors,
     this.dotColor = DefaultColors.dotColor,
-    this.shadowColor = DefaultColors.shadowColor,
     this.barColors = DefaultColors.barColors,
     this.barGradientStartAngle = DefaultColors.barGradientStartAngle,
     this.barGradientEndAngle = DefaultColors.barGradientEndAngle,
@@ -30,7 +28,6 @@ class CircularSliderColors {
 class DefaultColors {
   static const Color trackColor = Color.fromRGBO(220, 190, 251, 1.0);
   static const Color dotColor = Colors.white;
-  static const Color shadowColor = Color.fromRGBO(44, 87, 192, 1.0);
 
   static const List<Color> barColors = [
     Color.fromRGBO(30, 0, 59, 1.0),

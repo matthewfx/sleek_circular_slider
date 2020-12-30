@@ -5,6 +5,7 @@ import 'package:example/utils.dart';
 import 'package:sleek_circular_slider/configuration/CircularSliderColors.dart';
 import 'package:sleek_circular_slider/configuration/CircularSliderFeatures.dart';
 import 'package:sleek_circular_slider/configuration/CircularSliderGeometry.dart';
+import 'package:sleek_circular_slider/configuration/CircularSliderShadow.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class Clock extends StatefulWidget {
@@ -133,19 +134,19 @@ final colors01 = CircularSliderColors(
   dotColor: Colors.white.withOpacity(0.8),
   trackColor: HexColor('#FFD4BE').withOpacity(0.4),
   barColors: BarColorHelper.createBarColorList(HexColor('#F6A881')),
-  shadowColor: HexColor('#FFD4BE'),
 );
 
-final customColors01 = CustomSliderColors(
-  shadowStep: 10.0,
-  shadowMaxOpacity: 0.6,
+final shadow01 = CircularSliderShadow(
+  color: HexColor('#FFD4BE'),
+  step: 10.0,
+  maxOpacity: 0.6,
 );
 
 final settings01 = CircularSliderSettings(
   features: features01,
   geometry: geometry01,
   colors: colors01,
-  customColors: customColors01,
+  shadow: shadow01,
 );
 
 final features02 = CircularSliderFeatures(
@@ -165,19 +166,19 @@ final colors02 = CircularSliderColors(
   dotColor: Colors.white.withOpacity(0.8),
   trackColor: HexColor('#98DBFC').withOpacity(0.3),
   barColors: BarColorHelper.createBarColorList(HexColor('#6DCFFF')),
-  shadowColor: HexColor('#98DBFC'),
 );
 
-final customColors02 = CustomSliderColors(
-  shadowStep: 15.0,
-  shadowMaxOpacity: 0.3,
+final shadow02 = CircularSliderShadow(
+  color: HexColor('#98DBFC'),
+  step: 15.0,
+  maxOpacity: 0.3,
 );
 
 final settings02 = CircularSliderSettings(
   features: features02,
   geometry: geometry02,
   colors: colors02,
-  customColors: customColors02,
+  shadow: shadow02,
 );
 
 final features03 = CircularSliderFeatures(
@@ -197,17 +198,17 @@ final colors03 = CircularSliderColors(
   dotColor: Colors.white.withOpacity(0.8),
   trackColor: HexColor('#EFC8FC').withOpacity(0.3),
   barColors: BarColorHelper.createBarColorList(HexColor('#A177B0')),
-  shadowColor: HexColor('#EFC8FC'),
 );
 
-final customColors03 = CustomSliderColors(
-  shadowStep: 20.0,
-  shadowMaxOpacity: 0.3,
+final shadow03 = CircularSliderShadow(
+  color: HexColor('#EFC8FC'),
+  step: 20.0,
+  maxOpacity: 0.3,
 );
 
 final settings03 = CircularSliderSettings(
   features: features03,
   geometry: geometry03,
   colors: colors03,
-  customColors: customColors03,
+  shadow: shadow03,
 );

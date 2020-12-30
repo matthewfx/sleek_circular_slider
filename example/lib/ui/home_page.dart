@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/configuration/CircularSliderColors.dart';
 import 'package:sleek_circular_slider/configuration/CircularSliderFeatures.dart';
 import 'package:sleek_circular_slider/configuration/CircularSliderGeometry.dart';
+import 'package:sleek_circular_slider/configuration/CircularSliderShadow.dart';
 import 'package:sleek_circular_slider/configuration/CircularSliderText.dart';
 import 'clock_page.dart';
 import 'random_value_page.dart';
@@ -44,8 +45,6 @@ final colors02 = CircularSliderColors(
   barColors: BarColorHelper.createBarColorList(Colors.orange),
 );
 
-final customColors02 = CustomSliderColors();
-
 final text02 = CircularSliderText(
   topLabelStyle: TextStyle(
     color: Colors.orangeAccent,
@@ -68,7 +67,6 @@ final settings02 = CircularSliderSettings(
   features: features02,
   geometry: geometry02,
   colors: colors02,
-  customColors: customColors02,
   text: text02,
 );
 
@@ -97,12 +95,12 @@ final geometry03 = CircularSliderGeometry(
 final colors03 = CircularSliderColors(
   trackColors: [HexColor('#FFF8CB'), HexColor('#B9FFFF')],
   barColors: [HexColor('#FFC84B'), HexColor('#00BFD5')],
-  shadowColor: HexColor('#5FC7B0'),
   dynamicGradient: true,
 );
 
-final customColors03 = CustomSliderColors(
-  shadowMaxOpacity: 0.05,
+final shadow03 = CircularSliderShadow(
+  color: HexColor('#5FC7B0'),
+  maxOpacity: 0.05,
 );
 
 final text03 = CircularSliderText(
@@ -126,7 +124,7 @@ final text03 = CircularSliderText(
 final settings03 = CircularSliderSettings(
   geometry: geometry03,
   colors: colors03,
-  customColors: customColors03,
+  shadow: shadow03,
   text: text03,
 );
 
@@ -155,12 +153,12 @@ final geometry04 = CircularSliderGeometry(
 final colors04 = CircularSliderColors(
   trackColor: HexColor('#CCFF63'),
   barColors: BarColorHelper.createBarColorList(HexColor('#00FF89')),
-  shadowColor: HexColor('#B0FFDA'),
 );
 
-final customColors04 = CustomSliderColors(
-  shadowMaxOpacity: 0.5,
-  shadowStep: 20,
+final shadow04 = CircularSliderShadow(
+  color: HexColor('#B0FFDA'),
+  maxOpacity: 0.5,
+  step: 20,
 );
 
 final text04 = CircularSliderText(
@@ -184,7 +182,7 @@ final text04 = CircularSliderText(
 final settings04 = CircularSliderSettings(
   geometry: geometry04,
   colors: colors04,
-  customColors: customColors04,
+  shadow: shadow04,
   text: text04,
 );
 
@@ -214,11 +212,11 @@ final colors05 = CircularSliderColors(
   dotColor: HexColor('#FFB1B2'),
   trackColor: HexColor('#E9585A'),
   barColors: [HexColor('#FB9967'), HexColor('#E9585A')],
-  shadowColor: HexColor('#FFB1B2'),
 );
 
-final customColors05 = CustomSliderColors(
-  shadowMaxOpacity: 0.05,
+final shadow05 = CircularSliderShadow(
+  color: HexColor('#FFB1B2'),
+  maxOpacity: 0.05,
 );
 
 final text05 = CircularSliderText(
@@ -248,7 +246,7 @@ final text05 = CircularSliderText(
 final settings05 = CircularSliderSettings(
   geometry: geometry05,
   colors: colors05,
-  customColors: customColors05,
+  shadow: shadow05,
   text: text05,
 );
 
@@ -280,17 +278,17 @@ final colors06 = CircularSliderColors(
     HexColor('#F9D3D2').withOpacity(0.3),
     HexColor('#BF79C2').withOpacity(0.3)
   ],
-  shadowColor: HexColor('#7F5ED9'),
 );
 
-final customColors06 = CustomSliderColors(
-  shadowMaxOpacity: 0.05,
+final shadow06 = CircularSliderShadow(
+  color: HexColor('#7F5ED9'),
+  maxOpacity: 0.05,
 );
 
 final settings06 = CircularSliderSettings(
   geometry: geometry06,
   colors: colors06,
-  customColors: customColors06,
+  shadow: shadow06,
 );
 
 final viewModel06 = ExampleViewModel(
@@ -344,18 +342,18 @@ final colors07 = CircularSliderColors(
   dotColor: Colors.white.withOpacity(0.1),
   trackColor: HexColor('#7EFFFF').withOpacity(0.2),
   barColors: [HexColor('#17C5E5'), HexColor('#DFFF97'), HexColor('#04FFB5')],
-  shadowColor: HexColor('#0CA1BD'),
 );
 
-final customColors07 = CustomSliderColors(
-  shadowMaxOpacity: 0.05,
+final shadow07 = CircularSliderShadow(
+  color: HexColor('#0CA1BD'),
+  maxOpacity: 0.05,
 );
 
 final settings07 = CircularSliderSettings(
   features: features07,
   geometry: geometry07,
   colors: colors07,
-  customColors: customColors07,
+  shadow: shadow07,
 );
 
 final viewModel07 = ExampleViewModel(
@@ -388,18 +386,18 @@ final colors08 = CircularSliderColors(
     HexColor('#FF8876').withOpacity(0.25),
     HexColor('#FAFF76').withOpacity(0.5)
   ],
-  shadowColor: HexColor('#133657'),
 );
 
-final customColors08 = CustomSliderColors(
-  shadowMaxOpacity: 0.02,
+final shadow08 = CircularSliderShadow(
+  color: HexColor('#133657'),
+  maxOpacity: 0.02,
 );
 
 final settings08 = CircularSliderSettings(
   features: features08,
   geometry: geometry08,
   colors: colors08,
-  customColors: customColors08,
+  shadow: shadow08,
   spinnerDuration: 1000,
 );
 
@@ -440,18 +438,18 @@ final colors09 = CircularSliderColors(
     HexColor('#FF8876').withOpacity(0.25),
     HexColor('#3586FC').withOpacity(0.5)
   ],
-  shadowColor: HexColor('#133657'),
 );
 
-final customColors09 = CustomSliderColors(
-  shadowMaxOpacity: 0.02,
+final shadow09 = CircularSliderShadow(
+  color: HexColor('#133657'),
+  maxOpacity: 0.02,
 );
 
 final settings09 = CircularSliderSettings(
   features: features09,
   geometry: geometry09,
   colors: colors09,
-  customColors: customColors09,
+  shadow: shadow09,
 );
 
 final viewModel09 = ExampleViewModel(
@@ -491,12 +489,12 @@ final colors10 = CircularSliderColors(
     HexColor('#4E09ED').withOpacity(0.5),
     HexColor('#F7E4FF').withOpacity(0.3)
   ],
-  shadowColor: HexColor('#55B3E4'),
   dynamicGradient: true,
 );
 
-final customColors10 = CustomSliderColors(
-  shadowMaxOpacity: 0.02,
+final shadow10 = CircularSliderShadow(
+  color: HexColor('#55B3E4'),
+  maxOpacity: 0.02,
 );
 
 final text10 = CircularSliderText(
@@ -521,7 +519,7 @@ final settings10 = CircularSliderSettings(
   features: features10,
   geometry: geometry10,
   colors: colors10,
-  customColors: customColors10,
+  shadow: shadow10,
   text: text10,
   animDurationMultiplier: 3,
 );

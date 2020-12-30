@@ -4,6 +4,7 @@ import 'package:example/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/configuration/CircularSliderColors.dart';
 import 'package:sleek_circular_slider/configuration/CircularSliderGeometry.dart';
+import 'package:sleek_circular_slider/configuration/CircularSliderShadow.dart';
 import 'package:sleek_circular_slider/configuration/CircularSliderText.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
@@ -82,10 +83,12 @@ final colors01 = CircularSliderColors(
     HexColor('#FFAD8D').withOpacity(0.9),
     HexColor('#FE6490').withOpacity(0.5)
   ],
-  shadowColor: HexColor('#FFD7E2'),
 );
 
-final customColors01 = CustomSliderColors(shadowMaxOpacity: 0.08);
+final shadow01 = CircularSliderShadow(
+  color: HexColor('#FFD7E2'),
+  maxOpacity: 0.08,
+);
 
 final text01 = CircularSliderText(
   mainLabelStyle: TextStyle(
@@ -98,6 +101,6 @@ final text01 = CircularSliderText(
 final CircularSliderSettings appearance01 = CircularSliderSettings(
   geometry: geometry01,
   colors: colors01,
-  customColors: customColors01,
+  shadow: shadow01,
   text: text01,
 );

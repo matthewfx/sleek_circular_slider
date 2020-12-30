@@ -127,14 +127,14 @@ class _CurvePainter extends CustomPainter {
   }
 
   drawShadow({@required Canvas canvas, @required Size size}) {
-    final shadowStep = settings.shadowStep != null
-        ? settings.shadowStep
+    final shadowStep = settings.shadow.step != null
+        ? settings.shadow.step
         : math.max(
             1,
             (settings.geometry.shadowWidth -
                     settings.geometry.progressBarWidth) ~/
                 10);
-    final maxOpacity = math.min(1.0, settings.shadowMaxOpacity);
+    final maxOpacity = math.min(1.0, settings.shadow.maxOpacity);
     final repetitions = math.max(
         1,
         ((settings.geometry.shadowWidth - settings.geometry.progressBarWidth) ~/
@@ -146,7 +146,7 @@ class _CurvePainter extends CustomPainter {
     for (int i = 1; i <= repetitions; i++) {
       shadowPaint.strokeWidth =
           settings.geometry.progressBarWidth + i * shadowStep;
-      shadowPaint.color = settings.colors.shadowColor
+      shadowPaint.color = settings.shadow.color
           .withOpacity(maxOpacity - (opacityStep * (i - 1)));
       drawCircularArc(canvas: canvas, size: size, paint: shadowPaint);
     }
