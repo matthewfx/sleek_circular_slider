@@ -3,33 +3,38 @@ import 'settings.dart';
 
 class SliderLabel extends StatelessWidget {
   final double value;
-  final CircularSliderSettings appearance;
-  const SliderLabel({Key key, this.value, this.appearance}) : super(key: key);
+  final CircularSliderSettings settings;
+  const SliderLabel({
+    Key key,
+    this.value,
+    this.settings,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: builtInfo(appearance),
+      children: buildInfo(settings),
     );
   }
 
-  List<Widget> builtInfo(CircularSliderSettings appearance) {
+  List<Widget> buildInfo(CircularSliderSettings settings) {
     var widgets = <Widget>[];
-    if (appearance.infoTopLabelText != null) {
+    if (settings.text.topLabelText != null) {
       widgets.add(Text(
-        appearance.infoTopLabelText,
-        style: appearance.infoTopLabelStyle,
+        settings.text.topLabelText,
+        style: settings.text.getTopLabelStyle(settings.geometry.size),
       ));
     }
-    final modifier = appearance.infoModifier(value);
-    widgets.add(
-      Text('$modifier', style: appearance.infoMainLabelStyle),
-    );
-    if (appearance.infoBottomLabelText != null) {
+    final modifier = settings.text.modifier(value);
+    widgets.add(Text(
+      '$modifier',
+      style: settings.text.getMainLabelStyle(settings.geometry.size),
+    ));
+    if (settings.text.bottomLabelText != null) {
       widgets.add(Text(
-        appearance.infoBottomLabelText,
-        style: appearance.infoBottomLabelStyle,
+        settings.text.bottomLabelText,
+        style: settings.text.getBottomLabelStyle(settings.geometry.size),
       ));
     }
     return widgets;

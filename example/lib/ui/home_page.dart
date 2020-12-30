@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/configuration/CircularSliderColors.dart';
 import 'package:sleek_circular_slider/configuration/CircularSliderFeatures.dart';
 import 'package:sleek_circular_slider/configuration/CircularSliderGeometry.dart';
+import 'package:sleek_circular_slider/configuration/CircularSliderText.dart';
 import 'clock_page.dart';
 import 'random_value_page.dart';
 import 'package:example/utils.dart';
@@ -45,7 +46,7 @@ final colors02 = CircularSliderColors(
 
 final customColors02 = CustomSliderColors();
 
-final info02 = InfoProperties(
+final text02 = CircularSliderText(
   topLabelStyle: TextStyle(
     color: Colors.orangeAccent,
     fontSize: 30,
@@ -68,7 +69,7 @@ final settings02 = CircularSliderSettings(
   geometry: geometry02,
   colors: colors02,
   customColors: customColors02,
-  infoProperties: info02,
+  text: text02,
 );
 
 final viewModel02 = ExampleViewModel(
@@ -104,7 +105,7 @@ final customColors03 = CustomSliderColors(
   shadowMaxOpacity: 0.05,
 );
 
-final info03 = InfoProperties(
+final text03 = CircularSliderText(
   bottomLabelStyle: TextStyle(
     color: HexColor('#002D43'),
     fontSize: 20,
@@ -126,7 +127,7 @@ final settings03 = CircularSliderSettings(
   geometry: geometry03,
   colors: colors03,
   customColors: customColors03,
-  infoProperties: info03,
+  text: text03,
 );
 
 final viewModel03 = ExampleViewModel(
@@ -162,7 +163,7 @@ final customColors04 = CustomSliderColors(
   shadowStep: 20,
 );
 
-final info04 = InfoProperties(
+final text04 = CircularSliderText(
   bottomLabelStyle: TextStyle(
     color: HexColor('#6DA100'),
     fontSize: 20,
@@ -184,7 +185,7 @@ final settings04 = CircularSliderSettings(
   geometry: geometry04,
   colors: colors04,
   customColors: customColors04,
-  infoProperties: info04,
+  text: text04,
 );
 
 final viewModel04 = ExampleViewModel(
@@ -220,7 +221,7 @@ final customColors05 = CustomSliderColors(
   shadowMaxOpacity: 0.05,
 );
 
-final info05 = InfoProperties(
+final text05 = CircularSliderText(
   topLabelStyle: TextStyle(
     color: Colors.white,
     fontSize: 16,
@@ -248,7 +249,7 @@ final settings05 = CircularSliderSettings(
   geometry: geometry05,
   colors: colors05,
   customColors: customColors05,
-  infoProperties: info05,
+  text: text05,
 );
 
 final viewModel05 = ExampleViewModel(
@@ -498,7 +499,7 @@ final customColors10 = CustomSliderColors(
   shadowMaxOpacity: 0.02,
 );
 
-final info10 = InfoProperties(
+final text10 = CircularSliderText(
   bottomLabelStyle: TextStyle(
     color: HexColor('#5F9DF5'),
     fontSize: 24,
@@ -521,7 +522,7 @@ final settings10 = CircularSliderSettings(
   geometry: geometry10,
   colors: colors10,
   customColors: customColors10,
-  infoProperties: info10,
+  text: text10,
   animDurationMultiplier: 3,
 );
 
@@ -569,16 +570,16 @@ class _HomePageState extends State<HomePage> {
       controller: controller,
       children: <Widget>[
         example01,
-        example10,
-        RandomValuePage(),
+        example02,
         example03,
         example04,
-        example02,
         example05,
-        example09,
-        example08,
         example06,
         example07,
+        example08,
+        example09,
+        example10,
+        RandomValuePage(),
         Clock(),
       ],
     ));

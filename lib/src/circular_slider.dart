@@ -237,7 +237,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         ? widget.innerWidget(value)
         : SliderLabel(
             value: value,
-            appearance: widget.appearance,
+            settings: widget.appearance,
           );
     return childWidget;
   }
