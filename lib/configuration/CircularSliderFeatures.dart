@@ -1,5 +1,4 @@
 class CircularSliderFeatures {
-  final bool hideShadow;
   final bool counterClockwise;
   final bool spinnerMode;
   final int spinnerDuration;
@@ -7,7 +6,6 @@ class CircularSliderFeatures {
   final double animationDurationMultiplier;
 
   const CircularSliderFeatures({
-    this.hideShadow = DefaultFeatures.hideShadow,
     this.counterClockwise = DefaultFeatures.counterClockwise,
     this.spinnerMode = DefaultFeatures.spinnerMode,
     this.spinnerDuration = DefaultFeatures.spinnerDurationInMilliseconds,
@@ -18,7 +16,6 @@ class CircularSliderFeatures {
 }
 
 class DefaultFeatures {
-  static const bool hideShadow = false;
   static const bool counterClockwise = false;
   static const bool spinnerMode = false;
   static const int spinnerDurationInMilliseconds = 1500;

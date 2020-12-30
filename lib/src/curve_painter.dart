@@ -50,7 +50,7 @@ class _CurvePainter extends CustomPainter {
         ignoreAngle: true,
         spinnerMode: settings.features.spinnerMode);
 
-    if (!settings.features.hideShadow) {
+    if (!settings.shadow.hideShadow) {
       drawShadow(canvas: canvas, size: size);
     }
 

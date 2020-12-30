@@ -144,7 +144,6 @@ final slider = SleekCircularSlider(
 | **trackWidth** *double*        | progressBarWidth / 4   | The width of the slider's track. |
 | **progressBarWidth** *double*  | slider's size / 10     | The width of the slider's progress bar. |
 | **handlerSize** *double*       | progressBarWidth / 5   | The size of the slider's handler. |
-| **shadowWidth** *double*       | progressBarWidth * 1.4 | The width of the slider's shadow.  |
 
 #### CircularSliderColors parameters
 | Parameter                            | Default                       | Description                                                                                                                               |
@@ -163,7 +162,6 @@ final slider = SleekCircularSlider(
 #### CircularSliderFeatures parameters
 | Parameter                                | Default                       | Description                                                                           |
 | :--------------------------------------- | :---------------------------- | :------------------------------------------------------------------------------------ |
-| **hideShadow** *bool*                    | false                         | The setting indicating whether the shadow should be shown. |
 | **counterClockwise** *bool*              | false                         | The setting indicating direction of the widget. |
 | **spinnerMode** *bool*                   | false                         | The setting turning the widget into a spinner. |
 | **spinnerDuration** *int*                | 1500                          | The spinner animation duration in miliseconds. |
@@ -193,6 +191,8 @@ It will convert a current value to *int* and add the **%** sufix to it.
 #### CircularSliderShadow parameters
 | Parameter                     | Default  | Description                                                                                                             |
 | :---------------------------- | :------- | :------------------------------------------------------------------------------------------ |
+| **hideShadow** *bool*                    | false                         | The setting indicating whether the shadow should be shown. |
+| **shadowWidth** *double*       | progressBarWidth * 1.4 | The width of the slider's shadow.  |
 | **shadowColor** *Color*       | #2C57C0  | The color of the shadow. |
 | **shadowMaxOpacity** *double* | 0.2      | The opacity of the shadow in its darker part.             |
 | **shadowStep** *double*       |          | The shadow is being painted with a number of steps. This value determines how big is a width of each step. The more steps are painted the softer the shadow is. For a flat shadow use a difference between the **shadowWidth** and the **progressWidth** for the **shadowStep**.|

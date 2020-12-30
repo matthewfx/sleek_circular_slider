@@ -28,7 +28,6 @@ final example01 = ExamplePage(
 
 /// Example 02
 final features02 = CircularSliderFeatures(
-  hideShadow: true,
   animationEnabled: false,
 );
 
@@ -63,11 +62,16 @@ final text02 = CircularSliderText(
   },
 );
 
+final shadow02 = CircularSliderShadow(
+  hideShadow: true,
+);
+
 final settings02 = CircularSliderSettings(
   features: features02,
   geometry: geometry02,
   colors: colors02,
   text: text02,
+  shadow: shadow02,
 );
 
 final viewModel02 = ExampleViewModel(
