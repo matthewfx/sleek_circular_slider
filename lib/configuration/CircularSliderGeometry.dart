@@ -3,11 +3,30 @@ class CircularSliderGeometry {
   final double startAngle;
   final double angleRange;
 
+  final double _trackWidth;
+  double get trackWidth => _trackWidth ?? progressBarWidth / 4.0;
+
+  final double _progressBarWidth;
+  double get progressBarWidth => _progressBarWidth ?? size / 10.0;
+
+  final double _handlerSize;
+  double get handlerSize => _handlerSize ?? progressBarWidth / 5.0;
+
+  final double _shadowWidth;
+  double get shadowWidth => _shadowWidth ?? progressBarWidth * 1.4;
+
   const CircularSliderGeometry({
     this.size = CircularSliderDefaultGeometry.size,
     this.startAngle = CircularSliderDefaultGeometry.startAngle,
     this.angleRange = CircularSliderDefaultGeometry.angleRange,
-  });
+    double trackWidth,
+    double progressBarWidth,
+    double handlerSize,
+    double shadowWidth,
+  })  : _trackWidth = trackWidth,
+        _progressBarWidth = progressBarWidth,
+        _handlerSize = handlerSize,
+        _shadowWidth = shadowWidth;
 }
 
 class CircularSliderDefaultGeometry {

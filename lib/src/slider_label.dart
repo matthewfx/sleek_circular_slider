@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'appearance.dart';
+import 'settings.dart';
 
 class SliderLabel extends StatelessWidget {
   final double value;
-  final CircularSliderAppearance appearance;
+  final CircularSliderSettings appearance;
   const SliderLabel({Key key, this.value, this.appearance}) : super(key: key);
 
   @override
@@ -14,7 +14,7 @@ class SliderLabel extends StatelessWidget {
     );
   }
 
-  List<Widget> builtInfo(CircularSliderAppearance appearance) {
+  List<Widget> builtInfo(CircularSliderSettings appearance) {
     var widgets = <Widget>[];
     if (appearance.infoTopLabelText != null) {
       widgets.add(Text(

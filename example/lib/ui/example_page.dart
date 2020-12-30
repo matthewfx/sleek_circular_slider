@@ -3,7 +3,7 @@ import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class ExampleViewModel {
   final List<Color> pageColors;
-  final CircularSliderAppearance appearance;
+  final CircularSliderSettings appearance;
   final double min;
   final double max;
   final double value;

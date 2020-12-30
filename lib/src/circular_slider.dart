@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:sleek_circular_slider/src/slider_animations.dart';
 import 'package:sleek_circular_slider/src/unit_conversions.dart';
 import 'utils.dart';
-import 'appearance.dart';
+import 'settings.dart';
 import 'slider_label.dart';
 import 'dart:math' as math;
 
@@ -20,15 +20,15 @@ class SleekCircularSlider extends StatefulWidget {
   final double initialValue;
   final double min;
   final double max;
-  final CircularSliderAppearance appearance;
+  final CircularSliderSettings appearance;
   final OnChange onChange;
   final OnChange onChangeStart;
   final OnChange onChangeEnd;
   final InnerWidget innerWidget;
-  static const defaultAppearance = CircularSliderAppearance();
+  static const defaultAppearance = CircularSliderSettings();
 
   double get angle {
-    return valueToAngle(initialValue, min, max, appearance.settings.angleRange);
+    return valueToAngle(initialValue, min, max, appearance.geometry.angleRange);
   }
 
   const SleekCircularSlider(
@@ -73,8 +73,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   @override
   void initState() {
     super.initState();
-    _startAngle = widget.appearance.settings.startAngle;
-    _angleRange = widget.appearance.settings.angleRange;
+    _startAngle = widget.appearance.geometry.startAngle;
+    _angleRange = widget.appearance.geometry.angleRange;
 
     if (!widget.appearance.features.animationEnabled) {
       return;
@@ -161,8 +161,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         child: _buildRotatingPainter(
             rotation: _rotation,
             size: Size(
-              widget.appearance.settings.size,
-              widget.appearance.settings.size,
+              widget.appearance.geometry.size,
+              widget.appearance.geometry.size,
             )));
   }
 
@@ -268,9 +268,10 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     }
     RenderBox renderBox = context.findRenderObject();
     var position = renderBox.globalToLocal(details);
-    final double touchWidth = widget.appearance.progressBarWidth >= 25.0
-        ? widget.appearance.progressBarWidth
-        : 25.0;
+    final double touchWidth =
+        widget.appearance.geometry.progressBarWidth >= 25.0
+            ? widget.appearance.geometry.progressBarWidth
+            : 25.0;
     if (isPointAlongCircle(
         position, _painter.center, _painter.radius, touchWidth)) {
       _selectedAngle = coordinatesToRadians(_painter.center, position);
@@ -305,9 +306,10 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
       return false;
     }
 
-    final double touchWidth = widget.appearance.progressBarWidth >= 25.0
-        ? widget.appearance.progressBarWidth
-        : 25.0;
+    final double touchWidth =
+        widget.appearance.geometry.progressBarWidth >= 25.0
+            ? widget.appearance.geometry.progressBarWidth
+            : 25.0;
 
     if (isPointAlongCircle(
         position, _painter.center, _painter.radius, touchWidth)) {

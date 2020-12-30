@@ -5,7 +5,7 @@ import 'package:sleek_circular_slider/configuration/CircularSliderGeometry.dart'
 
 typedef String PercentageModifier(double percentage);
 
-class CircularSliderAppearance {
+class CircularSliderSettings {
   static const double _defaultGradientStartAngle = 0.0;
   static const double _defaultGradientEndAngle = 180.0;
   static const double _defaultTrackGradientStartAngle = 0.0;
@@ -23,21 +23,14 @@ class CircularSliderAppearance {
   static const defaultColors = CircularSliderColors();
   static const defaultFeatures = CircularSliderFeatures();
 
-  final CircularSliderGeometry settings;
+  final CircularSliderGeometry geometry;
   final CircularSliderColors colors;
   final CircularSliderFeatures features;
 
   final double animDurationMultiplier;
   final int spinnerDuration;
-  final CustomSliderWidths customWidths;
   final CustomSliderColors customColors;
   final InfoProperties infoProperties;
-
-  double get trackWidth => customWidths?.trackWidth ?? progressBarWidth / 4.0;
-  double get progressBarWidth =>
-      customWidths?.progressBarWidth ?? settings.size / 10.0;
-  double get handlerSize => customWidths?.handlerSize ?? progressBarWidth / 5.0;
-  double get shadowWidth => customWidths?.shadowWidth ?? progressBarWidth * 1.4;
 
   double get gradientStartAngle =>
       customColors?.gradientStartAngle ?? _defaultGradientStartAngle;
@@ -63,46 +56,32 @@ class CircularSliderAppearance {
       infoProperties?.mainLabelStyle ??
       TextStyle(
           fontWeight: FontWeight.w100,
-          fontSize: settings.size / 5.0,
+          fontSize: geometry.size / 5.0,
           color: Color.fromRGBO(30, 0, 59, 1.0));
 
   TextStyle get infoTopLabelStyle =>
       infoProperties?.topLabelStyle ??
       TextStyle(
           fontWeight: FontWeight.w600,
-          fontSize: settings.size / 10.0,
+          fontSize: geometry.size / 10.0,
           color: Color.fromRGBO(147, 81, 120, 1.0));
 
   TextStyle get infoBottomLabelStyle =>
       infoProperties?.bottomLabelStyle ??
       TextStyle(
           fontWeight: FontWeight.w600,
-          fontSize: settings.size / 10.0,
+          fontSize: geometry.size / 10.0,
           color: Color.fromRGBO(147, 81, 120, 1.0));
 
-  const CircularSliderAppearance({
-    this.settings = defaultGeometry,
+  const CircularSliderSettings({
+    this.geometry = defaultGeometry,
     this.colors = defaultColors,
     this.features = defaultFeatures,
-    this.customWidths,
     this.customColors,
     this.infoProperties,
     this.spinnerDuration = 1500,
     this.animDurationMultiplier = 1.0,
   });
-}
-
-class CustomSliderWidths {
-  final double trackWidth;
-  final double progressBarWidth;
-  final double handlerSize;
-  final double shadowWidth;
-
-  CustomSliderWidths(
-      {this.trackWidth,
-      this.progressBarWidth,
-      this.handlerSize,
-      this.shadowWidth});
 }
 
 class CustomSliderColors {

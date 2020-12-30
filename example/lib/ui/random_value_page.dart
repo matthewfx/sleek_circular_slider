@@ -61,8 +61,14 @@ class _RandomValuePageState extends State<RandomValuePage> {
   }
 }
 
-final customWidth01 =
-    CustomSliderWidths(trackWidth: 2, progressBarWidth: 20, shadowWidth: 50);
+final geometry01 = CircularSliderGeometry(
+  startAngle: 180,
+  angleRange: 180,
+  size: 250.0,
+  trackWidth: 2,
+  progressBarWidth: 20,
+  shadowWidth: 50,
+);
 
 final circularSliderColors01 = CircularSliderColors(
   dotColor: Colors.white.withOpacity(0.8),
@@ -81,14 +87,9 @@ final info = InfoProperties(
     mainLabelStyle: TextStyle(
         color: Colors.white, fontSize: 60, fontWeight: FontWeight.w100));
 
-final CircularSliderAppearance appearance01 = CircularSliderAppearance(
+final CircularSliderSettings appearance01 = CircularSliderSettings(
   colors: circularSliderColors01,
-  customWidths: customWidth01,
+  geometry: geometry01,
   customColors: customColors01,
   infoProperties: info,
-  settings: CircularSliderGeometry(
-    startAngle: 180,
-    angleRange: 180,
-    size: 250.0,
-  ),
 );

@@ -2,7 +2,7 @@ part of circular_slider;
 
 class _CurvePainter extends CustomPainter {
   final double angle;
-  final CircularSliderAppearance appearance;
+  final CircularSliderSettings appearance;
   final startAngle;
   final angleRange;
 
@@ -22,7 +22,7 @@ class _CurvePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     radius = math.min(size.width / 2, size.height / 2) -
-        appearance.progressBarWidth * 0.5;
+        appearance.geometry.progressBarWidth * 0.5;
     center = Offset(size.width / 2, size.height / 2);
 
     final progressBarRect = Rect.fromLTWH(0.0, 0.0, size.width, size.width);
@@ -30,7 +30,7 @@ class _CurvePainter extends CustomPainter {
     Paint trackPaint = Paint()
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke
-      ..strokeWidth = appearance.trackWidth;
+      ..strokeWidth = appearance.geometry.trackWidth;
 
     if (appearance.colors.trackColors != null) {
       final trackGradient = SweepGradient(
@@ -98,14 +98,14 @@ class _CurvePainter extends CustomPainter {
       ..shader = progressBarGradient.createShader(progressBarRect)
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke
-      ..strokeWidth = appearance.progressBarWidth;
+      ..strokeWidth = appearance.geometry.progressBarWidth;
     drawCircularArc(canvas: canvas, size: size, paint: progressBarPaint);
 
     var dotPaint = Paint()..color = appearance.colors.dotColor;
 
     Offset handler = degreesToCoordinates(
         center, -math.pi / 2 + startAngle + currentAngle + 1.5, radius);
-    canvas.drawCircle(handler, appearance.handlerSize, dotPaint);
+    canvas.drawCircle(handler, appearance.geometry.handlerSize, dotPaint);
   }
 
   drawCircularArc(
@@ -131,16 +131,23 @@ class _CurvePainter extends CustomPainter {
     final shadowStep = appearance.shadowStep != null
         ? appearance.shadowStep
         : math.max(
-            1, (appearance.shadowWidth - appearance.progressBarWidth) ~/ 10);
+            1,
+            (appearance.geometry.shadowWidth -
+                    appearance.geometry.progressBarWidth) ~/
+                10);
     final maxOpacity = math.min(1.0, appearance.shadowMaxOpacity);
-    final repetitions = math.max(1,
-        ((appearance.shadowWidth - appearance.progressBarWidth) ~/ shadowStep));
+    final repetitions = math.max(
+        1,
+        ((appearance.geometry.shadowWidth -
+                appearance.geometry.progressBarWidth) ~/
+            shadowStep));
     final opacityStep = maxOpacity / repetitions;
     final shadowPaint = Paint()
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
     for (int i = 1; i <= repetitions; i++) {
-      shadowPaint.strokeWidth = appearance.progressBarWidth + i * shadowStep;
+      shadowPaint.strokeWidth =
+          appearance.geometry.progressBarWidth + i * shadowStep;
       shadowPaint.color = appearance.colors.shadowColor
           .withOpacity(maxOpacity - (opacityStep * (i - 1)));
       drawCircularArc(canvas: canvas, size: size, paint: shadowPaint);

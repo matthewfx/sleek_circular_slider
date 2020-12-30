@@ -67,7 +67,7 @@ class ClockWidget extends StatelessWidget {
     var minutes = dateTime.minute.toDouble();
     var hours = dateTime.hour.toDouble();
     return SleekCircularSlider(
-      appearance: appearance01,
+      appearance: settings01,
       min: 0,
       max: 59,
       initialValue: seconds,
@@ -75,7 +75,7 @@ class ClockWidget extends StatelessWidget {
         return Align(
           alignment: Alignment.center,
           child: SleekCircularSlider(
-            appearance: appearance02,
+            appearance: settings02,
             min: 0,
             max: 59,
             initialValue: minutes,
@@ -83,7 +83,7 @@ class ClockWidget extends StatelessWidget {
               return Align(
                 alignment: Alignment.center,
                 child: SleekCircularSlider(
-                  appearance: appearance03,
+                  appearance: settings03,
                   min: 0,
                   max: 11,
                   initialValue: hours % 12,
@@ -116,9 +116,20 @@ class ClockWidget extends StatelessWidget {
   }
 }
 
-final customWidth01 =
-    CustomSliderWidths(trackWidth: 2, progressBarWidth: 10, shadowWidth: 20);
-final circularSliderColors01 = CircularSliderColors(
+final features01 = CircularSliderFeatures(
+  animationEnabled: false,
+);
+
+final geometry01 = CircularSliderGeometry(
+  startAngle: 270,
+  angleRange: 360,
+  size: 350.0,
+  trackWidth: 2,
+  progressBarWidth: 10,
+  shadowWidth: 20,
+);
+
+final colors01 = CircularSliderColors(
   dotColor: Colors.white.withOpacity(0.8),
   trackColor: HexColor('#FFD4BE').withOpacity(0.4),
   barColors: BarColorHelper.createBarColorList(HexColor('#F6A881')),
@@ -130,73 +141,73 @@ final customColors01 = CustomSliderColors(
   shadowMaxOpacity: 0.6,
 );
 
-final features01 = CircularSliderFeatures(animationEnabled: false);
-
-final CircularSliderAppearance appearance01 = CircularSliderAppearance(
-  colors: circularSliderColors01,
+final settings01 = CircularSliderSettings(
   features: features01,
-  customWidths: customWidth01,
+  geometry: geometry01,
+  colors: colors01,
   customColors: customColors01,
-  settings: CircularSliderGeometry(
-    startAngle: 270,
-    angleRange: 360,
-    size: 350.0,
-  ),
 );
 
-final customWidth02 = CustomSliderWidths(
+final features02 = CircularSliderFeatures(
+  animationEnabled: false,
+);
+
+final geometry02 = CircularSliderGeometry(
+  startAngle: 270,
+  angleRange: 360,
+  size: 290.0,
   trackWidth: 5,
   progressBarWidth: 15,
   shadowWidth: 30,
 );
 
-final circularSliderColors02 = CircularSliderColors(
+final colors02 = CircularSliderColors(
   dotColor: Colors.white.withOpacity(0.8),
   trackColor: HexColor('#98DBFC').withOpacity(0.3),
   barColors: BarColorHelper.createBarColorList(HexColor('#6DCFFF')),
   shadowColor: HexColor('#98DBFC'),
 );
 
-final customColors02 =
-    CustomSliderColors(shadowStep: 15.0, shadowMaxOpacity: 0.3);
-
-final features02 = CircularSliderFeatures(animationEnabled: false);
-
-final CircularSliderAppearance appearance02 = CircularSliderAppearance(
-  colors: circularSliderColors02,
-  features: features02,
-  customWidths: customWidth02,
-  customColors: customColors02,
-  settings: CircularSliderGeometry(
-    startAngle: 270,
-    angleRange: 360,
-    size: 290.0,
-  ),
+final customColors02 = CustomSliderColors(
+  shadowStep: 15.0,
+  shadowMaxOpacity: 0.3,
 );
 
-final customWidth03 =
-    CustomSliderWidths(trackWidth: 8, progressBarWidth: 20, shadowWidth: 40);
+final settings02 = CircularSliderSettings(
+  features: features02,
+  geometry: geometry02,
+  colors: colors02,
+  customColors: customColors02,
+);
 
-final circularSliderColors03 = CircularSliderColors(
+final features03 = CircularSliderFeatures(
+  animationEnabled: false,
+);
+
+final geometry03 = CircularSliderGeometry(
+  startAngle: 270,
+  angleRange: 360,
+  size: 210.0,
+  trackWidth: 8,
+  progressBarWidth: 20,
+  shadowWidth: 40,
+);
+
+final colors03 = CircularSliderColors(
   dotColor: Colors.white.withOpacity(0.8),
   trackColor: HexColor('#EFC8FC').withOpacity(0.3),
   barColors: BarColorHelper.createBarColorList(HexColor('#A177B0')),
   shadowColor: HexColor('#EFC8FC'),
 );
 
-final customColors03 =
-    CustomSliderColors(shadowStep: 20.0, shadowMaxOpacity: 0.3);
+final customColors03 = CustomSliderColors(
+  shadowStep: 20.0,
+  shadowMaxOpacity: 0.3,
+);
 
-final features03 = CircularSliderFeatures(animationEnabled: false);
-
-final CircularSliderAppearance appearance03 = CircularSliderAppearance(
-  colors: circularSliderColors03,
+final settings03 = CircularSliderSettings(
   features: features03,
-  customWidths: customWidth03,
+  geometry: geometry03,
+  colors: colors03,
   customColors: customColors03,
-  settings: CircularSliderGeometry(
-    startAngle: 270,
-    angleRange: 360,
-    size: 210.0,
-  ),
 );
