@@ -369,6 +369,7 @@ final example07 = ExamplePage(
 /// Example 08
 final features08 = CircularSliderFeatures(
   spinnerMode: true,
+  spinnerDuration: 1000,
 );
 
 final geometry08 = CircularSliderGeometry(
@@ -398,7 +399,6 @@ final settings08 = CircularSliderSettings(
   geometry: geometry08,
   colors: colors08,
   shadow: shadow08,
-  spinnerDuration: 1000,
 );
 
 final viewModel08 = ExampleViewModel(
@@ -470,6 +470,7 @@ final example09 = ExamplePage(
 /// Example 10
 final features10 = CircularSliderFeatures(
   counterClockwise: true,
+  animationDurationMultiplier: 3,
 );
 
 final geometry10 = CircularSliderGeometry(
@@ -521,7 +522,6 @@ final settings10 = CircularSliderSettings(
   colors: colors10,
   shadow: shadow10,
   text: text10,
-  animDurationMultiplier: 3,
 );
 
 final viewModel10 = ExampleViewModel(

@@ -68,7 +68,7 @@ class ClockWidget extends StatelessWidget {
     var minutes = dateTime.minute.toDouble();
     var hours = dateTime.hour.toDouble();
     return SleekCircularSlider(
-      appearance: settings01,
+      settings: settings01,
       min: 0,
       max: 59,
       initialValue: seconds,
@@ -76,7 +76,7 @@ class ClockWidget extends StatelessWidget {
         return Align(
           alignment: Alignment.center,
           child: SleekCircularSlider(
-            appearance: settings02,
+            settings: settings02,
             min: 0,
             max: 59,
             initialValue: minutes,
@@ -84,7 +84,7 @@ class ClockWidget extends StatelessWidget {
               return Align(
                 alignment: Alignment.center,
                 child: SleekCircularSlider(
-                  appearance: settings03,
+                  settings: settings03,
                   min: 0,
                   max: 11,
                   initialValue: hours % 12,

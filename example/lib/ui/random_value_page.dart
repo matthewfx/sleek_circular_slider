@@ -40,7 +40,7 @@ class _RandomValuePageState extends State<RandomValuePage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SleekCircularSlider(
-                    appearance: appearance01,
+                    settings: appearance01,
                     initialValue: _currentValue.toDouble(),
                   ),
                   MaterialButton(

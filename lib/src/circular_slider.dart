@@ -20,7 +20,7 @@ class SleekCircularSlider extends StatefulWidget {
   final double initialValue;
   final double min;
   final double max;
-  final CircularSliderSettings appearance;
+  final CircularSliderSettings settings;
   final OnChange onChange;
   final OnChange onChangeStart;
   final OnChange onChangeEnd;
@@ -28,7 +28,7 @@ class SleekCircularSlider extends StatefulWidget {
   static const defaultAppearance = CircularSliderSettings();
 
   double get angle {
-    return valueToAngle(initialValue, min, max, appearance.geometry.angleRange);
+    return valueToAngle(initialValue, min, max, settings.geometry.angleRange);
   }
 
   const SleekCircularSlider(
@@ -36,7 +36,7 @@ class SleekCircularSlider extends StatefulWidget {
       this.initialValue = 50,
       this.min = 0,
       this.max = 100,
-      this.appearance = defaultAppearance,
+      this.settings = defaultAppearance,
       this.onChange,
       this.onChangeStart,
       this.onChangeEnd,
@@ -46,7 +46,7 @@ class SleekCircularSlider extends StatefulWidget {
         assert(max != null),
         assert(min <= max),
         assert(initialValue >= min && initialValue <= max),
-        assert(appearance != null),
+        assert(settings != null),
         super(key: key);
   @override
   _SleekCircularSliderState createState() => _SleekCircularSliderState();
@@ -68,19 +68,19 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   ValueChangedAnimationManager _animationManager;
 
   bool get _interactionEnabled => (widget.onChangeEnd != null ||
-      widget.onChange != null && !widget.appearance.features.spinnerMode);
+      widget.onChange != null && !widget.settings.features.spinnerMode);
 
   @override
   void initState() {
     super.initState();
-    _startAngle = widget.appearance.geometry.startAngle;
-    _angleRange = widget.appearance.geometry.angleRange;
+    _startAngle = widget.settings.geometry.startAngle;
+    _angleRange = widget.settings.geometry.angleRange;
 
-    if (!widget.appearance.features.animationEnabled) {
+    if (!widget.settings.features.animationEnabled) {
       return;
     }
 
-    widget.appearance.features.spinnerMode ? _spin() : _animate();
+    widget.settings.features.spinnerMode ? _spin() : _animate();
   }
 
   @override
@@ -92,8 +92,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   }
 
   void _animate() {
-    if (!widget.appearance.features.animationEnabled ||
-        widget.appearance.features.spinnerMode) {
+    if (!widget.settings.features.animationEnabled ||
+        widget.settings.features.spinnerMode) {
       _setupPainter();
       _updateOnChange();
       return;
@@ -103,7 +103,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         tickerProvider: this,
         minValue: widget.min,
         maxValue: widget.max,
-        durationMultiplier: widget.appearance.animDurationMultiplier,
+        durationMultiplier:
+            widget.settings.features.animationDurationMultiplier,
       );
     }
     _animationManager.animate(
@@ -127,7 +128,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   void _spin() {
     _spinManager = SpinAnimationManager(
         tickerProvider: this,
-        duration: Duration(milliseconds: widget.appearance.spinnerDuration),
+        duration:
+            Duration(milliseconds: widget.settings.features.spinnerDuration),
         spinAnimation: ((double anim1, anim2, anim3) {
           setState(() {
             _rotation = anim1 != null ? anim1 : 0;
@@ -161,8 +163,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         child: _buildRotatingPainter(
             rotation: _rotation,
             size: Size(
-              widget.appearance.geometry.size,
-              widget.appearance.geometry.size,
+              widget.settings.geometry.size,
+              widget.settings.geometry.size,
             )));
   }
 
@@ -194,7 +196,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         startAngle: _startAngle,
         angleRange: _angleRange,
         angle: _currentAngle < 0.5 ? 0.5 : _currentAngle,
-        settings: widget.appearance);
+        settings: widget.settings);
     _oldWidgetAngle = widget.angle;
     _oldWidgetValue = widget.initialValue;
   }
@@ -228,7 +230,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   }
 
   Widget _buildChildWidget() {
-    if (widget.appearance.features.spinnerMode) {
+    if (widget.settings.features.spinnerMode) {
       return null;
     }
     final value =
@@ -237,7 +239,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         ? widget.innerWidget(value)
         : SliderLabel(
             value: value,
-            settings: widget.appearance,
+            settings: widget.settings,
           );
     return childWidget;
   }
@@ -268,16 +270,15 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     }
     RenderBox renderBox = context.findRenderObject();
     var position = renderBox.globalToLocal(details);
-    final double touchWidth =
-        widget.appearance.geometry.progressBarWidth >= 25.0
-            ? widget.appearance.geometry.progressBarWidth
-            : 25.0;
+    final double touchWidth = widget.settings.geometry.progressBarWidth >= 25.0
+        ? widget.settings.geometry.progressBarWidth
+        : 25.0;
     if (isPointAlongCircle(
         position, _painter.center, _painter.radius, touchWidth)) {
       _selectedAngle = coordinatesToRadians(_painter.center, position);
       // setup painter with new angle values and update onChange
       _setupPainter(
-          counterClockwise: widget.appearance.features.counterClockwise);
+          counterClockwise: widget.settings.features.counterClockwise);
       _updateOnChange();
       setState(() {});
     }
@@ -300,16 +301,15 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
       _angleRange,
       _touchAngle,
       _currentAngle,
-      widget.appearance.features.counterClockwise,
+      widget.settings.features.counterClockwise,
     );
     if (!angleWithinRange) {
       return false;
     }
 
-    final double touchWidth =
-        widget.appearance.geometry.progressBarWidth >= 25.0
-            ? widget.appearance.geometry.progressBarWidth
-            : 25.0;
+    final double touchWidth = widget.settings.geometry.progressBarWidth >= 25.0
+        ? widget.settings.geometry.progressBarWidth
+        : 25.0;
 
     if (isPointAlongCircle(
         position, _painter.center, _painter.radius, touchWidth)) {

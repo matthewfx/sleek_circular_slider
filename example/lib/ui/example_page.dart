@@ -41,7 +41,7 @@ class ExamplePage extends StatelessWidget {
             onChangeStart: (double value) {},
             onChangeEnd: (double value) {},
             innerWidget: viewModel.innerWidget,
-            appearance: viewModel.appearance,
+            settings: viewModel.appearance,
             min: viewModel.min,
             max: viewModel.max,
             initialValue: viewModel.value,
