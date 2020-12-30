@@ -52,7 +52,7 @@ And add it in its most basic form like it:
 
 ```dart
 final slider = SleekCircularSlider(
-                      appearance: CircularSliderAppearance(),
+                      settings: CircularSliderSettings(),
                       onChange: (double value) {
                         print(value);
                       });
@@ -85,8 +85,11 @@ Slider user's interaction will be disabled if there is either no [onChange] or [
 
 ```dart
 final slider = SleekCircularSlider(
-  appearance: CircularSliderAppearance(
-    customWidths: CustomSliderWidths(progressBarWidth: 10)),
+  settings: CircularSliderSettings(
+    geometry: CircularSliderGeometry(
+      progressBarWidth: 10,
+    ),
+  ),
   min: 10,
   max: 28,
   initialValue: 14,
@@ -98,85 +101,84 @@ There is one more use case for the library. It's a spinner which can be shown to
 
 ```dart
 final slider = SleekCircularSlider(
-  appearance: CircularSliderAppearance(
-    spinnerMode: true,
-));
+  settings: CircularSliderSettings(
+    features: CircularSliderFeatures(
+      spinnerMode: true,
+    ),
+  ),
+);
 ```
 
 ### SleekCircularSlider parameters
 
-
-| Parameter                 |                       Default                       | Description                                                                                                             |
-| :------------------------ | :-------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------- |
-| **appearance** *CircularSliderAppearance*    |                                                     | A set of objects describing the slider look and feel.                                                             |
-| **min** *double*                     |                         0                           | The minimum value the user can select.  Must be less than or equal to max. |
-| **max** *double*                     |                         100                         | The maximum value the user can select. Must be greater than or equal to min.  |
-| **initialValue** *double*            |                          50                         | The initial value for this slider.                       |
-| **onChange** *OnChange(double value)*|                                                     | Called during a drag when the user is selecting a new value for the slider by dragging. |
-| **onChangeStart** *OnChange(double value)* |                                               | Called when the user starts selecting a new value for the slider. |
-| **onChangeEnd**  *OnChange(double value)*  |                                                     | Called when the user is done selecting a new value for the slider. |
-| **innerWidget** *Widget InnerWidget(double value)* |                                       | A custom widget to replace the build in text labels which can capture a slider value from the callback. |
-
+| Parameter                                          | Default             | Description |
+| :------------------------------------------------- | :------------------ | :------------------------------------------------------------------------------------------------------ |
+| **settings** *CircularSliderSettings*              | Sensible defaults.  | Various settings for the circular slider. See the sections below for more information |
+| **min** *double*                                   | 0                   | The minimum value the user can select.  Must be less than or equal to max. |
+| **max** *double*                                   | 100                 | The maximum value the user can select. Must be greater than or equal to min. |
+| **initialValue** *double*                          | 50                  | The initial value for this slider. |
+| **onChange** *OnChange(double value)*              |                     | Called during a drag when the user is selecting a new value for the slider by dragging. |
+| **onChangeStart** *OnChange(double value)*         |                     | Called when the user starts selecting a new value for the slider. |
+| **onChangeEnd**  *OnChange(double value)*          |                     | Called when the user is done selecting a new value for the slider. |
+| **innerWidget** *Widget InnerWidget(double value)* |                     | A custom widget to replace the build in text labels which can capture a slider value from the callback. |
 
 
-### CircularSliderAppearance parameters
+### CircularSliderSettings parameters
 
-| Parameter                 |                       Default                       | Description                                                                                                             |
-| :------------------------ | :-------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------- |
-| **size** *double*                    |                        150                          | The width & height value for the slider.                    |
-| **startAngle** *double*              |                        150                          | The angle (in degrees) the slider begins with.            |
-| **angleRange** *double*              |                        240                          | The angle range (in degrees) the slider reaches when maximum value set. |
-| **counterClockwise** *bool*          |                       false                         | The setting indicating direction of the widget.                         |
-| **customWidths** *CustomSliderWidths*|                                                     | The object with a set of widths for the track, bar, shadow etc.        |
-| **customColors** *CustomSliderColors*|                                                     | The object with a set of colors for the track, bar, shadow etc.        |
-| **infoProperties** *InfoProperties*  |                                                     | The object with a set of properties for internal labels displaying a current slider value. |
-| **animationEnabled** *bool*          |                       true                          | The setting indicating whether external changes of a slider value should be animated.  |
-| **spinnerMode** *bool*               |                       false                         | The setting turning the widget into a spinner.                        |
-| **spinnerDuration** *int*            |                        1500                         | The spinner animation duration in miliseconds                            |
-| **animDurationMultiplier** *double*  |                        1.0                          | The multiplier of duration for the animation when value changed                           |
+| Parameter                              | Default                                                | Description                             |
+| :------------------------------------- | :----------------------------------------------------- | :-------------------------------------- |
+| **geometry** *CircularSliderGeometry*  | Defined in DefaultGeometry, depend on the slider size. | Properties related to sizes and angles. |
+| **colors** *CircularSliderColors*      | Defined in DefaultColors.                              | Properties related to color. |
+| **features** *CircularSliderFeatures*  | Defined in DefaultFeatures.                            | Properties related to slider features. |
+| **text** *CircularSliderText*          | Defined in DefaultText, depend on the slider size.     | Properties related to labels and text. |
+| **shadow** *CircularSliderShadow*      | Defined in DefaultShadow.                              | Properties related to slider shadow. |
+  
 
+#### CircularSliderGeometry parameters
 
+| Parameter                      | Default                | Description                                                             |
+| :----------------------------- | :--------------------- | :---------------------------------------------------------------------- |
+| **size** *double*              | 150                    | The width & height value for the slider. |
+| **startAngle** *double*        | 150                    | The angle (in degrees) the slider begins with. |
+| **angleRange** *double*        | 240                    | The angle range (in degrees) the slider reaches when maximum value set. |
+| **trackWidth** *double*        | progressBarWidth / 4   | The width of the slider's track. |
+| **progressBarWidth** *double*  | slider's size / 10     | The width of the slider's progress bar. |
+| **handlerSize** *double*       | progressBarWidth / 5   | The size of the slider's handler. |
+| **shadowWidth** *double*       | progressBarWidth * 1.4 | The width of the slider's shadow.  |
 
-### CustomSliderWidths parameters
+#### CircularSliderColors parameters
+| Parameter                            | Default                       | Description                                                                                                                               |
+| :----------------------------------- | :---------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| **trackColor** *Color*               | #DCBEFB                       | The color of the slider's track. |
+| **trackColors** *List<Color>*        | null                          | The list of colors for the track's gradient. |                 
+| **dotColor** *Color*                 | #FFFFFF                       | The color of the slider's handle. |
+| **barColors** *List<Color>*          | [#1E003B, #EC008A, #6285DA]   | The list of colors for the progress bar's gradient. |
+| **trackGradientStartAngle** *double* | 0                             | The start angle for the track's gradient. |
+| **trackGradientEndAngle** *double*   | 180                           | The end angle for the track's gradient. |
+| **barGradientStartAngle** *double*   | 0                             | The start angle for the progress bar's gradient. |
+| **barGradientEndAngle** *double*     | 180                           | The end angle for the progress bar's gradient. |
+| **dynamicGradient** *bool*           | false                         | The gradient angles will change dynamically with value changing. If true it will ignore both the grandientStartAngle and gradientEndAngle |
+**BarColorHelper** is used to create barColors using a single color.
 
-| Parameter                 |                       Default                       | Description                                                                                                             |
-| :------------------------ | :-------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------- |
-| **trackWidth** *double*              |                progressBarWidth / 4                 | The width of the slider's track.                        |
-| **progressBarWidth** *double*        |                 slider's size / 10                  | The width of the slider's progress bar.                 |
-| **shadowWidth** *double*             |                progressBarWidth * 1.4               | The width of the slider's shadow.  |
-| **handlerSize** *double*             |                progressBarWidth / 5                 | The size of the slider's handler. |
+#### CircularSliderFeatures parameters
+| Parameter                                | Default                       | Description                                                                           |
+| :--------------------------------------- | :---------------------------- | :------------------------------------------------------------------------------------ |
+| **hideShadow** *bool*                    | false                         | The setting indicating whether the shadow should be shown. |
+| **counterClockwise** *bool*              | false                         | The setting indicating direction of the widget. |
+| **spinnerMode** *bool*                   | false                         | The setting turning the widget into a spinner. |
+| **spinnerDuration** *int*                | 1500                          | The spinner animation duration in miliseconds. |
+| **animationEnabled** *bool*              | true                          | The setting indicating whether external changes of a slider value should be animated. |
+| **animationDurationMultiplier** *double* | 1.0                           | The multiplier of duration for the animation when value changed. |
 
-
-### CustomSliderColors parameters
-
-| Parameter                 |                       Default                       | Description                                                                                                             |
-| :------------------------ | :-------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------- |
-| **trackColor** *Color*               |                #DCBEFB                              | The color of the slider's track.                        |
-| **trackColors** *List<Color>*        |                  null                               | The list of colors for the track's gradient.                  |                 
-| **trackGradientStartAngle** *double* |                   0                                 | The start angle for the track's gradient.           |
-| **trackGradientEndAngle** *double*   |                  180                                | The end angle for the track's gradient.           |
-| **progressBarColor** *Color*         |                                                     | The color of the slider's progress bar. Won't be used if the slider uses gradient **progressBarColors != null**  |
-| **progressBarColors** *List<Color>*  |      [#1E003B, #EC008A, #6285DA]                    | The list of colors for the progress bar's gradient.       |
-| **gradientStartAngle** *double*      |                   0                                 | The start angle for the progress bar's gradient.           |
-| **gradientEndAngle** *double*        |                  180                                | The end angle for the progress bar's gradient.           |
-| **dynamicGradient** *bool*           |                  false                              | The gradient angles will change dynamically with value changing. If true it will ignore both the grandientStartAngle and gradientEndAngle          |
-| **dotColor** *Color*                 |                #FFFFFF                              | The color of the slider's handle.                       |
-| **hideShadow** *bool*                |                  false                              | The setting indicating whether the shadow should be showed. |
-| **shadowColor** *Color*              |                #2C57C0                              | The color of the shadow. |
-| **shadowMaxOpacity** *double*        |                    0.2                              | The opacity of the shadow in its darker part.             |
-| **shadowStep** *double*              |                                                     | The shadow is being painted with a number of steps. This value determines how big is a width of each step. The more steps are painted the softer the shadow is. For a flat shadow use a difference between the **shadowWidth** and the **progressWidth** for the **shadowStep**.|
-
-
-### InfoProperties parameters
-
-| Parameter                 |                       Default                       | Description                                                                                                             |
-| :------------------------ | :-------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------- |
-| **mainLabelStyle** *TextStyle*       |                                                     | The text style of the main text widget displaying a slider's current value.     |
-| **topLabelStyle** *TextStyle*        |                                                     | The text style of the top text widget.                   |
-| **bottomLabelStyle** *TextStyle*     |                                                     | The text style of the bottom text widget.                |
-| **topLabelText** *String*            |                                                     | The text for the top text widget.                           |
-| **bottomLabelText** *String*         |                                                     | The text for the bottom text widget.                    |
-| **modifier** *String PercentageModifier(double percentage)* | closure adding the **%** character | The closure allowing to modify how a current value of the slider is displayed. |
+#### CircularSliderText parameters
+| Parameter                                                   | Default                             | Description |
+| :-----------------------------------                        | :---------------------------------- | :------------------------------------------------------------------------------------ |
+| **topLabelStyle** *TextStyle*                               |                                     | The text style of the top text widget. |
+| **mainLabelStyle** *TextStyle*                              |                                     | The text style of the main text widget displaying a slider's current value. |
+| **bottomLabelStyle** *TextStyle*                            |                                     | The text style of the bottom text widget. |
+| **topLabelText** *String*                                   |                                     | The text for the top text widget. |
+| **bottomLabelText** *String*                                |                                     | The text for the bottom text widget. |
+| **modifier** *String PercentageModifier(double percentage)* | Closure adding the **%** character. | The closure allowing to modify how a current value of the slider is displayed. |
 
 **Example of the modifier**
  ```dart 
@@ -186,6 +188,17 @@ final slider = SleekCircularSlider(
   }
 ``` 
 It will convert a current value to *int* and add the **%** sufix to it.
+
+
+#### CircularSliderShadow parameters
+| Parameter                     | Default  | Description                                                                                                             |
+| :---------------------------- | :------- | :------------------------------------------------------------------------------------------ |
+| **shadowColor** *Color*       | #2C57C0  | The color of the shadow. |
+| **shadowMaxOpacity** *double* | 0.2      | The opacity of the shadow in its darker part.             |
+| **shadowStep** *double*       |          | The shadow is being painted with a number of steps. This value determines how big is a width of each step. The more steps are painted the softer the shadow is. For a flat shadow use a difference between the **shadowWidth** and the **progressWidth** for the **shadowStep**.|
+
+
+
 
 ### YouTube video
 

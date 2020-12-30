@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sleek_circular_slider/configuration/CircularSliderGeometry.dart';
 
 typedef String PercentageModifier(double percentage);
 
 class CircularSliderText {
-  final PercentageModifier modifier;
   final String topLabelText;
   final String bottomLabelText;
 
@@ -38,8 +36,9 @@ class CircularSliderText {
         );
   }
 
+  final PercentageModifier modifier;
+
   const CircularSliderText({
-    CircularSliderGeometry geometry,
     TextStyle topLabelStyle,
     TextStyle mainLabelStyle,
     TextStyle bottomLabelStyle,

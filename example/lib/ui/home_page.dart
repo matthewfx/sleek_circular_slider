@@ -15,7 +15,7 @@ import 'example_page.dart';
 final settings01 = CircularSliderSettings();
 
 final viewModel01 = ExampleViewModel(
-  appearance: appearance01,
+  settings: settings01,
   min: 0,
   max: 100,
   value: 60,
@@ -71,7 +71,7 @@ final settings02 = CircularSliderSettings(
 );
 
 final viewModel02 = ExampleViewModel(
-  appearance: settings02,
+  settings: settings02,
   min: 0,
   max: 10,
   value: 8,
@@ -129,7 +129,7 @@ final settings03 = CircularSliderSettings(
 );
 
 final viewModel03 = ExampleViewModel(
-  appearance: settings03,
+  settings: settings03,
   min: 500,
   max: 2300,
   value: 1623,
@@ -187,7 +187,7 @@ final settings04 = CircularSliderSettings(
 );
 
 final viewModel04 = ExampleViewModel(
-  appearance: settings04,
+  settings: settings04,
   min: 0,
   max: 40,
   value: 27,
@@ -251,7 +251,7 @@ final settings05 = CircularSliderSettings(
 );
 
 final viewModel05 = ExampleViewModel(
-    appearance: settings05,
+    settings: settings05,
     min: 0,
     max: 86400,
     value: 67459,
@@ -314,7 +314,7 @@ final viewModel06 = ExampleViewModel(
         ),
       );
     },
-    appearance: settings06,
+    settings: settings06,
     min: 0,
     max: 360,
     value: 45,
@@ -357,7 +357,7 @@ final settings07 = CircularSliderSettings(
 );
 
 final viewModel07 = ExampleViewModel(
-  appearance: settings07,
+  settings: settings07,
   value: 50,
   pageColors: [HexColor('#FFFFFF'), HexColor('#93EBEB')],
 );
@@ -402,7 +402,7 @@ final settings08 = CircularSliderSettings(
 );
 
 final viewModel08 = ExampleViewModel(
-  appearance: settings08,
+  settings: settings08,
   value: 50,
   pageColors: [
     HexColor('#EA875A'),
@@ -453,7 +453,7 @@ final settings09 = CircularSliderSettings(
 );
 
 final viewModel09 = ExampleViewModel(
-  appearance: settings09,
+  settings: settings09,
   value: 50,
   pageColors: [
     HexColor('#FFFFFF'),
@@ -525,7 +525,7 @@ final settings10 = CircularSliderSettings(
 );
 
 final viewModel10 = ExampleViewModel(
-  appearance: settings10,
+  settings: settings10,
   min: -25,
   max: 0,
   value: -17,
