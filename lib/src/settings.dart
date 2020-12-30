@@ -6,14 +6,6 @@ import 'package:sleek_circular_slider/configuration/CircularSliderGeometry.dart'
 typedef String PercentageModifier(double percentage);
 
 class CircularSliderSettings {
-  static const double _defaultGradientStartAngle = 0.0;
-  static const double _defaultGradientEndAngle = 180.0;
-  static const double _defaultTrackGradientStartAngle = 0.0;
-  static const double _defaultTrackGradientEndAngle = 180.0;
-  static const double _defaultShadowMaxOpacity = 0.2;
-
-  static const bool _defaultDynamicGradient = false;
-
   String _defaultPercentageModifier(double value) {
     final roundedValue = value.ceil();
     return '$roundedValue %';
@@ -27,25 +19,15 @@ class CircularSliderSettings {
   final CircularSliderColors colors;
   final CircularSliderFeatures features;
 
+  static const double _defaultShadowMaxOpacity = 0.2;
+  double get shadowMaxOpacity =>
+      customColors?.shadowMaxOpacity ?? _defaultShadowMaxOpacity;
+  double get shadowStep => customColors?.shadowStep;
+
   final double animDurationMultiplier;
   final int spinnerDuration;
   final CustomSliderColors customColors;
   final InfoProperties infoProperties;
-
-  double get gradientStartAngle =>
-      customColors?.gradientStartAngle ?? _defaultGradientStartAngle;
-  double get gradientStopAngle =>
-      customColors?.gradientEndAngle ?? _defaultGradientEndAngle;
-  double get trackGradientStartAngle =>
-      customColors?.trackGradientStartAngle ?? _defaultTrackGradientStartAngle;
-  double get trackGradientStopAngle =>
-      customColors?.trackGradientEndAngle ?? _defaultTrackGradientEndAngle;
-  bool get dynamicGradient =>
-      customColors?.dynamicGradient ?? _defaultDynamicGradient;
-
-  double get shadowMaxOpacity =>
-      customColors?.shadowMaxOpacity ?? _defaultShadowMaxOpacity;
-  double get shadowStep => customColors?.shadowStep;
 
   PercentageModifier get infoModifier =>
       infoProperties?.modifier ?? _defaultPercentageModifier;
@@ -85,23 +67,13 @@ class CircularSliderSettings {
 }
 
 class CustomSliderColors {
-  final double gradientStartAngle;
-  final double gradientEndAngle;
-  final double trackGradientStartAngle;
-  final double trackGradientEndAngle;
-  final bool dynamicGradient;
-
   final double shadowMaxOpacity;
   final double shadowStep;
 
-  CustomSliderColors(
-      {this.gradientStartAngle,
-      this.gradientEndAngle,
-      this.trackGradientStartAngle,
-      this.trackGradientEndAngle,
-      this.shadowMaxOpacity,
-      this.shadowStep,
-      this.dynamicGradient = false});
+  CustomSliderColors({
+    this.shadowMaxOpacity,
+    this.shadowStep,
+  });
 }
 
 class InfoProperties {

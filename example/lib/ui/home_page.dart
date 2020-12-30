@@ -93,14 +93,14 @@ final geometry03 = CircularSliderGeometry(
   shadowWidth: 50,
 );
 
-final circularSliderColors03 = CircularSliderColors(
+final colors03 = CircularSliderColors(
   trackColors: [HexColor('#FFF8CB'), HexColor('#B9FFFF')],
   barColors: [HexColor('#FFC84B'), HexColor('#00BFD5')],
   shadowColor: HexColor('#5FC7B0'),
+  dynamicGradient: true,
 );
 
 final customColors03 = CustomSliderColors(
-  dynamicGradient: true,
   shadowMaxOpacity: 0.05,
 );
 
@@ -124,7 +124,7 @@ final info03 = InfoProperties(
 
 final settings03 = CircularSliderSettings(
   geometry: geometry03,
-  colors: circularSliderColors03,
+  colors: colors03,
   customColors: customColors03,
   infoProperties: info03,
 );
@@ -271,7 +271,7 @@ final geometry06 = CircularSliderGeometry(
   shadowWidth: 70,
 );
 
-final circularSliderColors06 = CircularSliderColors(
+final colors06 = CircularSliderColors(
   dotColor: Colors.white.withOpacity(0.1),
   trackColor: HexColor('#F9EBE0').withOpacity(0.2),
   barColors: [
@@ -288,7 +288,7 @@ final customColors06 = CustomSliderColors(
 
 final settings06 = CircularSliderSettings(
   geometry: geometry06,
-  colors: circularSliderColors06,
+  colors: colors06,
   customColors: customColors06,
 );
 
@@ -446,7 +446,7 @@ final customColors09 = CustomSliderColors(
   shadowMaxOpacity: 0.02,
 );
 
-final CircularSliderSettings appearance09 = CircularSliderSettings(
+final settings09 = CircularSliderSettings(
   features: features09,
   geometry: geometry09,
   colors: colors09,
@@ -454,7 +454,7 @@ final CircularSliderSettings appearance09 = CircularSliderSettings(
 );
 
 final viewModel09 = ExampleViewModel(
-  appearance: appearance09,
+  appearance: settings09,
   value: 50,
   pageColors: [
     HexColor('#FFFFFF'),
@@ -491,10 +491,10 @@ final colors10 = CircularSliderColors(
     HexColor('#F7E4FF').withOpacity(0.3)
   ],
   shadowColor: HexColor('#55B3E4'),
+  dynamicGradient: true,
 );
 
 final customColors10 = CustomSliderColors(
-  dynamicGradient: true,
   shadowMaxOpacity: 0.02,
 );
 

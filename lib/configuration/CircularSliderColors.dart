@@ -7,16 +7,27 @@ class CircularSliderColors {
   final Color shadowColor;
   final List<Color> barColors;
 
+  final double barGradientStartAngle;
+  final double barGradientEndAngle;
+  final double trackGradientStartAngle;
+  final double trackGradientEndAngle;
+  final bool dynamicGradient;
+
   const CircularSliderColors({
-    this.trackColor = CircularSliderDefaultColors.trackColor,
+    this.trackColor = DefaultColors.trackColor,
     this.trackColors,
-    this.dotColor = CircularSliderDefaultColors.dotColor,
-    this.shadowColor = CircularSliderDefaultColors.shadowColor,
-    this.barColors = CircularSliderDefaultColors.barColors,
+    this.dotColor = DefaultColors.dotColor,
+    this.shadowColor = DefaultColors.shadowColor,
+    this.barColors = DefaultColors.barColors,
+    this.barGradientStartAngle = DefaultColors.barGradientStartAngle,
+    this.barGradientEndAngle = DefaultColors.barGradientEndAngle,
+    this.trackGradientStartAngle = DefaultColors.trackGradientStartAngle,
+    this.trackGradientEndAngle = DefaultColors.trackGradientEndAngle,
+    this.dynamicGradient = DefaultColors.dynamicGradient,
   });
 }
 
-class CircularSliderDefaultColors {
+class DefaultColors {
   static const Color trackColor = Color.fromRGBO(220, 190, 251, 1.0);
   static const Color dotColor = Colors.white;
   static const Color shadowColor = Color.fromRGBO(44, 87, 192, 1.0);
@@ -26,6 +37,12 @@ class CircularSliderDefaultColors {
     Color.fromRGBO(236, 0, 138, 1.0),
     Color.fromRGBO(98, 133, 218, 1.0),
   ];
+
+  static const double barGradientStartAngle = 0.0;
+  static const double barGradientEndAngle = 180.0;
+  static const double trackGradientStartAngle = 0.0;
+  static const double trackGradientEndAngle = 180.0;
+  static const bool dynamicGradient = false;
 }
 
 class BarColorHelper {

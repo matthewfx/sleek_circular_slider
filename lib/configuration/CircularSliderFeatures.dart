@@ -5,14 +5,14 @@ class CircularSliderFeatures {
   final bool counterClockwise;
 
   const CircularSliderFeatures({
-    this.hideShadow = CircularSliderDefaultFeatures.hideShadow,
-    this.animationEnabled = CircularSliderDefaultFeatures.animationEnabled,
-    this.spinnerMode = CircularSliderDefaultFeatures.spinnerMode,
-    this.counterClockwise = CircularSliderDefaultFeatures.counterClockwise,
+    this.hideShadow = DefaultFeatures.hideShadow,
+    this.animationEnabled = DefaultFeatures.animationEnabled,
+    this.spinnerMode = DefaultFeatures.spinnerMode,
+    this.counterClockwise = DefaultFeatures.counterClockwise,
   });
 }
 
-class CircularSliderDefaultFeatures {
+class DefaultFeatures {
   static const bool hideShadow = false;
   static const bool animationEnabled = true;
   static const bool counterClockwise = false;

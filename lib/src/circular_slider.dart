@@ -194,7 +194,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         startAngle: _startAngle,
         angleRange: _angleRange,
         angle: _currentAngle < 0.5 ? 0.5 : _currentAngle,
-        appearance: widget.appearance);
+        settings: widget.appearance);
     _oldWidgetAngle = widget.angle;
     _oldWidgetValue = widget.initialValue;
   }
