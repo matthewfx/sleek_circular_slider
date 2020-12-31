@@ -127,18 +127,14 @@ class _CurvePainter extends CustomPainter {
   }
 
   drawShadow({@required Canvas canvas, @required Size size}) {
+    final shadowWidth =
+        settings.shadow.getShadowWidth(settings.geometry.progressBarWidth);
     final shadowStep = settings.shadow.step != null
         ? settings.shadow.step
-        : math.max(
-            1,
-            (settings.geometry.shadowWidth -
-                    settings.geometry.progressBarWidth) ~/
-                10);
+        : math.max(1, (shadowWidth - settings.geometry.progressBarWidth) ~/ 10);
     final maxOpacity = math.min(1.0, settings.shadow.maxOpacity);
     final repetitions = math.max(
-        1,
-        ((settings.geometry.shadowWidth - settings.geometry.progressBarWidth) ~/
-            shadowStep));
+        1, (shadowWidth - settings.geometry.progressBarWidth) ~/ shadowStep);
     final opacityStep = maxOpacity / repetitions;
     final shadowPaint = Paint()
       ..strokeCap = StrokeCap.round

@@ -93,7 +93,6 @@ final geometry03 = CircularSliderGeometry(
   angleRange: 340,
   trackWidth: 22,
   progressBarWidth: 20,
-  shadowWidth: 50,
 );
 
 final colors03 = CircularSliderColors(
@@ -105,6 +104,7 @@ final colors03 = CircularSliderColors(
 final shadow03 = CircularSliderShadow(
   color: HexColor('#5FC7B0'),
   maxOpacity: 0.05,
+  shadowWidth: 50,
 );
 
 final text03 = CircularSliderText(
@@ -151,7 +151,6 @@ final geometry04 = CircularSliderGeometry(
   size: 200.0,
   trackWidth: 4,
   progressBarWidth: 20,
-  shadowWidth: 40,
 );
 
 final colors04 = CircularSliderColors(
@@ -163,6 +162,7 @@ final shadow04 = CircularSliderShadow(
   color: HexColor('#B0FFDA'),
   maxOpacity: 0.5,
   step: 20,
+  shadowWidth: 40,
 );
 
 final text04 = CircularSliderText(
@@ -209,7 +209,6 @@ final geometry05 = CircularSliderGeometry(
   size: 350.0,
   trackWidth: 4,
   progressBarWidth: 45,
-  shadowWidth: 70,
 );
 
 final colors05 = CircularSliderColors(
@@ -221,6 +220,7 @@ final colors05 = CircularSliderColors(
 final shadow05 = CircularSliderShadow(
   color: HexColor('#FFB1B2'),
   maxOpacity: 0.05,
+  shadowWidth: 70,
 );
 
 final text05 = CircularSliderText(
@@ -271,7 +271,6 @@ final geometry06 = CircularSliderGeometry(
   size: 300.0,
   trackWidth: 4,
   progressBarWidth: 40,
-  shadowWidth: 70,
 );
 
 final colors06 = CircularSliderColors(
@@ -287,6 +286,7 @@ final colors06 = CircularSliderColors(
 final shadow06 = CircularSliderShadow(
   color: HexColor('#7F5ED9'),
   maxOpacity: 0.05,
+  shadowWidth: 70,
 );
 
 final settings06 = CircularSliderSettings(
@@ -339,7 +339,6 @@ final geometry07 = CircularSliderGeometry(
   size: 130.0,
   trackWidth: 2,
   progressBarWidth: 10,
-  shadowWidth: 20,
 );
 
 final colors07 = CircularSliderColors(
@@ -351,6 +350,7 @@ final colors07 = CircularSliderColors(
 final shadow07 = CircularSliderShadow(
   color: HexColor('#0CA1BD'),
   maxOpacity: 0.05,
+  shadowWidth: 20,
 );
 
 final settings07 = CircularSliderSettings(
@@ -380,7 +380,6 @@ final geometry08 = CircularSliderGeometry(
   size: 230.0,
   trackWidth: 1,
   progressBarWidth: 15,
-  shadowWidth: 50,
 );
 
 final colors08 = CircularSliderColors(
@@ -396,6 +395,7 @@ final colors08 = CircularSliderColors(
 final shadow08 = CircularSliderShadow(
   color: HexColor('#133657'),
   maxOpacity: 0.02,
+  shadowWidth: 50,
 );
 
 final settings08 = CircularSliderSettings(
@@ -431,7 +431,6 @@ final geometry09 = CircularSliderGeometry(
   size: 230.0,
   trackWidth: 1,
   progressBarWidth: 15,
-  shadowWidth: 50,
 );
 
 final colors09 = CircularSliderColors(
@@ -447,6 +446,7 @@ final colors09 = CircularSliderColors(
 final shadow09 = CircularSliderShadow(
   color: HexColor('#133657'),
   maxOpacity: 0.02,
+  shadowWidth: 50,
 );
 
 final settings09 = CircularSliderSettings(
@@ -483,7 +483,6 @@ final geometry10 = CircularSliderGeometry(
   size: 280.0,
   trackWidth: 1,
   progressBarWidth: 28,
-  shadowWidth: 60,
 );
 
 final colors10 = CircularSliderColors(
@@ -500,6 +499,7 @@ final colors10 = CircularSliderColors(
 final shadow10 = CircularSliderShadow(
   color: HexColor('#55B3E4'),
   maxOpacity: 0.02,
+  shadowWidth: 60,
 );
 
 final text10 = CircularSliderText(

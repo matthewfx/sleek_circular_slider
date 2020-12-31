@@ -72,7 +72,6 @@ final geometry01 = CircularSliderGeometry(
   size: 250.0,
   trackWidth: 2,
   progressBarWidth: 20,
-  shadowWidth: 50,
 );
 
 final colors01 = CircularSliderColors(
@@ -88,6 +87,7 @@ final colors01 = CircularSliderColors(
 final shadow01 = CircularSliderShadow(
   color: HexColor('#FFD7E2'),
   maxOpacity: 0.08,
+  shadowWidth: 50,
 );
 
 final text01 = CircularSliderText(
