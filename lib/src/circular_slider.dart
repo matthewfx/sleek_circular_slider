@@ -2,7 +2,11 @@ library circular_slider;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:sleek_circular_slider/src/painters/background_painter.dart';
+import 'package:sleek_circular_slider/src/painters/circular_arc_painter.dart';
+import 'package:sleek_circular_slider/src/painters/current_value_painter.dart';
+import 'package:sleek_circular_slider/src/painters/progress_bar_painter.dart';
+import 'package:sleek_circular_slider/src/painters/shadow_painter.dart';
 import 'package:sleek_circular_slider/src/slider_animations.dart';
 import 'package:sleek_circular_slider/src/unit_conversions.dart';
 import 'utils.dart';
@@ -18,34 +22,38 @@ typedef Widget InnerWidget(double percentage);
 
 class SleekCircularSlider extends StatefulWidget {
   final double initialValue;
-  final double min;
-  final double max;
+  final double minimumValue;
+  final double maximumValue;
   final CircularSliderSettings settings;
   final OnChange onChange;
   final OnChange onChangeStart;
   final OnChange onChangeEnd;
   final InnerWidget innerWidget;
-  static const defaultAppearance = CircularSliderSettings();
 
   double get angle {
-    return valueToAngle(initialValue, min, max, settings.geometry.angleRange);
+    return valueToAngle(
+      initialValue,
+      minimumValue,
+      maximumValue,
+      settings.geometry.angleRange,
+    );
   }
 
-  const SleekCircularSlider(
-      {Key key,
-      this.initialValue = 50,
-      this.min = 0,
-      this.max = 100,
-      this.settings = defaultAppearance,
-      this.onChange,
-      this.onChangeStart,
-      this.onChangeEnd,
-      this.innerWidget})
-      : assert(initialValue != null),
-        assert(min != null),
-        assert(max != null),
-        assert(min <= max),
-        assert(initialValue >= min && initialValue <= max),
+  const SleekCircularSlider({
+    Key key,
+    this.initialValue = 50,
+    this.minimumValue = 0,
+    this.maximumValue = 100,
+    this.settings = const CircularSliderSettings(),
+    this.onChange,
+    this.onChangeStart,
+    this.onChangeEnd,
+    this.innerWidget,
+  })  : assert(initialValue != null),
+        assert(minimumValue != null),
+        assert(maximumValue != null),
+        assert(minimumValue <= maximumValue),
+        assert(initialValue >= minimumValue && initialValue <= maximumValue),
         assert(settings != null),
         super(key: key);
   @override
@@ -101,8 +109,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     if (_animationManager == null) {
       _animationManager = ValueChangedAnimationManager(
         tickerProvider: this,
-        minValue: widget.min,
-        maxValue: widget.max,
+        minValue: widget.minimumValue,
+        maxValue: widget.maximumValue,
         durationMultiplier:
             widget.settings.features.animationDurationMultiplier,
       );
@@ -203,8 +211,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
 
   void _updateOnChange() {
     if (widget.onChange != null && !_animationInProgress) {
-      final value =
-          angleToValue(_currentAngle, widget.min, widget.max, _angleRange);
+      final value = angleToValue(
+          _currentAngle, widget.minimumValue, widget.maximumValue, _angleRange);
       widget.onChange(value);
     }
   }
@@ -233,8 +241,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     if (widget.settings.features.spinnerMode) {
       return null;
     }
-    final value =
-        angleToValue(_currentAngle, widget.min, widget.max, _angleRange);
+    final value = angleToValue(
+        _currentAngle, widget.minimumValue, widget.maximumValue, _angleRange);
     final childWidget = widget.innerWidget != null
         ? widget.innerWidget(value)
         : SliderLabel(
@@ -257,8 +265,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   void _onPanEnd(Offset details) {
     _handlePan(details, true);
     if (widget.onChangeEnd != null) {
-      widget.onChangeEnd(
-          angleToValue(_currentAngle, widget.min, widget.max, _angleRange));
+      widget.onChangeEnd(angleToValue(_currentAngle, widget.minimumValue,
+          widget.maximumValue, _angleRange));
     }
 
     _isHandlerSelected = false;
@@ -315,8 +323,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         position, _painter.center, _painter.radius, touchWidth)) {
       _isHandlerSelected = true;
       if (widget.onChangeStart != null) {
-        widget.onChangeStart(
-            angleToValue(_currentAngle, widget.min, widget.max, _angleRange));
+        widget.onChangeStart(angleToValue(_currentAngle, widget.minimumValue,
+            widget.maximumValue, _angleRange));
       }
       _onPanUpdate(details);
     } else {
