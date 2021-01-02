@@ -2,12 +2,13 @@ library circular_slider;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:sleek_circular_slider/src/animations/value_changed_animation_manager.dart';
 import 'package:sleek_circular_slider/src/painters/background_painter.dart';
 import 'package:sleek_circular_slider/src/painters/circular_arc_painter.dart';
 import 'package:sleek_circular_slider/src/painters/current_value_painter.dart';
 import 'package:sleek_circular_slider/src/painters/progress_bar_painter.dart';
 import 'package:sleek_circular_slider/src/painters/shadow_painter.dart';
-import 'package:sleek_circular_slider/src/slider_animations.dart';
+import 'package:sleek_circular_slider/src/animations/spin_animation_manager.dart';
 import 'package:sleek_circular_slider/src/unit_conversions.dart';
 import 'utils.dart';
 import 'settings.dart';
