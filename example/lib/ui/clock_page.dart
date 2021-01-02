@@ -2,10 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:example/utils.dart';
-import 'package:sleek_circular_slider/configuration/CircularSliderColors.dart';
-import 'package:sleek_circular_slider/configuration/CircularSliderFeatures.dart';
-import 'package:sleek_circular_slider/configuration/CircularSliderGeometry.dart';
-import 'package:sleek_circular_slider/configuration/CircularSliderShadow.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class Clock extends StatefulWidget {

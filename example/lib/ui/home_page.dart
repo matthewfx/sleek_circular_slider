@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sleek_circular_slider/configuration/CircularSliderColors.dart';
-import 'package:sleek_circular_slider/configuration/CircularSliderFeatures.dart';
-import 'package:sleek_circular_slider/configuration/CircularSliderGeometry.dart';
-import 'package:sleek_circular_slider/configuration/CircularSliderShadow.dart';
-import 'package:sleek_circular_slider/configuration/CircularSliderText.dart';
 import 'clock_page.dart';
 import 'random_value_page.dart';
 import 'package:example/utils.dart';

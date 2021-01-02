@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'settings.dart';
+import 'package:sleek_circular_slider/src/settings/CircularSliderSettings.dart';
 
 class SliderLabel extends StatelessWidget {
   final double value;

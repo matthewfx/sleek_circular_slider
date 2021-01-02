@@ -9,9 +9,9 @@ import 'package:sleek_circular_slider/src/painters/current_value_painter.dart';
 import 'package:sleek_circular_slider/src/painters/progress_bar_painter.dart';
 import 'package:sleek_circular_slider/src/painters/shadow_painter.dart';
 import 'package:sleek_circular_slider/src/animations/spin_animation_manager.dart';
+import 'package:sleek_circular_slider/src/settings/CircularSliderSettings.dart';
 import 'package:sleek_circular_slider/src/unit_conversions.dart';
 import 'utils.dart';
-import 'settings.dart';
 import 'slider_label.dart';
 import 'dart:math' as math;
 
