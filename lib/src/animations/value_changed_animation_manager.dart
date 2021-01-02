@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sleek_circular_slider/src/unit_conversions.dart';
+import 'package:sleek_circular_slider/src/utilities/unit_conversions.dart';
 
 typedef void ValueChangeAnimation(double animation, bool animationFinished);
 

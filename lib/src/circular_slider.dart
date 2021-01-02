@@ -10,13 +10,13 @@ import 'package:sleek_circular_slider/src/painters/progress_bar_painter.dart';
 import 'package:sleek_circular_slider/src/painters/shadow_painter.dart';
 import 'package:sleek_circular_slider/src/animations/spin_animation_manager.dart';
 import 'package:sleek_circular_slider/src/settings/CircularSliderSettings.dart';
-import 'package:sleek_circular_slider/src/unit_conversions.dart';
-import 'utils.dart';
-import 'slider_label.dart';
+import 'package:sleek_circular_slider/src/utilities/unit_conversions.dart';
+import 'package:sleek_circular_slider/src/utilities/utils.dart';
+import 'widgets/slider_label.dart';
 import 'dart:math' as math;
 
 part 'curve_painter.dart';
-part 'custom_gesture_recognizer.dart';
+part 'widgets/custom_gesture_recognizer.dart';
 
 typedef void OnChange(double value);
 typedef Widget InnerWidget(double percentage);
