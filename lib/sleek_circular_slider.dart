@@ -7,3 +7,4 @@ export 'src/settings/CircularSliderColors.dart';
 export 'src/settings/CircularSliderGeometry.dart';
 export 'src/settings/CircularSliderShadow.dart';
 export 'src/settings/CircularSliderText.dart';
+export 'src/circular_slider_parameters.dart';
