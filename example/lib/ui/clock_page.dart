@@ -65,25 +65,31 @@ class ClockWidget extends StatelessWidget {
     var hours = dateTime.hour.toDouble();
     return SleekCircularSlider(
       settings: settings01,
-      minimumValue: 0,
-      maximumValue: 59,
-      initialValue: seconds,
+      values: SliderValues(
+        minimumValue: 0,
+        maximumValue: 59,
+        initialValue: seconds,
+      ),
       innerWidget: (double value) {
         return Align(
           alignment: Alignment.center,
           child: SleekCircularSlider(
             settings: settings02,
-            minimumValue: 0,
-            maximumValue: 59,
-            initialValue: minutes,
+            values: SliderValues(
+              minimumValue: 0,
+              maximumValue: 59,
+              initialValue: minutes,
+            ),
             innerWidget: (double value) {
               return Align(
                 alignment: Alignment.center,
                 child: SleekCircularSlider(
                   settings: settings03,
-                  minimumValue: 0,
-                  maximumValue: 11,
-                  initialValue: hours % 12,
+                  values: SliderValues(
+                    minimumValue: 0,
+                    maximumValue: 11,
+                    initialValue: hours % 12,
+                  ),
                   innerWidget: (double value) {
                     final h = hours.toInt() < 12
                         ? 'AM ${hours.toInt() % 12}'

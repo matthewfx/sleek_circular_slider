@@ -37,7 +37,9 @@ class _RandomValuePageState extends State<RandomValuePage> {
                 children: [
                   SleekCircularSlider(
                     settings: settings01,
-                    initialValue: _currentValue.toDouble(),
+                    values: SliderValues(
+                      initialValue: _currentValue.toDouble(),
+                    ),
                   ),
                   MaterialButton(
                     height: 35.0,

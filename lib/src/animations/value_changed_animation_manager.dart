@@ -14,18 +14,19 @@ class ValueChangedAnimationManager {
     @required this.minValue,
     @required this.maxValue,
     this.durationMultiplier = 1.0,
-  });
+  }) : _animationController = AnimationController(vsync: tickerProvider);
 
   Animation<double> _animation;
   bool _animationCompleted = false;
-  AnimationController _animController;
+  AnimationController _animationController;
 
-  void animate(
-      {double initialValue,
-      double oldValue,
-      double angle,
-      double oldAngle,
-      ValueChangeAnimation valueChangedAnimation}) {
+  void animate({
+    double initialValue,
+    double oldValue,
+    double angle,
+    double oldAngle,
+    ValueChangeAnimation valueChangedAnimation,
+  }) {
     _animationCompleted = false;
 
     final _duration = valueToDuration(
@@ -36,14 +37,10 @@ class ValueChangedAnimationManager {
     );
 
     final multipliedDuration = (durationMultiplier * _duration).toInt();
-    if (_animController == null) {
-      _animController = AnimationController(vsync: tickerProvider);
-    }
-
-    _animController.duration = Duration(milliseconds: multipliedDuration);
+    _animationController.duration = Duration(milliseconds: multipliedDuration);
 
     final curvedAnimation = CurvedAnimation(
-      parent: _animController,
+      parent: _animationController,
       curve: Curves.easeOut,
     );
 
@@ -56,13 +53,13 @@ class ValueChangedAnimationManager {
             if (status == AnimationStatus.completed) {
               _animationCompleted = true;
 
-              _animController.reset();
+              _animationController.reset();
             }
           });
-    _animController.forward();
+    _animationController.forward();
   }
 
   void dispose() {
-    _animController.dispose();
+    _animationController.dispose();
   }
 }

@@ -41,13 +41,17 @@ class ExamplePage extends StatelessWidget {
         child: SafeArea(
           child: Center(
             child: SleekCircularSlider(
-              onChangeStart: (double value) {},
-              onChangeEnd: (double value) {},
+              callbacks: SliderCallbacks(
+                onChangeStart: (double value) {},
+                onChangeEnd: (double value) {},
+              ),
               innerWidget: viewModel.innerWidget,
               settings: viewModel.settings,
-              minimumValue: viewModel.min,
-              maximumValue: viewModel.max,
-              initialValue: viewModel.value,
+              values: SliderValues(
+                minimumValue: viewModel.min,
+                maximumValue: viewModel.max,
+                initialValue: viewModel.value,
+              ),
             ),
           ),
         ),
