@@ -4,19 +4,13 @@ import 'package:sleek_circular_slider/src/utilities/unit_conversions.dart';
 
 class CircularArcPainter {
   final CircularSliderSettings settings;
+  final CircularSliderValues values;
   final double angle;
-  final double startAngle;
-  final double angleRange;
-  final Offset center;
-  final double radius;
 
   CircularArcPainter(
     this.settings,
+    this.values,
     this.angle,
-    this.startAngle,
-    this.angleRange,
-    this.center,
-    this.radius,
   );
   void drawCircularArc(
     Canvas canvas,
@@ -25,13 +19,18 @@ class CircularArcPainter {
     bool ignoreAngle = false,
     bool spinnerMode = false,
   }) {
-    final double angleValue = ignoreAngle ? 0 : (angleRange - angle);
-    final range = settings.features.counterClockwise ? -angleRange : angleRange;
+    final double angleValue = ignoreAngle ? 0 : (values.angleRange - angle);
+    final range = settings.features.counterClockwise
+        ? -values.angleRange
+        : values.angleRange;
     final currentAngle =
         settings.features.counterClockwise ? angleValue : -angleValue;
     canvas.drawArc(
-        Rect.fromCircle(center: center, radius: radius),
-        degreeToRadians(spinnerMode ? 0 : startAngle),
+        Rect.fromCircle(
+          center: values.center,
+          radius: values.radius,
+        ),
+        degreeToRadians(spinnerMode ? 0 : values.startAngle),
         degreeToRadians(spinnerMode ? 360 : range + currentAngle),
         false,
         paint);

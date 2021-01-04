@@ -65,30 +65,45 @@ class ClockWidget extends StatelessWidget {
     var hours = dateTime.hour.toDouble();
     return SleekCircularSlider(
       settings: settings01,
-      values: SliderValues(
+      values: CircularSliderValues(
         minimumValue: 0,
         maximumValue: 59,
         initialValue: seconds,
+        startAngle: 270,
+        angleRange: 360,
+        size: 350.0,
+        trackWidth: 2,
+        progressBarWidth: 10,
       ),
       innerWidget: (double value) {
         return Align(
           alignment: Alignment.center,
           child: SleekCircularSlider(
             settings: settings02,
-            values: SliderValues(
+            values: CircularSliderValues(
               minimumValue: 0,
               maximumValue: 59,
               initialValue: minutes,
+              startAngle: 270,
+              angleRange: 360,
+              size: 290.0,
+              trackWidth: 5,
+              progressBarWidth: 15,
             ),
             innerWidget: (double value) {
               return Align(
                 alignment: Alignment.center,
                 child: SleekCircularSlider(
                   settings: settings03,
-                  values: SliderValues(
+                  values: CircularSliderValues(
+                    initialValue: hours % 12,
                     minimumValue: 0,
                     maximumValue: 11,
-                    initialValue: hours % 12,
+                    startAngle: 270,
+                    angleRange: 360,
+                    size: 210.0,
+                    trackWidth: 8,
+                    progressBarWidth: 20,
                   ),
                   innerWidget: (double value) {
                     final h = hours.toInt() < 12
@@ -123,14 +138,6 @@ final features01 = CircularSliderFeatures(
   animationEnabled: false,
 );
 
-final geometry01 = CircularSliderGeometry(
-  startAngle: 270,
-  angleRange: 360,
-  size: 350.0,
-  trackWidth: 2,
-  progressBarWidth: 10,
-);
-
 final colors01 = CircularSliderColors(
   dotColor: Colors.white.withOpacity(0.8),
   trackColor: HexColor('#FFD4BE').withOpacity(0.4),
@@ -146,21 +153,12 @@ final shadow01 = CircularSliderShadow(
 
 final settings01 = CircularSliderSettings(
   features: features01,
-  geometry: geometry01,
   colors: colors01,
   shadow: shadow01,
 );
 
 final features02 = CircularSliderFeatures(
   animationEnabled: false,
-);
-
-final geometry02 = CircularSliderGeometry(
-  startAngle: 270,
-  angleRange: 360,
-  size: 290.0,
-  trackWidth: 5,
-  progressBarWidth: 15,
 );
 
 final colors02 = CircularSliderColors(
@@ -178,21 +176,12 @@ final shadow02 = CircularSliderShadow(
 
 final settings02 = CircularSliderSettings(
   features: features02,
-  geometry: geometry02,
   colors: colors02,
   shadow: shadow02,
 );
 
 final features03 = CircularSliderFeatures(
   animationEnabled: false,
-);
-
-final geometry03 = CircularSliderGeometry(
-  startAngle: 270,
-  angleRange: 360,
-  size: 210.0,
-  trackWidth: 8,
-  progressBarWidth: 20,
 );
 
 final colors03 = CircularSliderColors(
@@ -210,7 +199,6 @@ final shadow03 = CircularSliderShadow(
 
 final settings03 = CircularSliderSettings(
   features: features03,
-  geometry: geometry03,
   colors: colors03,
   shadow: shadow03,
 );

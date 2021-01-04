@@ -37,8 +37,13 @@ class _RandomValuePageState extends State<RandomValuePage> {
                 children: [
                   SleekCircularSlider(
                     settings: settings01,
-                    values: SliderValues(
+                    values: CircularSliderValues(
                       initialValue: _currentValue.toDouble(),
+                      startAngle: 180,
+                      angleRange: 180,
+                      size: 250.0,
+                      trackWidth: 2,
+                      progressBarWidth: 20,
                     ),
                   ),
                   MaterialButton(
@@ -63,14 +68,6 @@ class _RandomValuePageState extends State<RandomValuePage> {
     );
   }
 }
-
-final geometry01 = CircularSliderGeometry(
-  startAngle: 180,
-  angleRange: 180,
-  size: 250.0,
-  trackWidth: 2,
-  progressBarWidth: 20,
-);
 
 final colors01 = CircularSliderColors(
   dotColor: Colors.white.withOpacity(0.8),
@@ -97,7 +94,6 @@ final text01 = CircularSliderText(
 );
 
 final CircularSliderSettings settings01 = CircularSliderSettings(
-  geometry: geometry01,
   colors: colors01,
   shadow: shadow01,
   text: text01,

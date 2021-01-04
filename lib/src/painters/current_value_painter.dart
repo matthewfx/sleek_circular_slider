@@ -5,36 +5,31 @@ import 'dart:math' as math;
 
 class CurrentValuePainter extends CustomPainter {
   final CircularSliderSettings settings;
+  final CircularSliderValues values;
   final double angle;
-  final double startAngle;
-  final Offset center;
-  final double radius;
 
   double currentAngle;
   Paint currentValuePaint;
 
   CurrentValuePainter(
     this.settings,
+    this.values,
     this.angle,
-    this.startAngle,
-    this.center,
-    this.radius,
   ) {
     currentAngle = settings.features.counterClockwise ? -angle : angle;
-
     currentValuePaint = Paint()..color = settings.colors.dotColor;
   }
 
   @override
   void paint(Canvas canvas, Size size) {
     Offset handler = degreesToCoordinates(
-      center,
-      -math.pi / 2 + startAngle + currentAngle + 1.5,
-      radius,
+      values.center,
+      -math.pi / 2 + values.startAngle + currentAngle + 1.5,
+      values.radius,
     );
     canvas.drawCircle(
       handler,
-      settings.geometry.handlerSize,
+      values.handlerSize,
       currentValuePaint,
     );
   }

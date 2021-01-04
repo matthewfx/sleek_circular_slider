@@ -1,61 +1,26 @@
 part of circular_slider;
 
 class _CurvePainter extends CustomPainter {
-  final double angle;
+  final CircularArcPainter circularArcPainter;
+  final CustomPainter backgroundPainter;
+  final CustomPainter shadowPainter;
+  final CustomPainter currentValuePainter;
+  final CustomPainter progressBarPainter;
   final CircularSliderSettings settings;
-  final startAngle;
-  final angleRange;
-
-  Offset handler;
-  Offset center;
-  double radius;
+  final CircularSliderValues values;
 
   _CurvePainter({
+    this.circularArcPainter,
+    this.backgroundPainter,
+    this.shadowPainter,
+    this.progressBarPainter,
+    this.currentValuePainter,
     this.settings,
-    this.angle = 30,
-    this.startAngle,
-    this.angleRange,
-  })  : assert(settings != null),
-        assert(startAngle != null),
-        assert(angleRange != null);
+    this.values,
+  }) : assert(settings != null);
 
   @override
   void paint(Canvas canvas, Size size) {
-    radius = math.min(size.width / 2, size.height / 2) -
-        settings.geometry.progressBarWidth * 0.5;
-    center = Offset(size.width / 2, size.height / 2);
-
-    final circularArcPainter = CircularArcPainter(
-      settings,
-      angle,
-      startAngle,
-      angleRange,
-      center,
-      radius,
-    );
-
-    final backgroundPainter = BackgroundPainter(
-      settings,
-      circularArcPainter,
-    );
-    final shadowPainter = ShadowPainter(
-      settings,
-      circularArcPainter,
-    );
-    final progressBarPainter = ProgressBarPainter(
-      settings,
-      circularArcPainter,
-      angle,
-      startAngle,
-    );
-    final currentValuePainter = CurrentValuePainter(
-      settings,
-      angle,
-      startAngle,
-      center,
-      radius,
-    );
-
     backgroundPainter.paint(canvas, size);
     shadowPainter.paint(canvas, size);
     progressBarPainter.paint(canvas, size);

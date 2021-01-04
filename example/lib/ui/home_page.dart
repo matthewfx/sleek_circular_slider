@@ -7,14 +7,38 @@ import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'example_page.dart';
 
 /// Example 01
-final settings01 = CircularSliderSettings();
+final values01 = CircularSliderValues(
+  initialValue: 60,
+  minimumValue: 0,
+  maximumValue: 100,
+  startAngle: 180,
+  angleRange: 270,
+  size: 300.0,
+  trackWidth: 40,
+  progressBarWidth: 30,
+);
+
+final shadow01 = CircularSliderShadow(
+  shadowWidth: 50,
+  step: 0.1,
+  maxOpacity: 0.5,
+  color: Colors.pink,
+);
+
+final colors01 = CircularSliderColors(
+  trackColor: Colors.white,
+  barColors: BarColorHelper.createBarColorList(Colors.white),
+);
+
+final settings01 = CircularSliderSettings(
+  shadow: shadow01,
+  colors: colors01,
+);
 
 final viewModel01 = ExampleViewModel(
   settings: settings01,
-  min: 0,
-  max: 100,
-  value: 60,
-  pageColors: [Colors.white, HexColor('#E1C3FF')],
+  values: values01,
+  pageColors: [Colors.white, Colors.white],
 );
 
 final example01 = ExamplePage(
@@ -26,7 +50,10 @@ final features02 = CircularSliderFeatures(
   animationEnabled: false,
 );
 
-final geometry02 = CircularSliderGeometry(
+final values02 = CircularSliderValues(
+  initialValue: 8,
+  minimumValue: 0,
+  maximumValue: 10,
   startAngle: 180,
   angleRange: 270,
   size: 200.0,
@@ -63,7 +90,6 @@ final shadow02 = CircularSliderShadow(
 
 final settings02 = CircularSliderSettings(
   features: features02,
-  geometry: geometry02,
   colors: colors02,
   text: text02,
   shadow: shadow02,
@@ -71,9 +97,7 @@ final settings02 = CircularSliderSettings(
 
 final viewModel02 = ExampleViewModel(
   settings: settings02,
-  min: 0,
-  max: 10,
-  value: 8,
+  values: values02,
   pageColors: [Colors.black, Colors.black87],
 );
 
@@ -82,7 +106,10 @@ final example02 = ExamplePage(
 );
 
 /// Example 03
-final geometry03 = CircularSliderGeometry(
+final values03 = CircularSliderValues(
+  initialValue: 1623,
+  minimumValue: 500,
+  maximumValue: 2300,
   size: 250.0,
   startAngle: 180,
   angleRange: 340,
@@ -121,7 +148,6 @@ final text03 = CircularSliderText(
 );
 
 final settings03 = CircularSliderSettings(
-  geometry: geometry03,
   colors: colors03,
   shadow: shadow03,
   text: text03,
@@ -129,9 +155,7 @@ final settings03 = CircularSliderSettings(
 
 final viewModel03 = ExampleViewModel(
   settings: settings03,
-  min: 500,
-  max: 2300,
-  value: 1623,
+  values: values03,
   pageColors: [HexColor('#D9FFF7'), HexColor('#FFFFFF')],
 );
 
@@ -140,7 +164,10 @@ final example03 = ExamplePage(
 );
 
 /// Example 04
-final geometry04 = CircularSliderGeometry(
+final values04 = CircularSliderValues(
+  initialValue: 27,
+  minimumValue: 0,
+  maximumValue: 40,
   startAngle: 90,
   angleRange: 90,
   size: 200.0,
@@ -179,7 +206,6 @@ final text04 = CircularSliderText(
 );
 
 final settings04 = CircularSliderSettings(
-  geometry: geometry04,
   colors: colors04,
   shadow: shadow04,
   text: text04,
@@ -187,9 +213,7 @@ final settings04 = CircularSliderSettings(
 
 final viewModel04 = ExampleViewModel(
   settings: settings04,
-  min: 0,
-  max: 40,
-  value: 27,
+  values: values04,
   pageColors: [Colors.white, HexColor('#F1F1F1')],
 );
 
@@ -198,7 +222,10 @@ final example04 = ExamplePage(
 );
 
 /// Example 05
-final geometry05 = CircularSliderGeometry(
+final values05 = CircularSliderValues(
+  initialValue: 67459,
+  minimumValue: 0,
+  maximumValue: 86400,
   startAngle: 270,
   angleRange: 360,
   size: 350.0,
@@ -243,24 +270,26 @@ final text05 = CircularSliderText(
 );
 
 final settings05 = CircularSliderSettings(
-  geometry: geometry05,
   colors: colors05,
   shadow: shadow05,
   text: text05,
 );
 
 final viewModel05 = ExampleViewModel(
-    settings: settings05,
-    min: 0,
-    max: 86400,
-    value: 67459,
-    pageColors: [Colors.black, Colors.black87]);
+  settings: settings05,
+  values: values05,
+  pageColors: [Colors.black, Colors.black87],
+);
+
 final example05 = ExamplePage(
   viewModel: viewModel05,
 );
 
 /// Example 06
-final geometry06 = CircularSliderGeometry(
+final values06 = CircularSliderValues(
+  initialValue: 45,
+  minimumValue: 0,
+  maximumValue: 360,
   startAngle: 180,
   angleRange: 360,
   size: 300.0,
@@ -285,12 +314,12 @@ final shadow06 = CircularSliderShadow(
 );
 
 final settings06 = CircularSliderSettings(
-  geometry: geometry06,
   colors: colors06,
   shadow: shadow06,
 );
 
 final viewModel06 = ExampleViewModel(
+    values: values06,
     innerWidget: (double value) {
       return Transform.rotate(
         angle: degreeToRadians(value),
@@ -314,9 +343,6 @@ final viewModel06 = ExampleViewModel(
       );
     },
     settings: settings06,
-    min: 0,
-    max: 360,
-    value: 45,
     pageColors: [HexColor('#4825FF'), HexColor('#FFCAD2')]);
 
 final example06 = ExamplePage(
@@ -328,7 +354,8 @@ final features07 = CircularSliderFeatures(
   spinnerMode: true,
 );
 
-final geometry07 = CircularSliderGeometry(
+final values07 = CircularSliderValues(
+  initialValue: 50,
   startAngle: 180,
   angleRange: 360,
   size: 130.0,
@@ -350,14 +377,13 @@ final shadow07 = CircularSliderShadow(
 
 final settings07 = CircularSliderSettings(
   features: features07,
-  geometry: geometry07,
   colors: colors07,
   shadow: shadow07,
 );
 
 final viewModel07 = ExampleViewModel(
   settings: settings07,
-  value: 50,
+  values: values07,
   pageColors: [HexColor('#FFFFFF'), HexColor('#93EBEB')],
 );
 
@@ -371,7 +397,8 @@ final features08 = CircularSliderFeatures(
   spinnerDuration: 1000,
 );
 
-final geometry08 = CircularSliderGeometry(
+final values08 = CircularSliderValues(
+  initialValue: 50,
   size: 230.0,
   trackWidth: 1,
   progressBarWidth: 15,
@@ -395,14 +422,13 @@ final shadow08 = CircularSliderShadow(
 
 final settings08 = CircularSliderSettings(
   features: features08,
-  geometry: geometry08,
   colors: colors08,
   shadow: shadow08,
 );
 
 final viewModel08 = ExampleViewModel(
   settings: settings08,
-  value: 50,
+  values: values08,
   pageColors: [
     HexColor('#EA875A'),
     HexColor('#9EAABB'),
@@ -420,7 +446,8 @@ final features09 = CircularSliderFeatures(
   counterClockwise: true,
 );
 
-final geometry09 = CircularSliderGeometry(
+final values09 = CircularSliderValues(
+  initialValue: 50,
   startAngle: 55,
   angleRange: 110,
   size: 230.0,
@@ -446,14 +473,13 @@ final shadow09 = CircularSliderShadow(
 
 final settings09 = CircularSliderSettings(
   features: features09,
-  geometry: geometry09,
   colors: colors09,
   shadow: shadow09,
 );
 
 final viewModel09 = ExampleViewModel(
   settings: settings09,
-  value: 50,
+  values: values09,
   pageColors: [
     HexColor('#FFFFFF'),
     HexColor('#EEEEEE'),
@@ -472,7 +498,10 @@ final features10 = CircularSliderFeatures(
   animationDurationMultiplier: 3,
 );
 
-final geometry10 = CircularSliderGeometry(
+final values10 = CircularSliderValues(
+  initialValue: -17,
+  minimumValue: -25,
+  maximumValue: 0,
   startAngle: 180,
   angleRange: 240,
   size: 280.0,
@@ -517,7 +546,6 @@ final text10 = CircularSliderText(
 
 final settings10 = CircularSliderSettings(
   features: features10,
-  geometry: geometry10,
   colors: colors10,
   shadow: shadow10,
   text: text10,
@@ -525,9 +553,7 @@ final settings10 = CircularSliderSettings(
 
 final viewModel10 = ExampleViewModel(
   settings: settings10,
-  min: -25,
-  max: 0,
-  value: -17,
+  values: values10,
   pageColors: [
     HexColor('#FFFFFF'),
     HexColor('#D7F2FD'),
@@ -566,12 +592,12 @@ class _HomePageState extends State<HomePage> {
         child: PageView(
       controller: controller,
       children: <Widget>[
-        example01,
-        example02,
-        example03,
-        example04,
-        example05,
-        example06,
+        //example01,
+        //example02,
+        //example03,
+        //example04,
+        //example05,
+        //example06,
         example07,
         example08,
         example09,

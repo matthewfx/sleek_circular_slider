@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:sleek_circular_slider/src/settings/CircularSliderSettings.dart';
 
 class SliderLabel extends StatelessWidget {
   final double value;
   final CircularSliderSettings settings;
+  final CircularSliderValues values;
   const SliderLabel({
     Key key,
     this.value,
+    this.values,
     this.settings,
   }) : super(key: key);
 
@@ -23,18 +26,18 @@ class SliderLabel extends StatelessWidget {
     if (settings.text.topLabelText != null) {
       widgets.add(Text(
         settings.text.topLabelText,
-        style: settings.text.getTopLabelStyle(settings.geometry.size),
+        style: settings.text.getTopLabelStyle(values.size),
       ));
     }
     final modifier = settings.text.modifier(value);
     widgets.add(Text(
       '$modifier',
-      style: settings.text.getMainLabelStyle(settings.geometry.size),
+      style: settings.text.getMainLabelStyle(values.size),
     ));
     if (settings.text.bottomLabelText != null) {
       widgets.add(Text(
         settings.text.bottomLabelText,
-        style: settings.text.getBottomLabelStyle(settings.geometry.size),
+        style: settings.text.getBottomLabelStyle(values.size),
       ));
     }
     return widgets;

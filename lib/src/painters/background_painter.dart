@@ -5,18 +5,20 @@ import 'package:sleek_circular_slider/src/utilities/unit_conversions.dart';
 
 class BackgroundPainter extends CustomPainter {
   final CircularSliderSettings settings;
+  final CircularSliderValues values;
   final CircularArcPainter circularArcPainter;
 
   Paint backgroundPaint;
 
   BackgroundPainter(
     this.settings,
+    this.values,
     this.circularArcPainter,
   ) {
     backgroundPaint = Paint()
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke
-      ..strokeWidth = settings.geometry.trackWidth;
+      ..strokeWidth = values.trackWidth;
   }
 
   @override

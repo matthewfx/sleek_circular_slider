@@ -4,17 +4,13 @@ import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 class ExampleViewModel {
   final List<Color> pageColors;
   final CircularSliderSettings settings;
-  final double min;
-  final double max;
-  final double value;
+  final CircularSliderValues values;
   final InnerWidget innerWidget;
 
   ExampleViewModel({
     @required this.pageColors,
     @required this.settings,
-    this.min = 0,
-    this.max = 100,
-    this.value = 50,
+    @required this.values,
     this.innerWidget,
   });
 }
@@ -47,10 +43,16 @@ class ExamplePage extends StatelessWidget {
               ),
               innerWidget: viewModel.innerWidget,
               settings: viewModel.settings,
-              values: SliderValues(
-                minimumValue: viewModel.min,
-                maximumValue: viewModel.max,
-                initialValue: viewModel.value,
+              values: viewModel.values,
+              painters: SliderPainters(
+                backgroundPainter: (settings, values, painter, angle) =>
+                    BackgroundPainter(settings, values, painter),
+                shadowPainter: (settings, values, painter, angle) =>
+                    ShadowPainter(settings, values, painter),
+                progressBarPainter: (settings, values, painter, angle) =>
+                    ProgressBarPainter(settings, values, painter, angle),
+                currentValuePainter: (settings, values, painter, angle) =>
+                    CurrentValuePainter(settings, values, angle),
               ),
             ),
           ),
