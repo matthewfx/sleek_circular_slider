@@ -5,12 +5,10 @@ import 'package:sleek_circular_slider/src/utilities/unit_conversions.dart';
 class CircularArcPainter {
   final CircularSliderSettings settings;
   final CircularSliderValues values;
-  final double angle;
 
   CircularArcPainter(
     this.settings,
     this.values,
-    this.angle,
   );
   void drawCircularArc(
     Canvas canvas,
@@ -19,7 +17,8 @@ class CircularArcPainter {
     bool ignoreAngle = false,
     bool spinnerMode = false,
   }) {
-    final double angleValue = ignoreAngle ? 0 : (values.angleRange - angle);
+    final double angleValue =
+        ignoreAngle ? 0 : (values.angleRange - values.currentAngle);
     final range = settings.features.counterClockwise
         ? -values.angleRange
         : values.angleRange;

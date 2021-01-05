@@ -7,6 +7,7 @@ class CircularSliderValues {
 
   final double size;
   final double startAngle;
+  final double currentAngle;
   final double angleRange;
 
   final double _progressBarWidth;
@@ -30,6 +31,7 @@ class CircularSliderValues {
     this.maximumValue = DefaultValues.maximumValue,
     this.size = DefaultValues.size,
     this.startAngle = DefaultValues.startAngle,
+    this.currentAngle = DefaultValues.startAngle,
     this.angleRange = DefaultValues.angleRange,
     double trackWidth,
     double progressBarWidth,

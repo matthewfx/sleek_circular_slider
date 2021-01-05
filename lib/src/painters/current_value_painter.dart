@@ -6,7 +6,6 @@ import 'dart:math' as math;
 class CurrentValuePainter extends CustomPainter {
   final CircularSliderSettings settings;
   final CircularSliderValues values;
-  final double angle;
 
   double currentAngle;
   Paint currentValuePaint;
@@ -14,9 +13,10 @@ class CurrentValuePainter extends CustomPainter {
   CurrentValuePainter(
     this.settings,
     this.values,
-    this.angle,
   ) {
-    currentAngle = settings.features.counterClockwise ? -angle : angle;
+    currentAngle = settings.features.counterClockwise
+        ? -values.currentAngle
+        : values.currentAngle;
     currentValuePaint = Paint()..color = settings.colors.dotColor;
   }
 

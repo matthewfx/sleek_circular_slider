@@ -9,8 +9,6 @@ class ProgressBarPainter extends CustomPainter {
   final CircularSliderValues values;
   final CircularArcPainter circularArcPainter;
 
-  final double angle;
-
   double currentAngle;
   double gradientRotationAngle;
   double gradientStartAngle;
@@ -24,9 +22,10 @@ class ProgressBarPainter extends CustomPainter {
     this.settings,
     this.values,
     this.circularArcPainter,
-    this.angle,
   ) {
-    currentAngle = settings.features.counterClockwise ? -angle : angle;
+    currentAngle = settings.features.counterClockwise
+        ? -values.currentAngle
+        : values.currentAngle;
 
     gradientRotationAngle = settings.colors.dynamicGradient
         ? settings.features.counterClockwise

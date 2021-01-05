@@ -56,14 +56,9 @@ double calculateRawAngle(
 double calculateAngle(
   double startAngle,
   double angleRange,
-  selectedAngle,
-  defaultAngle,
+  double selectedAngle,
   bool counterClockwise,
 ) {
-  if (selectedAngle == null) {
-    return defaultAngle;
-  }
-
   double calcAngle = calculateRawAngle(
     startAngle,
     angleRange,
@@ -77,7 +72,7 @@ double calculateAngle(
     return angleRange;
   }
 
-  return calcAngle;
+  return calcAngle < 0.5 ? 0.5 : calcAngle;
 }
 
 bool isAngleWithinRange(

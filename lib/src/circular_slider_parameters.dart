@@ -10,7 +10,6 @@ typedef CustomPainter CustomSliderPainter(
   CircularSliderSettings settings,
   CircularSliderValues values,
   CircularArcPainter circularArcPainter,
-  double currentAngle,
 );
 
 class SliderPainters {
@@ -24,17 +23,17 @@ class SliderPainters {
     CustomSliderPainter progressBarPainter,
     CustomSliderPainter currentValuePainter,
   })  : this.backgroundPainter = backgroundPainter ??
-            ((settings, values, painter, angle) =>
+            ((settings, values, painter) =>
                 BackgroundPainter(settings, values, painter)),
         this.shadowPainter = shadowPainter ??
-            ((settings, values, painter, angle) =>
+            ((settings, values, painter) =>
                 ShadowPainter(settings, values, painter)),
         this.progressBarPainter = progressBarPainter ??
-            ((settings, values, painter, angle) =>
-                ProgressBarPainter(settings, values, painter, angle)),
+            ((settings, values, painter) =>
+                ProgressBarPainter(settings, values, painter)),
         this.currentValuePainter = currentValuePainter ??
-            ((settings, values, painter, angle) =>
-                CurrentValuePainter(settings, values, angle));
+            ((settings, values, painter) =>
+                CurrentValuePainter(settings, values));
 }
 
 class SliderCallbacks {
