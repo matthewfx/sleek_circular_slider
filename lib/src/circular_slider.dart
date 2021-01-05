@@ -7,7 +7,7 @@ import 'package:sleek_circular_slider/src/circular_slider_parameters.dart';
 import 'package:sleek_circular_slider/src/painters/circular_arc_painter.dart';
 import 'package:sleek_circular_slider/src/animations/spin_animation_manager.dart';
 import 'package:sleek_circular_slider/src/settings/CircularSliderSettings.dart';
-import 'package:sleek_circular_slider/src/settings/CircularSliderValues.dart';
+import 'package:sleek_circular_slider/src/circular_slider_values.dart';
 import 'package:sleek_circular_slider/src/utilities/unit_conversions.dart';
 import 'package:sleek_circular_slider/src/utilities/utils.dart';
 import 'widgets/slider_label.dart';
