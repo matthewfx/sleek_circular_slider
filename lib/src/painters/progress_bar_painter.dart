@@ -7,7 +7,7 @@ import 'package:sleek_circular_slider/src/utilities/unit_conversions.dart';
 class ProgressBarPainter extends CustomPainter {
   final CircularSliderSettings settings;
   final CircularSliderValues values;
-  final CircularArcPainter circularArcPainter;
+  ShapePainter shapePainter;
 
   double currentAngle;
   double gradientRotationAngle;
@@ -21,7 +21,6 @@ class ProgressBarPainter extends CustomPainter {
   ProgressBarPainter(
     this.settings,
     this.values,
-    this.circularArcPainter,
   ) {
     currentAngle = settings.features.counterClockwise
         ? -values.currentAngle
@@ -66,6 +65,11 @@ class ProgressBarPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke
       ..strokeWidth = values.progressBarWidth;
+
+    shapePainter = CircularArcPainter(
+      settings,
+      values,
+    );
   }
 
   @override
@@ -74,7 +78,7 @@ class ProgressBarPainter extends CustomPainter {
 
     progressBarPaint..shader = gradient.createShader(sliderRectangle);
 
-    circularArcPainter.drawCircularArc(
+    shapePainter.drawShape(
       canvas,
       size,
       progressBarPaint,

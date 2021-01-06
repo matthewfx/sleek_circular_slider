@@ -2,7 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:sleek_circular_slider/src/utilities/unit_conversions.dart';
 
-class CircularArcPainter {
+abstract class ShapePainter {
+  void drawShape(
+    Canvas canvas,
+    Size size,
+    Paint paint, {
+    bool ignoreAngle = false,
+    bool spinnerMode = false,
+  });
+}
+
+class CircularArcPainter extends ShapePainter {
   final CircularSliderSettings settings;
   final CircularSliderValues values;
 
@@ -10,7 +20,9 @@ class CircularArcPainter {
     this.settings,
     this.values,
   );
-  void drawCircularArc(
+
+  @override
+  void drawShape(
     Canvas canvas,
     Size size,
     Paint paint, {

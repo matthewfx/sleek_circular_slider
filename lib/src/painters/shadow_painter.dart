@@ -7,7 +7,6 @@ import 'package:sleek_circular_slider/src/painters/circular_arc_painter.dart';
 class ShadowPainter extends CustomPainter {
   final CircularSliderSettings settings;
   final CircularSliderValues values;
-  final CircularArcPainter circularArcPainter;
 
   double shadowWidth;
   double shadowStep;
@@ -15,12 +14,12 @@ class ShadowPainter extends CustomPainter {
   int repetitions;
   double opacityStep;
 
+  ShapePainter shapePainter;
   Paint shadowPaint;
 
   ShadowPainter(
     this.settings,
     this.values,
-    this.circularArcPainter,
   ) {
     shadowWidth = settings.shadow.getShadowWidth(values.progressBarWidth);
 
@@ -38,6 +37,11 @@ class ShadowPainter extends CustomPainter {
     shadowPaint = Paint()
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
+
+    shapePainter = CircularArcPainter(
+      settings,
+      values,
+    );
   }
 
   @override
@@ -51,7 +55,7 @@ class ShadowPainter extends CustomPainter {
       shadowPaint.strokeWidth = currentWidth;
       shadowPaint.color = settings.shadow.color.withOpacity(currentOpacity);
 
-      circularArcPainter.drawCircularArc(canvas, size, shadowPaint);
+      shapePainter.drawShape(canvas, size, shadowPaint);
     }
   }
 

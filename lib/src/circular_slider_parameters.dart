@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:sleek_circular_slider/src/painters/background_painter.dart';
-import 'package:sleek_circular_slider/src/painters/circular_arc_painter.dart';
 import 'package:sleek_circular_slider/src/painters/shadow_painter.dart';
 
 typedef void OnChange(double value);
@@ -9,7 +8,6 @@ typedef Widget InnerWidget(double percentage);
 typedef CustomPainter CustomSliderPainter(
   CircularSliderSettings settings,
   CircularSliderValues values,
-  CircularArcPainter circularArcPainter,
 );
 
 class SliderPainters {
@@ -23,17 +21,13 @@ class SliderPainters {
     CustomSliderPainter progressBarPainter,
     CustomSliderPainter currentValuePainter,
   })  : this.backgroundPainter = backgroundPainter ??
-            ((settings, values, painter) =>
-                BackgroundPainter(settings, values, painter)),
+            ((settings, values) => BackgroundPainter(settings, values)),
         this.shadowPainter = shadowPainter ??
-            ((settings, values, painter) =>
-                ShadowPainter(settings, values, painter)),
+            ((settings, values) => ShadowPainter(settings, values)),
         this.progressBarPainter = progressBarPainter ??
-            ((settings, values, painter) =>
-                ProgressBarPainter(settings, values, painter)),
+            ((settings, values) => ProgressBarPainter(settings, values)),
         this.currentValuePainter = currentValuePainter ??
-            ((settings, values, painter) =>
-                CurrentValuePainter(settings, values));
+            ((settings, values) => CurrentValuePainter(settings, values));
 }
 
 class SliderCallbacks {

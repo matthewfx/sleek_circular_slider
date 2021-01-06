@@ -45,13 +45,13 @@ class ExamplePage extends StatelessWidget {
               settings: viewModel.settings,
               values: viewModel.values,
               painters: SliderPainters(
-                backgroundPainter: (settings, values, painter) =>
-                    BackgroundPainter(settings, values, painter),
-                shadowPainter: (settings, values, painter) =>
-                    ShadowPainter(settings, values, painter),
-                progressBarPainter: (settings, values, painter) =>
-                    ProgressBarPainter(settings, values, painter),
-                currentValuePainter: (settings, values, painter) =>
+                backgroundPainter: (settings, values) =>
+                    BackgroundPainter(settings, values),
+                shadowPainter: (settings, values) =>
+                    ShadowPainter(settings, values),
+                progressBarPainter: (settings, values) =>
+                    ProgressBarPainter(settings, values),
+                currentValuePainter: (settings, values) =>
                     CurrentValuePainter(settings, values),
               ),
             ),

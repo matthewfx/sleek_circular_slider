@@ -217,37 +217,27 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   }
 
   void recreatePainter() {
-    final circularArcPainter = CircularArcPainter(
-      widget.settings,
-      _currentValues,
-    );
-
     final backgroundPainter = _sliderPainters.backgroundPainter(
       widget.settings,
       _currentValues,
-      circularArcPainter,
     );
 
     final shadowPainter = _sliderPainters.shadowPainter(
       widget.settings,
       _currentValues,
-      circularArcPainter,
     );
 
     final progressBarPainter = _sliderPainters.progressBarPainter(
       widget.settings,
       _currentValues,
-      circularArcPainter,
     );
 
     final currentValuePainter = _sliderPainters.currentValuePainter(
       widget.settings,
       _currentValues,
-      circularArcPainter,
     );
 
     _painter = _CurvePainter(
-      circularArcPainter: circularArcPainter,
       backgroundPainter: backgroundPainter,
       shadowPainter: shadowPainter,
       progressBarPainter: progressBarPainter,

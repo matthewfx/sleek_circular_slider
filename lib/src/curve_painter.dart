@@ -1,7 +1,6 @@
 part of circular_slider;
 
 class _CurvePainter extends CustomPainter {
-  final CircularArcPainter circularArcPainter;
   final CustomPainter backgroundPainter;
   final CustomPainter shadowPainter;
   final CustomPainter currentValuePainter;
@@ -10,7 +9,6 @@ class _CurvePainter extends CustomPainter {
   final CircularSliderValues values;
 
   _CurvePainter({
-    this.circularArcPainter,
     this.backgroundPainter,
     this.shadowPainter,
     this.progressBarPainter,

@@ -6,19 +6,23 @@ import 'package:sleek_circular_slider/src/utilities/unit_conversions.dart';
 class BackgroundPainter extends CustomPainter {
   final CircularSliderSettings settings;
   final CircularSliderValues values;
-  final CircularArcPainter circularArcPainter;
 
+  ShapePainter shapePainter;
   Paint backgroundPaint;
 
   BackgroundPainter(
     this.settings,
     this.values,
-    this.circularArcPainter,
   ) {
     backgroundPaint = Paint()
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke
       ..strokeWidth = values.trackWidth;
+
+    shapePainter = CircularArcPainter(
+      settings,
+      values,
+    );
   }
 
   @override
@@ -26,7 +30,7 @@ class BackgroundPainter extends CustomPainter {
     final sliderRectangle = Rect.fromLTWH(0.0, 0.0, size.width, size.width);
     setupColorOrGradient(sliderRectangle);
 
-    circularArcPainter.drawCircularArc(
+    shapePainter.drawShape(
       canvas,
       size,
       backgroundPaint,
