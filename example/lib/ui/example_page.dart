@@ -37,7 +37,7 @@ class ExamplePage extends StatelessWidget {
         child: SafeArea(
           child: Center(
             child: SleekCircularSlider(
-              callbacks: SliderCallbacks(
+              callbacks: CircularSliderCallbacks(
                 onChangeStart: (double value) {},
                 onChangeEnd: (double value) {},
               ),

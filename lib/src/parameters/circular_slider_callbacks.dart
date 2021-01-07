@@ -1,11 +1,11 @@
 typedef void OnChange(double value);
 
-class SliderCallbacks {
+class CircularSliderCallbacks {
   final OnChange onChange;
   final OnChange onChangeStart;
   final OnChange onChangeEnd;
 
-  const SliderCallbacks({
+  const CircularSliderCallbacks({
     this.onChange,
     this.onChangeStart,
     this.onChangeEnd,

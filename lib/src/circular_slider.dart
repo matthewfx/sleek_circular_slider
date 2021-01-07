@@ -21,14 +21,14 @@ typedef Widget InnerWidget(double percentage);
 class SleekCircularSlider extends StatefulWidget {
   final CircularSliderValues values;
   final CircularSliderSettings settings;
-  final SliderCallbacks callbacks;
+  final CircularSliderCallbacks callbacks;
   final CircularSliderPainters painters;
   final InnerWidget innerWidget;
 
   SleekCircularSlider({
     Key key,
     this.values = const CircularSliderValues(),
-    this.callbacks = const SliderCallbacks(),
+    this.callbacks = const CircularSliderCallbacks(),
     this.settings = const CircularSliderSettings(),
     this.painters,
     this.innerWidget,
