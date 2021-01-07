@@ -64,26 +64,47 @@ class ClockWidget extends StatelessWidget {
     var minutes = dateTime.minute.toDouble();
     var hours = dateTime.hour.toDouble();
     return SleekCircularSlider(
-      appearance: appearance01,
-      min: 0,
-      max: 59,
-      initialValue: seconds,
+      settings: settings01,
+      values: CircularSliderValues(
+        minimumValue: 0,
+        maximumValue: 59,
+        initialValue: seconds,
+        startAngle: 270,
+        angleRange: 360,
+        size: 350.0,
+        trackWidth: 2,
+        progressBarWidth: 10,
+      ),
       innerWidget: (double value) {
         return Align(
           alignment: Alignment.center,
           child: SleekCircularSlider(
-            appearance: appearance02,
-            min: 0,
-            max: 59,
-            initialValue: minutes,
+            settings: settings02,
+            values: CircularSliderValues(
+              minimumValue: 0,
+              maximumValue: 59,
+              initialValue: minutes,
+              startAngle: 270,
+              angleRange: 360,
+              size: 290.0,
+              trackWidth: 5,
+              progressBarWidth: 15,
+            ),
             innerWidget: (double value) {
               return Align(
                 alignment: Alignment.center,
                 child: SleekCircularSlider(
-                  appearance: appearance03,
-                  min: 0,
-                  max: 11,
-                  initialValue: hours % 12,
+                  settings: settings03,
+                  values: CircularSliderValues(
+                    initialValue: hours % 12,
+                    minimumValue: 0,
+                    maximumValue: 11,
+                    startAngle: 270,
+                    angleRange: 360,
+                    size: 210.0,
+                    trackWidth: 8,
+                    progressBarWidth: 20,
+                  ),
                   innerWidget: (double value) {
                     final h = hours.toInt() < 12
                         ? 'AM ${hours.toInt() % 12}'
@@ -113,56 +134,71 @@ class ClockWidget extends StatelessWidget {
   }
 }
 
-final customWidth01 =
-    CustomSliderWidths(trackWidth: 2, progressBarWidth: 10, shadowWidth: 20);
-final customColors01 = CustomSliderColors(
-    dotColor: Colors.white.withOpacity(0.8),
-    trackColor: HexColor('#FFD4BE').withOpacity(0.4),
-    progressBarColor: HexColor('#F6A881'),
-    shadowColor: HexColor('#FFD4BE'),
-    shadowStep: 10.0,
-    shadowMaxOpacity: 0.6);
+final features01 = CircularSliderFeatures(
+  animationEnabled: false,
+);
 
-final CircularSliderAppearance appearance01 = CircularSliderAppearance(
-    customWidths: customWidth01,
-    customColors: customColors01,
-    startAngle: 270,
-    angleRange: 360,
-    size: 350.0,
-    animationEnabled: false);
+final colors01 = CircularSliderColors(
+  dotColor: Colors.white.withOpacity(0.8),
+  trackColor: HexColor('#FFD4BE').withOpacity(0.4),
+  barColors: BarColorHelper.createBarColorList(HexColor('#F6A881')),
+);
 
-final customWidth02 =
-    CustomSliderWidths(trackWidth: 5, progressBarWidth: 15, shadowWidth: 30);
-final customColors02 = CustomSliderColors(
-    dotColor: Colors.white.withOpacity(0.8),
-    trackColor: HexColor('#98DBFC').withOpacity(0.3),
-    progressBarColor: HexColor('#6DCFFF'),
-    shadowColor: HexColor('#98DBFC'),
-    shadowStep: 15.0,
-    shadowMaxOpacity: 0.3);
+final shadow01 = CircularSliderShadow(
+  color: HexColor('#FFD4BE'),
+  step: 10.0,
+  maxOpacity: 0.6,
+  shadowWidth: 20,
+);
 
-final CircularSliderAppearance appearance02 = CircularSliderAppearance(
-    customWidths: customWidth02,
-    customColors: customColors02,
-    startAngle: 270,
-    angleRange: 360,
-    size: 290.0,
-    animationEnabled: false);
+final settings01 = CircularSliderSettings(
+  features: features01,
+  colors: colors01,
+  shadow: shadow01,
+);
 
-final customWidth03 =
-    CustomSliderWidths(trackWidth: 8, progressBarWidth: 20, shadowWidth: 40);
-final customColors03 = CustomSliderColors(
-    dotColor: Colors.white.withOpacity(0.8),
-    trackColor: HexColor('#EFC8FC').withOpacity(0.3),
-    progressBarColor: HexColor('#A177B0'),
-    shadowColor: HexColor('#EFC8FC'),
-    shadowStep: 20.0,
-    shadowMaxOpacity: 0.3);
+final features02 = CircularSliderFeatures(
+  animationEnabled: false,
+);
 
-final CircularSliderAppearance appearance03 = CircularSliderAppearance(
-    customWidths: customWidth03,
-    customColors: customColors03,
-    startAngle: 270,
-    angleRange: 360,
-    size: 210.0,
-    animationEnabled: false);
+final colors02 = CircularSliderColors(
+  dotColor: Colors.white.withOpacity(0.8),
+  trackColor: HexColor('#98DBFC').withOpacity(0.3),
+  barColors: BarColorHelper.createBarColorList(HexColor('#6DCFFF')),
+);
+
+final shadow02 = CircularSliderShadow(
+  color: HexColor('#98DBFC'),
+  step: 15.0,
+  maxOpacity: 0.3,
+  shadowWidth: 30,
+);
+
+final settings02 = CircularSliderSettings(
+  features: features02,
+  colors: colors02,
+  shadow: shadow02,
+);
+
+final features03 = CircularSliderFeatures(
+  animationEnabled: false,
+);
+
+final colors03 = CircularSliderColors(
+  dotColor: Colors.white.withOpacity(0.8),
+  trackColor: HexColor('#EFC8FC').withOpacity(0.3),
+  barColors: BarColorHelper.createBarColorList(HexColor('#A177B0')),
+);
+
+final shadow03 = CircularSliderShadow(
+  color: HexColor('#EFC8FC'),
+  step: 20.0,
+  maxOpacity: 0.3,
+  shadowWidth: 40,
+);
+
+final settings03 = CircularSliderSettings(
+  features: features03,
+  colors: colors03,
+  shadow: shadow03,
+);

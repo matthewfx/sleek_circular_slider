@@ -2,51 +2,45 @@ library circular_slider;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:sleek_circular_slider/src/slider_animations.dart';
-import 'utils.dart';
-import 'appearance.dart';
-import 'slider_label.dart';
+import 'package:sleek_circular_slider/src/animations/value_changed_animation_manager.dart';
+import 'package:sleek_circular_slider/src/animations/spin_animation_manager.dart';
+import 'package:sleek_circular_slider/src/parameters/circular_slider_callbacks.dart';
+import 'package:sleek_circular_slider/src/parameters/circular_slider_painters.dart';
+import 'package:sleek_circular_slider/src/parameters/circular_slider_settings.dart';
+import 'package:sleek_circular_slider/src/parameters/circular_slider_values.dart';
+import 'package:sleek_circular_slider/src/utilities/unit_conversions.dart';
+import 'package:sleek_circular_slider/src/utilities/utils.dart';
+import 'widgets/slider_label.dart';
 import 'dart:math' as math;
 
 part 'curve_painter.dart';
-part 'custom_gesture_recognizer.dart';
+part 'widgets/custom_gesture_recognizer.dart';
 
-typedef void OnChange(double value);
 typedef Widget InnerWidget(double percentage);
 
 class SleekCircularSlider extends StatefulWidget {
-  final double initialValue;
-  final double min;
-  final double max;
-  final CircularSliderAppearance appearance;
-  final OnChange onChange;
-  final OnChange onChangeStart;
-  final OnChange onChangeEnd;
+  final CircularSliderValues values;
+  final CircularSliderSettings settings;
+  final CircularSliderCallbacks callbacks;
+  final CircularSliderPainters painters;
   final InnerWidget innerWidget;
-  static const defaultAppearance = CircularSliderAppearance();
 
-  double get angle {
-    return valueToAngle(initialValue, min, max, appearance.angleRange);
-  }
+  SleekCircularSlider({
+    Key key,
+    this.values = const CircularSliderValues(),
+    this.callbacks = const CircularSliderCallbacks(),
+    this.settings = const CircularSliderSettings(),
+    this.painters,
+    this.innerWidget,
+  }) : super(key: key);
 
-  const SleekCircularSlider(
-      {Key key,
-      this.initialValue = 50,
-      this.min = 0,
-      this.max = 100,
-      this.appearance = defaultAppearance,
-      this.onChange,
-      this.onChangeStart,
-      this.onChangeEnd,
-      this.innerWidget})
-      : assert(initialValue != null),
-        assert(min != null),
-        assert(max != null),
-        assert(min <= max),
-        assert(initialValue >= min && initialValue <= max),
-        assert(appearance != null),
-        super(key: key);
+  double get initialAngle => valueToAngle(
+        values.initialValue,
+        values.minimumValue,
+        values.maximumValue,
+        values.angleRange,
+      );
+
   @override
   _SleekCircularSliderState createState() => _SleekCircularSliderState();
 }
@@ -59,106 +53,129 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   double _oldWidgetAngle;
   double _oldWidgetValue;
   double _currentAngle;
-  double _startAngle;
-  double _angleRange;
-  double _selectedAngle;
+  double _selectedAngleInRadians;
   double _rotation;
   SpinAnimationManager _spinManager;
   ValueChangedAnimationManager _animationManager;
+  CircularSliderPainters _sliderPainters;
+  CircularSliderValues _currentValues;
 
-  bool get _interactionEnabled => (widget.onChangeEnd != null ||
-      widget.onChange != null && !widget.appearance.spinnerMode);
+  bool get _interactionEnabled =>
+      widget.callbacks.onChangeEnd != null ||
+      widget.callbacks.onChange != null &&
+          !widget.settings.features.spinnerMode;
+
+  double get currentValue => angleToValue(
+        _currentAngle,
+        _currentValues.minimumValue,
+        _currentValues.maximumValue,
+        _currentValues.angleRange,
+      );
 
   @override
   void initState() {
     super.initState();
-    _startAngle = widget.appearance.startAngle;
-    _angleRange = widget.appearance.angleRange;
+    _sliderPainters = this.widget.painters ?? CircularSliderPainters();
+    _currentValues = widget.values;
 
-    if (!widget.appearance.animationEnabled) {
-      return;
+    updateAngles();
+    recreatePainter();
+
+    if (widget.settings.features.spinnerMode) {
+      _spinManager = SpinAnimationManager(
+        tickerProvider: this,
+        duration:
+            Duration(milliseconds: widget.settings.features.spinnerDuration),
+        spinAnimation: ((double anim1, anim2, anim3) {
+          setState(() {
+            _rotation = anim1 != null ? anim1 : 0;
+
+            _currentValues = CircularSliderValues(
+              currentAngle: _currentValues.currentAngle,
+              initialValue: _currentValues.initialValue,
+              minimumValue: _currentValues.minimumValue,
+              maximumValue: _currentValues.maximumValue,
+              progressBarWidth: _currentValues.progressBarWidth,
+              trackWidth: _currentValues.trackWidth,
+              startAngle: anim2 != null ? math.pi * anim2 : 0,
+              angleRange: _currentValues.angleRange,
+              handlerSize: _currentValues.handlerSize,
+              size: _currentValues.size,
+            );
+            _currentAngle = anim3 != null ? anim3 : 0;
+            updateAngles();
+            recreatePainter();
+            handleOnChange();
+          });
+        }),
+      );
+
+      _spinManager.spin();
+    } else if (widget.settings.features.animationEnabled) {
+      _animationManager = ValueChangedAnimationManager(
+        tickerProvider: this,
+        minValue: _currentValues.minimumValue,
+        maxValue: _currentValues.maximumValue,
+        durationMultiplier:
+            widget.settings.features.animationDurationMultiplier,
+      );
     }
-
-    widget.appearance.spinnerMode ? _spin() : _animate();
+    updateSliderUi();
   }
 
   @override
   void didUpdateWidget(SleekCircularSlider oldWidget) {
-    if (oldWidget.angle != widget.angle) {
-      _animate();
+    if (oldWidget.initialAngle != widget.initialAngle) {
+      updateSliderUi();
     }
     super.didUpdateWidget(oldWidget);
   }
 
-  void _animate() {
-    if (!widget.appearance.animationEnabled || widget.appearance.spinnerMode) {
-      _setupPainter();
-      _updateOnChange();
+  void updateSliderUi() {
+    if (!widget.settings.features.animationEnabled ||
+        widget.settings.features.spinnerMode) {
+      updateAngles();
+      recreatePainter();
+      handleOnChange();
       return;
     }
-    if (_animationManager == null) {
-      _animationManager = ValueChangedAnimationManager(
-        tickerProvider: this,
-        minValue: widget.min,
-        maxValue: widget.max,
-        durationMultiplier: widget.appearance.animDurationMultiplier,
-      );
-    }
-    _animationManager.animate(
-        initialValue: widget.initialValue,
-        angle: widget.angle,
-        oldAngle: _oldWidgetAngle,
-        oldValue: _oldWidgetValue,
-        valueChangedAnimation: ((double anim, bool animationCompleted) {
-          _animationInProgress = !animationCompleted;
-          setState(() {
-            if (!animationCompleted) {
-              _currentAngle = anim;
-              // update painter and the on change closure
-              _setupPainter();
-              _updateOnChange();
-            }
-          });
-        }));
-  }
 
-  void _spin() {
-    _spinManager = SpinAnimationManager(
-        tickerProvider: this,
-        duration: Duration(milliseconds: widget.appearance.spinnerDuration),
-        spinAnimation: ((double anim1, anim2, anim3) {
-          setState(() {
-            _rotation = anim1 != null ? anim1 : 0;
-            _startAngle = anim2 != null ? math.pi * anim2 : 0;
-            _currentAngle = anim3 != null ? anim3 : 0;
-            _setupPainter();
-            _updateOnChange();
-          });
-        }));
-    _spinManager.spin();
+    _animationManager.animate(
+      initialValue: _currentValues.initialValue,
+      angle: widget.initialAngle,
+      oldAngle: _oldWidgetAngle,
+      oldValue: _oldWidgetValue,
+      valueChangedAnimation: ((double newValue, bool animationCompleted) {
+        _animationInProgress = !animationCompleted;
+        setState(() {
+          if (!animationCompleted) {
+            _currentAngle = newValue;
+            // update painter and the on change closure
+            updateAngles();
+            recreatePainter();
+            handleOnChange();
+          }
+        });
+      }),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    /// If painter is null there is a need to setup it to prevent exceptions.
-    if (_painter == null) {
-      _setupPainter();
-    }
     return RawGestureDetector(
-        gestures: <Type, GestureRecognizerFactory>{
-          _CustomPanGestureRecognizer:
-              GestureRecognizerFactoryWithHandlers<_CustomPanGestureRecognizer>(
-            () => _CustomPanGestureRecognizer(
-              onPanDown: _onPanDown,
-              onPanUpdate: _onPanUpdate,
-              onPanEnd: _onPanEnd,
-            ),
-            (_CustomPanGestureRecognizer instance) {},
+      gestures: <Type, GestureRecognizerFactory>{
+        _CustomPanGestureRecognizer:
+            GestureRecognizerFactoryWithHandlers<_CustomPanGestureRecognizer>(
+          () => _CustomPanGestureRecognizer(
+            onPanDown: _onPanDown,
+            onPanUpdate: _onPanUpdate,
+            onPanEnd: _onPanEnd,
           ),
-        },
-        child: _buildRotatingPainter(
-            rotation: _rotation,
-            size: Size(widget.appearance.size, widget.appearance.size)));
+          (_CustomPanGestureRecognizer instance) {},
+        ),
+      },
+      child: _rotation != null ? rotatedCustomPaint() : customPaint(),
+    );
   }
 
   @override
@@ -168,145 +185,164 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     super.dispose();
   }
 
-  void _setupPainter({bool counterClockwise = false}) {
-    var defaultAngle = _currentAngle ?? widget.angle;
-    if (_oldWidgetAngle != null) {
-      if (_oldWidgetAngle != widget.angle) {
-        _selectedAngle = null;
-        defaultAngle = widget.angle;
-      }
+  void updateAngles() {
+    if (_oldWidgetAngle != null && _oldWidgetAngle != widget.initialAngle) {
+      _selectedAngleInRadians = null;
+      _currentAngle = widget.initialAngle;
+    }
+    if (_selectedAngleInRadians == null) {
+      _currentAngle = _currentAngle ?? widget.initialAngle;
+    } else {
+      _currentAngle = calculateAngle(
+        _currentValues.startAngle,
+        _currentValues.angleRange,
+        _selectedAngleInRadians,
+        widget.settings.features.counterClockwise,
+      );
     }
 
-    _currentAngle = calculateAngle(
-        startAngle: _startAngle,
-        angleRange: _angleRange,
-        selectedAngle: _selectedAngle,
-        defaultAngle: defaultAngle,
-        counterClockwise: counterClockwise);
+    _currentValues = CircularSliderValues(
+      initialValue: _currentValues.initialValue,
+      minimumValue: _currentValues.minimumValue,
+      maximumValue: _currentValues.maximumValue,
+      progressBarWidth: _currentValues.progressBarWidth,
+      trackWidth: _currentValues.trackWidth,
+      startAngle: _currentValues.startAngle,
+      currentAngle: _currentAngle,
+      angleRange: _currentValues.angleRange,
+      handlerSize: _currentValues.handlerSize,
+      size: _currentValues.size,
+    );
+
+    _oldWidgetAngle = widget.initialAngle;
+    _oldWidgetValue = _currentValues.initialValue;
+  }
+
+  void recreatePainter() {
+    final backgroundPainter = _sliderPainters.backgroundPainter(
+      widget.settings,
+      _currentValues,
+    );
+
+    final shadowPainter = _sliderPainters.shadowPainter(
+      widget.settings,
+      _currentValues,
+    );
+
+    final progressBarPainter = _sliderPainters.progressBarPainter(
+      widget.settings,
+      _currentValues,
+    );
+
+    final currentValuePainter = _sliderPainters.currentValuePainter(
+      widget.settings,
+      _currentValues,
+    );
 
     _painter = _CurvePainter(
-        startAngle: _startAngle,
-        angleRange: _angleRange,
-        angle: _currentAngle < 0.5 ? 0.5 : _currentAngle,
-        appearance: widget.appearance);
-    _oldWidgetAngle = widget.angle;
-    _oldWidgetValue = widget.initialValue;
+      backgroundPainter: backgroundPainter,
+      shadowPainter: shadowPainter,
+      progressBarPainter: progressBarPainter,
+      currentValuePainter: currentValuePainter,
+      settings: widget.settings,
+      values: _currentValues,
+    );
   }
 
-  void _updateOnChange() {
-    if (widget.onChange != null && !_animationInProgress) {
-      final value =
-          angleToValue(_currentAngle, widget.min, widget.max, _angleRange);
-      widget.onChange(value);
-    }
+  Widget rotatedCustomPaint() {
+    return Transform(
+      transform: Matrix4.identity()..rotateZ((_rotation) * 5 * math.pi / 6),
+      alignment: FractionalOffset.center,
+      child: customPaint(),
+    );
   }
 
-  Widget _buildRotatingPainter({double rotation, Size size}) {
-    if (rotation != null) {
-      return Transform(
-          transform: Matrix4.identity()..rotateZ((rotation) * 5 * math.pi / 6),
-          alignment: FractionalOffset.center,
-          child: _buildPainter(size: size));
-    } else {
-      return _buildPainter(size: size);
-    }
-  }
-
-  Widget _buildPainter({Size size}) {
+  Widget customPaint() {
     return CustomPaint(
-        painter: _painter,
-        child: Container(
-            width: size.width,
-            height: size.height,
-            child: _buildChildWidget()));
-  }
-
-  Widget _buildChildWidget() {
-    if (widget.appearance.spinnerMode) {
-      return null;
-    }
-    final value =
-        angleToValue(_currentAngle, widget.min, widget.max, _angleRange);
-    final childWidget = widget.innerWidget != null
-        ? widget.innerWidget(value)
-        : SliderLabel(
-            value: value,
-            appearance: widget.appearance,
-          );
-    return childWidget;
+      painter: _painter,
+      child: Container(
+        width: _currentValues.size,
+        height: _currentValues.size,
+        child: widget.settings.features.spinnerMode
+            ? null
+            : widget.innerWidget != null
+                ? widget.innerWidget(currentValue)
+                : SliderLabel(
+                    value: currentValue,
+                    settings: widget.settings,
+                    values: _currentValues,
+                  ),
+      ),
+    );
   }
 
   void _onPanUpdate(Offset details) {
-    if (!_isHandlerSelected) {
-      return;
-    }
-    if (_painter.center == null) {
-      return;
-    }
-    _handlePan(details, false);
+    if (_painter.values.center == null || !_isHandlerSelected) return;
+
+    _handlePan(details);
+  }
+
+  void handleOnChange() {
+    if (_animationInProgress) return;
+
+    widget.callbacks.onChange?.call(currentValue);
   }
 
   void _onPanEnd(Offset details) {
-    _handlePan(details, true);
-    if (widget.onChangeEnd != null) {
-      widget.onChangeEnd(
-          angleToValue(_currentAngle, widget.min, widget.max, _angleRange));
-    }
+    _handlePan(details);
+    widget.callbacks.onChangeEnd?.call(currentValue);
 
     _isHandlerSelected = false;
   }
 
-  void _handlePan(Offset details, bool isPanEnd) {
-    if (_painter.center == null) {
-      return;
-    }
-    RenderBox renderBox = context.findRenderObject();
-    var position = renderBox.globalToLocal(details);
-    final double touchWidth = widget.appearance.progressBarWidth >= 25.0
-        ? widget.appearance.progressBarWidth
+  void _handlePan(Offset details) {
+    if (_painter.values.center == null) return;
+
+    final RenderBox renderBox = context.findRenderObject();
+    final position = renderBox.globalToLocal(details);
+    final touchWidth = _currentValues.progressBarWidth >= 25.0
+        ? _currentValues.progressBarWidth
         : 25.0;
     if (isPointAlongCircle(
-        position, _painter.center, _painter.radius, touchWidth)) {
-      _selectedAngle = coordinatesToRadians(_painter.center, position);
-      // setup painter with new angle values and update onChange
-      _setupPainter(counterClockwise: widget.appearance.counterClockwise);
-      _updateOnChange();
+        position, _painter.values.center, _painter.values.radius, touchWidth)) {
+      _selectedAngleInRadians =
+          coordinatesToRadians(_painter.values.center, position);
+      updateAngles();
+      recreatePainter();
+      handleOnChange();
       setState(() {});
     }
   }
 
   bool _onPanDown(Offset details) {
-    if (_painter == null || _interactionEnabled == false) {
-      return false;
-    }
-    RenderBox renderBox = context.findRenderObject();
-    var position = renderBox.globalToLocal(details);
+    if (_painter == null || _interactionEnabled == false) return false;
 
-    if (position == null) {
-      return false;
-    }
+    final RenderBox renderBox = context.findRenderObject();
+    final position = renderBox.globalToLocal(details);
 
+    if (position == null) return false;
+
+    final touchAngle = coordinatesToRadians(_painter.values.center, position);
     final angleWithinRange = isAngleWithinRange(
-        startAngle: _startAngle,
-        angleRange: _angleRange,
-        touchAngle: coordinatesToRadians(_painter.center, position),
-        previousAngle: _currentAngle,
-        counterClockwise: widget.appearance.counterClockwise);
-    if (!angleWithinRange) {
-      return false;
-    }
+      _currentValues.startAngle,
+      _currentValues.angleRange,
+      touchAngle,
+      _currentAngle,
+      widget.settings.features.counterClockwise,
+    );
 
-    final double touchWidth = widget.appearance.progressBarWidth >= 25.0
-        ? widget.appearance.progressBarWidth
+    if (!angleWithinRange) return false;
+
+    final double touchWidth = _currentValues.progressBarWidth >= 25.0
+        ? _currentValues.progressBarWidth
         : 25.0;
 
-    if (isPointAlongCircle(
-        position, _painter.center, _painter.radius, touchWidth)) {
+    final pointAlongCircle = isPointAlongCircle(
+        position, _painter.values.center, _painter.values.radius, touchWidth);
+
+    if (pointAlongCircle) {
       _isHandlerSelected = true;
-      if (widget.onChangeStart != null) {
-        widget.onChangeStart(
-            angleToValue(_currentAngle, widget.min, widget.max, _angleRange));
-      }
+      widget.callbacks.onChangeStart?.call(currentValue);
       _onPanUpdate(details);
     } else {
       _isHandlerSelected = false;

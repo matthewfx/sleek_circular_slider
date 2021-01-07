@@ -3,19 +3,16 @@ import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class ExampleViewModel {
   final List<Color> pageColors;
-  final CircularSliderAppearance appearance;
-  final double min;
-  final double max;
-  final double value;
+  final CircularSliderSettings settings;
+  final CircularSliderValues values;
   final InnerWidget innerWidget;
 
-  ExampleViewModel(
-      {@required this.pageColors,
-      @required this.appearance,
-      this.min = 0,
-      this.max = 100,
-      this.value = 50,
-      this.innerWidget});
+  ExampleViewModel({
+    @required this.pageColors,
+    @required this.settings,
+    @required this.values,
+    this.innerWidget,
+  });
 }
 
 class ExamplePage extends StatelessWidget {
@@ -30,22 +27,35 @@ class ExamplePage extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: viewModel.pageColors,
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
-                tileMode: TileMode.clamp)),
+          gradient: LinearGradient(
+            colors: viewModel.pageColors,
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            tileMode: TileMode.clamp,
+          ),
+        ),
         child: SafeArea(
           child: Center(
-              child: SleekCircularSlider(
-            onChangeStart: (double value) {},
-            onChangeEnd: (double value) {},
-            innerWidget: viewModel.innerWidget,
-            appearance: viewModel.appearance,
-            min: viewModel.min,
-            max: viewModel.max,
-            initialValue: viewModel.value,
-          )),
+            child: SleekCircularSlider(
+              callbacks: CircularSliderCallbacks(
+                onChangeStart: (double value) {},
+                onChangeEnd: (double value) {},
+              ),
+              innerWidget: viewModel.innerWidget,
+              settings: viewModel.settings,
+              values: viewModel.values,
+              painters: CircularSliderPainters(
+                backgroundPainter: (settings, values) =>
+                    BackgroundPainter(settings, values),
+                shadowPainter: (settings, values) =>
+                    ShadowPainter(settings, values),
+                progressBarPainter: (settings, values) =>
+                    ProgressBarPainter(settings, values),
+                currentValuePainter: (settings, values) =>
+                    CurrentValuePainter(settings, values),
+              ),
+            ),
+          ),
         ),
       ),
     );
