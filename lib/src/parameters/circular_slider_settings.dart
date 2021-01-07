@@ -1,7 +1,7 @@
-import 'package:sleek_circular_slider/src/settings/CircularSliderColors.dart';
-import 'package:sleek_circular_slider/src/settings/CircularSliderFeatures.dart';
-import 'package:sleek_circular_slider/src/settings/CircularSliderShadow.dart';
-import 'package:sleek_circular_slider/src/settings/CircularSliderText.dart';
+import 'package:sleek_circular_slider/src/settings/circular_slider_colors.dart';
+import 'package:sleek_circular_slider/src/settings/circular_slider_features.dart';
+import 'package:sleek_circular_slider/src/settings/circular_slider_shadow.dart';
+import 'package:sleek_circular_slider/src/settings/circular_slider_text.dart';
 
 class CircularSliderSettings {
   final CircularSliderColors colors;

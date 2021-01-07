@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:sleek_circular_slider/src/painters/circular_arc_painter.dart';
+import 'package:sleek_circular_slider/src/parameters/circular_slider_values.dart';
 import 'package:sleek_circular_slider/src/utilities/unit_conversions.dart';
 
 class BackgroundPainter extends CustomPainter {

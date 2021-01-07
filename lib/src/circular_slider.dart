@@ -3,11 +3,11 @@ library circular_slider;
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:sleek_circular_slider/src/animations/value_changed_animation_manager.dart';
-import 'package:sleek_circular_slider/src/circular_slider_parameters.dart';
-import 'package:sleek_circular_slider/src/painters/circular_arc_painter.dart';
 import 'package:sleek_circular_slider/src/animations/spin_animation_manager.dart';
-import 'package:sleek_circular_slider/src/settings/CircularSliderSettings.dart';
-import 'package:sleek_circular_slider/src/circular_slider_values.dart';
+import 'package:sleek_circular_slider/src/parameters/circular_slider_callbacks.dart';
+import 'package:sleek_circular_slider/src/parameters/circular_slider_painters.dart';
+import 'package:sleek_circular_slider/src/parameters/circular_slider_settings.dart';
+import 'package:sleek_circular_slider/src/parameters/circular_slider_values.dart';
 import 'package:sleek_circular_slider/src/utilities/unit_conversions.dart';
 import 'package:sleek_circular_slider/src/utilities/utils.dart';
 import 'widgets/slider_label.dart';
@@ -16,11 +16,13 @@ import 'dart:math' as math;
 part 'curve_painter.dart';
 part 'widgets/custom_gesture_recognizer.dart';
 
+typedef Widget InnerWidget(double percentage);
+
 class SleekCircularSlider extends StatefulWidget {
   final CircularSliderValues values;
   final CircularSliderSettings settings;
   final SliderCallbacks callbacks;
-  final SliderPainters painters;
+  final CircularSliderPainters painters;
   final InnerWidget innerWidget;
 
   SleekCircularSlider({
@@ -55,7 +57,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   double _rotation;
   SpinAnimationManager _spinManager;
   ValueChangedAnimationManager _animationManager;
-  SliderPainters _sliderPainters;
+  CircularSliderPainters _sliderPainters;
   CircularSliderValues _currentValues;
 
   bool get _interactionEnabled =>
@@ -73,7 +75,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   @override
   void initState() {
     super.initState();
-    _sliderPainters = this.widget.painters ?? SliderPainters();
+    _sliderPainters = this.widget.painters ?? CircularSliderPainters();
     _currentValues = widget.values;
 
     updateAngles();

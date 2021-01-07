@@ -3,6 +3,7 @@ import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'dart:math' as math;
 
 import 'package:sleek_circular_slider/src/painters/circular_arc_painter.dart';
+import 'package:sleek_circular_slider/src/parameters/circular_slider_values.dart';
 
 class ShadowPainter extends CustomPainter {
   final CircularSliderSettings settings;

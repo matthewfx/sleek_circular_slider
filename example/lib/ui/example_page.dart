@@ -44,7 +44,7 @@ class ExamplePage extends StatelessWidget {
               innerWidget: viewModel.innerWidget,
               settings: viewModel.settings,
               values: viewModel.values,
-              painters: SliderPainters(
+              painters: CircularSliderPainters(
                 backgroundPainter: (settings, values) =>
                     BackgroundPainter(settings, values),
                 shadowPainter: (settings, values) =>
