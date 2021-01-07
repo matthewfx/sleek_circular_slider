@@ -62,18 +62,22 @@ There are additional optional parameters one can initialize the slider with.
 
 ```dart
 final slider = SleekCircularSlider(
-  min: 0,
-  max: 1000,
-  initialValue: 426,
-  onChange: (double value) {
-    // callback providing a value while its being changed (with a pan gesture)
-  },
-  onChangeStart: (double startValue) {
-    // callback providing a starting value (when a pan gesture starts)
-  },
-  onChangeEnd: (double endValue) {
-    // ucallback providing an ending value (when a pan gesture ends)
-  },
+  values: CircularSliderValues(
+    minimumValue: 0,
+    maximumValue: 1000,
+    initialValue: 426,
+  ),
+  callbacks: SliderCallbacks(
+    onChange: (double value) {
+      // callback providing a value while its being changed (with a pan gesture)
+    },
+    onChangeStart: (double startValue) {
+      // callback providing a starting value (when a pan gesture starts)
+    },
+    onChangeEnd: (double endValue) {
+      // ucallback providing an ending value (when a pan gesture ends)
+    },
+  ),
   innerWidget: (double value) {
     // use your custom widget inside the slider (gets a slider value from the callback)
   },
@@ -90,9 +94,11 @@ final slider = SleekCircularSlider(
       progressBarWidth: 10,
     ),
   ),
-  min: 10,
-  max: 28,
-  initialValue: 14,
+  values: CircularSliderValues(
+    minimumValue: 10,
+    maximumValue: 28,
+    initialValue: 14,
+  ),
 );
 ```
 
