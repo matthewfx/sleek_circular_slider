@@ -1,10 +1,12 @@
 # Sleek circular slider/progress bar & spinner for Flutter
 
-## Customizable Circular Slider & Progress
-
 ---
 
-![Example 06](doc/slider05.gif)
+## Customizable Circular Slider & Progress
+
+
+
+![Example 06](doc/slider07.gif)
 
 
 # Usage
@@ -190,6 +192,6 @@ Link From:
 ![Example 01](doc/slider00.gif) ![Example 02](doc/slider01.gif)
 ![Example 03](doc/slider02.gif) ![Example 04](doc/slider03.gif)
 ![Example 05](doc/slider04.gif) ![Example 12](doc/slider11.gif)
-![Example 07](doc/slider06.gif) ![Example 08](doc/slider07.gif)
+![Example 07](doc/slider06.gif) ![Example 08](doc/slider05.gif)
 ![Example 09](doc/slider08.gif) ![Example 10](doc/slider09.gif)
 ![Example 11](doc/slider10.gif) 
