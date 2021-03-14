@@ -30,8 +30,8 @@ final info02 = InfoProperties(
     topLabelText: 'Budget',
     mainLabelStyle: TextStyle(
         color: Colors.white, fontSize: 50.0, fontWeight: FontWeight.w100),
-    modifier: (double value) {
-      final budget = (value * 1000).toInt();
+    modifier: (double? value) {
+      final budget = (value! * 1000).toInt();
       return '\$ $budget';
     });
 final CircularSliderAppearance appearance02 = CircularSliderAppearance(
@@ -70,8 +70,8 @@ final info03 = InfoProperties(
         color: Color.fromRGBO(97, 169, 210, 1),
         fontSize: 30.0,
         fontWeight: FontWeight.w200),
-    modifier: (double value) {
-      final kcal = value.toInt();
+    modifier: (double? value) {
+      final kcal = value!.toInt();
       return '$kcal kCal';
     });
 final CircularSliderAppearance appearance03 = CircularSliderAppearance(
@@ -108,8 +108,8 @@ final info04 = InfoProperties(
         color: HexColor('#54826D'),
         fontSize: 30.0,
         fontWeight: FontWeight.w600),
-    modifier: (double value) {
-      final temp = value.toInt();
+    modifier: (double? value) {
+      final temp = value!.toInt();
       return '$temp ˚C';
     });
 final CircularSliderAppearance appearance04 = CircularSliderAppearance(
@@ -148,8 +148,8 @@ final info05 = InfoProperties(
     bottomLabelText: 'time',
     mainLabelStyle: TextStyle(
         color: Colors.white, fontSize: 50.0, fontWeight: FontWeight.w600),
-    modifier: (double value) {
-      final time = printDuration(Duration(seconds: value.toInt()));
+    modifier: (double? value) {
+      final time = printDuration(Duration(seconds: value!.toInt()));
       return '$time';
     });
 final CircularSliderAppearance appearance05 = CircularSliderAppearance(
@@ -337,8 +337,8 @@ final info10 = InfoProperties(
         color: HexColor('#FF6BD9'),
         fontSize: 60.0,
         fontWeight: FontWeight.w100),
-    modifier: (double value) {
-      final volume = value.toInt();
+    modifier: (double? value) {
+      final volume = value!.toInt();
       return '$volume db';
     });
 
@@ -378,7 +378,7 @@ String printDuration(Duration duration) {
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   _HomePageState createState() => _HomePageState();
 }
@@ -392,8 +392,8 @@ class _HomePageState extends State<HomePage> {
         child: PageView(
       controller: controller,
       children: <Widget>[
-        example01,
         example10,
+        example01,
         RandomValuePage(),
         example03,
         example04,

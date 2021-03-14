@@ -49,21 +49,21 @@ bool isPointAlongCircle(
 }
 
 double calculateRawAngle(
-    {@required double startAngle,
-    @required double angleRange,
-    @required double selectedAngle,
+    {required double? startAngle,
+    required double? angleRange,
+    required double selectedAngle,
     bool counterClockwise = false}) {
   double angle = radiansToDegrees(selectedAngle);
 
   double calcAngle = 0.0;
   if (!counterClockwise) {
-    if (angle >= startAngle && angle <= 360.0) {
+    if (angle >= startAngle! && angle <= 360.0) {
       calcAngle = angle - startAngle;
     } else {
       calcAngle = 360.0 - startAngle + angle;
     }
   } else {
-    if (angle <= startAngle) {
+    if (angle <= startAngle!) {
       calcAngle = startAngle - angle;
     } else {
       calcAngle = 360.0 - angle + startAngle;
@@ -72,11 +72,11 @@ double calculateRawAngle(
   return calcAngle;
 }
 
-double calculateAngle(
-    {@required double startAngle,
-    @required double angleRange,
-    @required selectedAngle,
-    @required defaultAngle,
+double? calculateAngle(
+    {required double? startAngle,
+    required double? angleRange,
+    required selectedAngle,
+    required defaultAngle,
     bool counterClockwise = false}) {
   if (selectedAngle == null) {
     return defaultAngle;
@@ -88,7 +88,7 @@ double calculateAngle(
       selectedAngle: selectedAngle,
       counterClockwise: counterClockwise);
 
-  if (calcAngle - angleRange > (360.0 - angleRange) * 0.5) {
+  if (calcAngle - angleRange! > (360.0 - angleRange) * 0.5) {
     return 0.0;
   } else if (calcAngle > angleRange) {
     return angleRange;
@@ -98,10 +98,10 @@ double calculateAngle(
 }
 
 bool isAngleWithinRange(
-    {@required double startAngle,
-    @required double angleRange,
-    @required touchAngle,
-    @required previousAngle,
+    {required double? startAngle,
+    required double angleRange,
+    required touchAngle,
+    required previousAngle,
     bool counterClockwise = false}) {
   double calcAngle = calculateRawAngle(
       startAngle: startAngle,
@@ -115,9 +115,9 @@ bool isAngleWithinRange(
   return true;
 }
 
-int valueToDuration(double value, double previous, double min, double max) {
+int valueToDuration(double? value, double previous, double min, double max) {
   final divider = (max - min) / 100;
-  return divider != 0 ? (value - previous).abs() ~/ divider * 15 : 0;
+  return divider != 0 ? (value! - previous).abs() ~/ divider * 15 : 0;
 }
 
 double valueToPercentage(double value, double min, double max) {

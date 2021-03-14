@@ -38,41 +38,41 @@ class CircularSliderAppearance {
   final bool counterClockwise;
   final double animDurationMultiplier;
   final int spinnerDuration;
-  final CustomSliderWidths customWidths;
-  final CustomSliderColors customColors;
-  final InfoProperties infoProperties;
+  final CustomSliderWidths? customWidths;
+  final CustomSliderColors? customColors;
+  final InfoProperties? infoProperties;
 
-  double get _customTrackWidth =>
-      customWidths != null ? customWidths.trackWidth : null;
-  double get _customProgressBarWidth =>
-      customWidths != null ? customWidths.progressBarWidth : null;
-  double get _customShadowWidth =>
-      customWidths != null ? customWidths.shadowWidth : null;
-  double get _customHandlerSize =>
-      customWidths != null ? customWidths.handlerSize : null;
+  double? get _customTrackWidth =>
+      customWidths != null ? customWidths!.trackWidth : null;
+  double? get _customProgressBarWidth =>
+      customWidths != null ? customWidths!.progressBarWidth : null;
+  double? get _customShadowWidth =>
+      customWidths != null ? customWidths!.shadowWidth : null;
+  double? get _customHandlerSize =>
+      customWidths != null ? customWidths!.handlerSize : null;
 
   double get trackWidth => _customTrackWidth ?? progressBarWidth / 4.0;
   double get progressBarWidth => _customProgressBarWidth ?? size / 10.0;
   double get handlerSize => _customHandlerSize ?? progressBarWidth / 5.0;
   double get shadowWidth => _customShadowWidth ?? progressBarWidth * 1.4;
 
-  Color get _customTrackColor =>
-      customColors != null ? customColors.trackColor : null;
-  List<Color> get _customProgressBarColors {
+  Color? get _customTrackColor =>
+      customColors != null ? customColors!.trackColor : null;
+  List<Color?>? get _customProgressBarColors {
     if (customColors != null) {
-      if (customColors.progressBarColors != null) {
-        return customColors.progressBarColors;
-      } else if (customColors.progressBarColor != null) {
-        return [customColors.progressBarColor, customColors.progressBarColor];
+      if (customColors!.progressBarColors != null) {
+        return customColors!.progressBarColors;
+      } else if (customColors!.progressBarColor != null) {
+        return [customColors!.progressBarColor, customColors!.progressBarColor];
       }
     }
     return null;
   }
 
-  List<Color> get _customTrackColors {
+  List<Color>? get _customTrackColors {
     if (customColors != null) {
-      if (customColors.trackColors != null) {
-        return customColors.trackColors;
+      if (customColors!.trackColors != null) {
+        return customColors!.trackColors;
       } else {
         return null;
       }
@@ -80,29 +80,30 @@ class CircularSliderAppearance {
     return null;
   }
 
-  double get _gradientStartAngle =>
-      customColors != null ? customColors.gradientStartAngle : null;
-  double get _gradientEndAngle =>
-      customColors != null ? customColors.gradientEndAngle : null;
-  double get _trackGradientStartAngle =>
-      customColors != null ? customColors.trackGradientStartAngle : null;
-  double get _trackGradientEndAngle =>
-      customColors != null ? customColors.trackGradientEndAngle : null;
-  bool get _dynamicGradient =>
-      customColors != null ? customColors.dynamicGradient : null;
-  Color get _customShadowColor =>
-      customColors != null ? customColors.shadowColor : null;
-  double get _customShadowMaxOpacity =>
-      customColors != null ? customColors.shadowMaxOpacity : null;
-  double get _customShadowStep =>
-      customColors != null ? customColors.shadowStep : null;
-  Color get _customDotColor =>
-      customColors != null ? customColors.dotColor : null;
-  bool get _hideShadow => customColors != null ? customColors.hideShadow : null;
+  double? get _gradientStartAngle =>
+      customColors != null ? customColors!.gradientStartAngle : null;
+  double? get _gradientEndAngle =>
+      customColors != null ? customColors!.gradientEndAngle : null;
+  double? get _trackGradientStartAngle =>
+      customColors != null ? customColors!.trackGradientStartAngle : null;
+  double? get _trackGradientEndAngle =>
+      customColors != null ? customColors!.trackGradientEndAngle : null;
+  bool? get _dynamicGradient =>
+      customColors != null ? customColors!.dynamicGradient : null;
+  Color? get _customShadowColor =>
+      customColors != null ? customColors!.shadowColor : null;
+  double? get _customShadowMaxOpacity =>
+      customColors != null ? customColors!.shadowMaxOpacity : null;
+  double? get _customShadowStep =>
+      customColors != null ? customColors!.shadowStep : null;
+  Color? get _customDotColor =>
+      customColors != null ? customColors!.dotColor : null;
+  bool? get _hideShadow =>
+      customColors != null ? customColors!.hideShadow : null;
 
   Color get trackColor => _customTrackColor ?? _defaultTrackColor;
-  List<Color> get trackColors => _customTrackColors ?? null;
-  List<Color> get progressBarColors =>
+  List<Color>? get trackColors => _customTrackColors ?? null;
+  List<Color?> get progressBarColors =>
       _customProgressBarColors ?? _defaultBarColors;
   double get gradientStartAngle =>
       _gradientStartAngle ?? _defaultGradientStartAngle;
@@ -116,27 +117,27 @@ class CircularSliderAppearance {
   Color get shadowColor => _customShadowColor ?? _defaultShadowColor;
   double get shadowMaxOpacity =>
       _customShadowMaxOpacity ?? _defaultShadowMaxOpacity;
-  double get shadowStep => _customShadowStep;
+  double? get shadowStep => _customShadowStep;
   Color get dotColor => _customDotColor ?? _defaultDotColor;
 
-  String get _topLabelText =>
-      infoProperties != null ? infoProperties.topLabelText : null;
-  String get _bottomLabelText =>
-      infoProperties != null ? infoProperties.bottomLabelText : null;
-  TextStyle get _mainLabelStyle =>
-      infoProperties != null ? infoProperties.mainLabelStyle : null;
-  TextStyle get _topLabelStyle =>
-      infoProperties != null ? infoProperties.topLabelStyle : null;
-  TextStyle get _bottomLabelStyle =>
-      infoProperties != null ? infoProperties.bottomLabelStyle : null;
-  PercentageModifier get _modifier =>
-      infoProperties != null ? infoProperties.modifier : null;
+  String? get _topLabelText =>
+      infoProperties != null ? infoProperties!.topLabelText : null;
+  String? get _bottomLabelText =>
+      infoProperties != null ? infoProperties!.bottomLabelText : null;
+  TextStyle? get _mainLabelStyle =>
+      infoProperties != null ? infoProperties!.mainLabelStyle : null;
+  TextStyle? get _topLabelStyle =>
+      infoProperties != null ? infoProperties!.topLabelStyle : null;
+  TextStyle? get _bottomLabelStyle =>
+      infoProperties != null ? infoProperties!.bottomLabelStyle : null;
+  PercentageModifier? get _modifier =>
+      infoProperties != null ? infoProperties!.modifier : null;
 
   PercentageModifier get infoModifier =>
       _modifier ?? _defaultPercentageModifier;
-  String get infoTopLabelText => _topLabelText ?? null;
-  String get infoBottomLabelText => _bottomLabelText ?? null;
-  TextStyle get infoMainLabelStyle {
+  String? get infoTopLabelText => _topLabelText ?? null;
+  String? get infoBottomLabelText => _bottomLabelText ?? null;
+  TextStyle? get infoMainLabelStyle {
     if (_mainLabelStyle != null) return _mainLabelStyle;
 
     return TextStyle(
@@ -145,7 +146,7 @@ class CircularSliderAppearance {
         color: Color.fromRGBO(30, 0, 59, 1.0));
   }
 
-  TextStyle get infoTopLabelStyle {
+  TextStyle? get infoTopLabelStyle {
     if (_topLabelStyle != null) return _topLabelStyle;
     return TextStyle(
         fontWeight: FontWeight.w600,
@@ -153,7 +154,7 @@ class CircularSliderAppearance {
         color: Color.fromRGBO(147, 81, 120, 1.0));
   }
 
-  TextStyle get infoBottomLabelStyle {
+  TextStyle? get infoBottomLabelStyle {
     if (_bottomLabelStyle != null) return _bottomLabelStyle;
     return TextStyle(
         fontWeight: FontWeight.w600,
@@ -176,10 +177,10 @@ class CircularSliderAppearance {
 }
 
 class CustomSliderWidths {
-  final double trackWidth;
-  final double progressBarWidth;
-  final double handlerSize;
-  final double shadowWidth;
+  final double? trackWidth;
+  final double? progressBarWidth;
+  final double? handlerSize;
+  final double? shadowWidth;
 
   CustomSliderWidths(
       {this.trackWidth,
@@ -189,20 +190,20 @@ class CustomSliderWidths {
 }
 
 class CustomSliderColors {
-  final Color trackColor;
-  final Color progressBarColor;
-  final List<Color> progressBarColors;
-  final double gradientStartAngle;
-  final double gradientEndAngle;
-  final List<Color> trackColors;
-  final double trackGradientStartAngle;
-  final double trackGradientEndAngle;
+  final Color? trackColor;
+  final Color? progressBarColor;
+  final List<Color>? progressBarColors;
+  final double? gradientStartAngle;
+  final double? gradientEndAngle;
+  final List<Color>? trackColors;
+  final double? trackGradientStartAngle;
+  final double? trackGradientEndAngle;
   final bool dynamicGradient;
-  final bool hideShadow;
-  final Color shadowColor;
-  final double shadowMaxOpacity;
-  final double shadowStep;
-  final Color dotColor;
+  final bool? hideShadow;
+  final Color? shadowColor;
+  final double? shadowMaxOpacity;
+  final double? shadowStep;
+  final Color? dotColor;
 
   CustomSliderColors(
       {this.trackColor,
@@ -222,12 +223,12 @@ class CustomSliderColors {
 }
 
 class InfoProperties {
-  final PercentageModifier modifier;
-  final TextStyle mainLabelStyle;
-  final TextStyle topLabelStyle;
-  final TextStyle bottomLabelStyle;
-  final String topLabelText;
-  final String bottomLabelText;
+  final PercentageModifier? modifier;
+  final TextStyle? mainLabelStyle;
+  final TextStyle? topLabelStyle;
+  final TextStyle? bottomLabelStyle;
+  final String? topLabelText;
+  final String? bottomLabelText;
 
   InfoProperties(
       {this.topLabelText,

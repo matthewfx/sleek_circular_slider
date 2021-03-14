@@ -7,11 +7,11 @@ class ExampleViewModel {
   final double min;
   final double max;
   final double value;
-  final InnerWidget innerWidget;
+  final InnerWidget? innerWidget;
 
   ExampleViewModel(
-      {@required this.pageColors,
-      @required this.appearance,
+      {required this.pageColors,
+      required this.appearance,
       this.min = 0,
       this.max = 100,
       this.value = 50,
@@ -21,8 +21,8 @@ class ExampleViewModel {
 class ExamplePage extends StatelessWidget {
   final ExampleViewModel viewModel;
   const ExamplePage({
-    Key key,
-    @required this.viewModel,
+    Key? key,
+    required this.viewModel,
   }) : super(key: key);
 
   @override

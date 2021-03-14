@@ -5,14 +5,14 @@ import 'package:example/utils.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class Clock extends StatefulWidget {
-  Clock({Key key}) : super(key: key);
+  Clock({Key? key}) : super(key: key);
 
   _ClockState createState() => _ClockState();
 }
 
 class _ClockState extends State<Clock> {
-  Timer _timer;
-  DateTime dateTime;
+  late Timer _timer;
+  DateTime? dateTime;
 
   @override
   void initState() {
@@ -55,14 +55,14 @@ class _ClockState extends State<Clock> {
 }
 
 class ClockWidget extends StatelessWidget {
-  final DateTime dateTime;
-  const ClockWidget({Key key, this.dateTime}) : super(key: key);
+  final DateTime? dateTime;
+  const ClockWidget({Key? key, this.dateTime}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var seconds = dateTime.second.toDouble();
-    var minutes = dateTime.minute.toDouble();
-    var hours = dateTime.hour.toDouble();
+    var seconds = dateTime!.second.toDouble();
+    var minutes = dateTime!.minute.toDouble();
+    var hours = dateTime!.hour.toDouble();
     return SleekCircularSlider(
       appearance: appearance01,
       min: 0,
