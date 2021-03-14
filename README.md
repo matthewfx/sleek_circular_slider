@@ -1,7 +1,5 @@
 # Sleek circular slider/progress bar & spinner for Flutter
 
----
-
 ## Customizable Circular Slider & Progress
 
 
