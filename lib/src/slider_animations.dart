@@ -9,17 +9,15 @@ class SpinAnimationManager {
   final Duration duration;
   final SpinAnimation spinAnimation;
   SpinAnimationManager({
-    @required this.spinAnimation,
-    @required this.duration,
-    @required this.tickerProvider,
-  })  : assert(duration != null),
-        assert(tickerProvider != null),
-        assert(spinAnimation != null);
+    required this.spinAnimation,
+    required this.duration,
+    required this.tickerProvider,
+  });
 
-  Animation<double> _animation1;
-  Animation<double> _animation2;
-  Animation<double> _animation3;
-  AnimationController _animController;
+  late Animation<double> _animation1;
+  late Animation<double> _animation2;
+  late Animation<double> _animation3;
+  late AnimationController _animController;
 
   void spin() {
     _animController = AnimationController(
@@ -61,31 +59,29 @@ class ValueChangedAnimationManager {
   final double maxValue;
 
   ValueChangedAnimationManager({
-    @required this.tickerProvider,
-    @required this.minValue,
-    @required this.maxValue,
+    required this.tickerProvider,
+    required this.minValue,
+    required this.maxValue,
     this.durationMultiplier = 1.0,
   });
 
-  Animation<double> _animation;
+  late Animation<double> _animation;
+  late AnimationController _animController = AnimationController(vsync: tickerProvider);
   bool _animationCompleted = false;
-  AnimationController _animController;
+
 
   void animate(
-      {double initialValue,
-      double oldValue,
-      double angle,
-      double oldAngle,
-      ValueChangeAnimation valueChangedAnimation}) {
+      {required double initialValue,
+      double? oldValue,
+      required double angle,
+      double? oldAngle,
+      required ValueChangeAnimation valueChangedAnimation}) {
     _animationCompleted = false;
 
     final duration = (durationMultiplier *
             valueToDuration(
                 initialValue, oldValue ?? minValue, minValue, maxValue))
         .toInt();
-    if (_animController == null) {
-      _animController = AnimationController(vsync: tickerProvider);
-    }
 
     _animController.duration = Duration(milliseconds: duration);
 

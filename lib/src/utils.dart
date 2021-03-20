@@ -49,9 +49,9 @@ bool isPointAlongCircle(
 }
 
 double calculateRawAngle(
-    {@required double startAngle,
-    @required double angleRange,
-    @required double selectedAngle,
+    {required double startAngle,
+    required double angleRange,
+    required double selectedAngle,
     bool counterClockwise = false}) {
   double angle = radiansToDegrees(selectedAngle);
 
@@ -73,10 +73,10 @@ double calculateRawAngle(
 }
 
 double calculateAngle(
-    {@required double startAngle,
-    @required double angleRange,
-    @required selectedAngle,
-    @required defaultAngle,
+    {required double startAngle,
+    required double angleRange,
+    required selectedAngle,
+    required defaultAngle,
     bool counterClockwise = false}) {
   if (selectedAngle == null) {
     return defaultAngle;
@@ -98,10 +98,10 @@ double calculateAngle(
 }
 
 bool isAngleWithinRange(
-    {@required double startAngle,
-    @required double angleRange,
-    @required touchAngle,
-    @required previousAngle,
+    {required double startAngle,
+    required double angleRange,
+    required touchAngle,
+    required previousAngle,
     bool counterClockwise = false}) {
   double calcAngle = calculateRawAngle(
       startAngle: startAngle,
