@@ -38,3 +38,6 @@
 * Implemented the animation duration multiplier
 * Implemented the dynamic gradient
 * Implemented the gradient for the track
+
+## [2.0.0] - 2021-03-21
+* Added the null-safety
