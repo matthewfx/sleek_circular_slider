@@ -133,6 +133,7 @@ final slider = SleekCircularSlider(
 | **animationEnabled** *bool*          |                       true                          | The setting indicating whether external changes of a slider value should be animated.  |
 | **spinnerMode** *bool*               |                       false                         | The setting turning the widget into a spinner.                        |
 | **spinnerDuration** *int*            |                        1500                         | The spinner animation duration in miliseconds                            |
+| **animDurationMultiplier** *double*  |                        1.0                          | The multiplier of duration for the animation when value changed                           |
 
 
 
@@ -151,10 +152,14 @@ final slider = SleekCircularSlider(
 | Parameter                 |                       Default                       | Description                                                                                                             |
 | :------------------------ | :-------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------- |
 | **trackColor** *Color*               |                #DCBEFB                              | The color of the slider's track.                        |
+| **trackColors** *List<Color>*        |                  null                               | The list of colors for the track's gradient.                  |                 
+| **trackGradientStartAngle** *double* |                   0                                 | The start angle for the track's gradient.           |
+| **trackGradientEndAngle** *double*   |                  180                                | The end angle for the track's gradient.           |
 | **progressBarColor** *Color*         |                                                     | The color of the slider's progress bar. Won't be used if the slider uses gradient **progressBarColors != null**  |
 | **progressBarColors** *List<Color>*  |      [#1E003B, #EC008A, #6285DA]                    | The list of colors for the progress bar's gradient.       |
 | **gradientStartAngle** *double*      |                   0                                 | The start angle for the progress bar's gradient.           |
 | **gradientEndAngle** *double*        |                  180                                | The end angle for the progress bar's gradient.           |
+| **dynamicGradient** *bool*           |                  false                              | The gradient angles will change dynamically with value changing. If true it will ignore both the grandientStartAngle and gradientEndAngle          |
 | **dotColor** *Color*                 |                #FFFFFF                              | The color of the slider's handle.                       |
 | **hideShadow** *bool*                |                  false                              | The setting indicating whether the shadow should be showed. |
 | **shadowColor** *Color*              |                #2C57C0                              | The color of the shadow. |
