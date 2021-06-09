@@ -80,7 +80,8 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
 
   @override
   void didUpdateWidget(SleekCircularSlider oldWidget) {
-    if (oldWidget.angle != widget.angle) {
+    if (oldWidget.angle != widget.angle &&
+        _currentAngle?.toStringAsFixed(4) != widget.angle.toStringAsFixed(4)) {
       _animate();
     }
     super.didUpdateWidget(oldWidget);
@@ -93,12 +94,12 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
       return;
     }
     if (_animationManager == null) {
-	    _animationManager = ValueChangedAnimationManager(
-		    tickerProvider: this,
-		    minValue: widget.min,
-		    maxValue: widget.max,
-		    durationMultiplier: widget.appearance.animDurationMultiplier,
-	    );
+      _animationManager = ValueChangedAnimationManager(
+        tickerProvider: this,
+        minValue: widget.min,
+        maxValue: widget.max,
+        durationMultiplier: widget.appearance.animDurationMultiplier,
+      );
     }
 
     _animationManager!.animate(
