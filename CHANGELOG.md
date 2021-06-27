@@ -41,3 +41,6 @@
 
 ## [2.0.0] - 2021-03-21
 * Added the null-safety
+
+## [2.0.1] - 2021-6-27
+* Merged 2 PR's with bugs fixes
