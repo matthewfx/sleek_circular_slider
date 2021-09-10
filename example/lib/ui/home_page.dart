@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
-import 'clock_page.dart';
-import 'random_value_page.dart';
-import 'package:example/utils.dart';
 import 'dart:math' as math;
+
+import 'package:example/utils.dart';
+import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+
+import 'clock_page.dart';
 import 'example_page.dart';
+import 'random_value_page.dart';
 
 /// Example 01
 final CircularSliderAppearance appearance01 = CircularSliderAppearance();
@@ -13,6 +15,7 @@ final viewModel01 = ExampleViewModel(
     min: 0,
     max: 100,
     value: 60,
+    touchOnTrack:false,
     pageColors: [Colors.white, HexColor('#E1C3FF')]);
 final example01 = ExamplePage(
   viewModel: viewModel01,
