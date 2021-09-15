@@ -116,6 +116,8 @@ final slider = SleekCircularSlider(
 | **onChangeStart** *OnChange(double value)* |                                               | Called when the user starts selecting a new value for the slider. |
 | **onChangeEnd**  *OnChange(double value)*  |                                                     | Called when the user is done selecting a new value for the slider. |
 | **innerWidget** *Widget InnerWidget(double value)* |                                       | A custom widget to replace the build in text labels which can capture a slider value from the callback. |
+| **enableTouchOnTrack** *bool* |                   true                    | Enabling/Disabling touch on track. |
+| **minMaxGap** *double* |                                       | Gap when sliding from min to max angle and vice versa. |
 
 
 
