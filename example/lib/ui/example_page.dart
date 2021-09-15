@@ -7,6 +7,8 @@ class ExampleViewModel {
   final double min;
   final double max;
   final double value;
+  final bool enableTouchOnTrack;
+  final double? minMaxSlideGap;
   final InnerWidget? innerWidget;
 
   ExampleViewModel(
@@ -15,6 +17,8 @@ class ExampleViewModel {
       this.min = 0,
       this.max = 100,
       this.value = 50,
+      this.enableTouchOnTrack = true,
+      this.minMaxSlideGap,
       this.innerWidget});
 }
 
@@ -44,6 +48,8 @@ class ExamplePage extends StatelessWidget {
             appearance: viewModel.appearance,
             min: viewModel.min,
             max: viewModel.max,
+            enableTouchOnTrack: viewModel.enableTouchOnTrack,
+            minMaxSlideGap: viewModel.minMaxSlideGap,
             initialValue: viewModel.value,
           )),
         ),

@@ -19,6 +19,8 @@ class SleekCircularSlider extends StatefulWidget {
   final double initialValue;
   final double min;
   final double max;
+  final bool enableTouchOnTrack;
+  final double? minMaxSlideGap;
   final CircularSliderAppearance appearance;
   final OnChange? onChange;
   final OnChange? onChangeStart;
@@ -35,6 +37,8 @@ class SleekCircularSlider extends StatefulWidget {
       this.initialValue = 50,
       this.min = 0,
       this.max = 100,
+      this.enableTouchOnTrack = true,
+      this.minMaxSlideGap,
       this.appearance = defaultAppearance,
       this.onChange,
       this.onChangeStart,
@@ -169,7 +173,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     super.dispose();
   }
 
-  void _setupPainter({bool counterClockwise = false}) {
+  double _getDefaultAngle() {
     var defaultAngle = _currentAngle ?? widget.angle;
     if (_oldWidgetAngle != null) {
       if (_oldWidgetAngle != widget.angle) {
@@ -177,6 +181,12 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         defaultAngle = widget.angle;
       }
     }
+
+    return defaultAngle;
+  }
+
+  void _setupPainter({bool counterClockwise = false}) {
+    var defaultAngle = _getDefaultAngle();
 
     _currentAngle = calculateAngle(
         startAngle: _startAngle,
@@ -268,12 +278,27 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         : 25.0;
     if (isPointAlongCircle(
         position, _painter!.center!, _painter!.radius, touchWidth)) {
-      _selectedAngle = coordinatesToRadians(_painter!.center!, position);
-      // setup painter with new angle values and update onChange
-      _setupPainter(counterClockwise: widget.appearance.counterClockwise);
-      _updateOnChange();
-      setState(() {});
+      var selectedAngle = coordinatesToRadians(_painter!.center!, position);
+
+      if(widget.minMaxSlideGap == null || !_isMinMaxSlide(selectedAngle)) {
+        _selectedAngle = selectedAngle;
+        // setup painter with new angle values and update onChange
+        _setupPainter(counterClockwise: widget.appearance.counterClockwise);
+        _updateOnChange();
+        setState(() {});
+      }
     }
+  }
+
+  bool _isMinMaxSlide(double selectedAngle) {
+    final newAngle = calculateAngle(
+        startAngle: _startAngle,
+        angleRange: _angleRange,
+        selectedAngle: selectedAngle,
+        defaultAngle: _getDefaultAngle(),
+        counterClockwise: widget.appearance.counterClockwise);
+
+    return (newAngle - _currentAngle!).abs() >= _angleRange - widget.minMaxSlideGap!;
   }
 
   bool _onPanDown(Offset details) {
@@ -296,6 +321,17 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     final double touchWidth = widget.appearance.progressBarWidth >= 25.0
         ? widget.appearance.progressBarWidth
         : 25.0;
+
+    if(!widget.enableTouchOnTrack) {
+      Offset handlerOffset = degreesToCoordinates(
+          _painter!.center!, -math.pi / 2 + _startAngle + _currentAngle! + 1.5,
+          _painter!.radius);
+      if (!Rect.fromCenter(
+          center: position, width: touchWidth, height: touchWidth).contains(
+          handlerOffset)) {
+        return false;
+      }
+    }
 
     if (isPointAlongCircle(
         position, _painter!.center!, _painter!.radius, touchWidth)) {

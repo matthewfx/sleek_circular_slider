@@ -13,6 +13,8 @@ final viewModel01 = ExampleViewModel(
     min: 0,
     max: 100,
     value: 60,
+    enableTouchOnTrack: true,
+    minMaxSlideGap: null,
     pageColors: [Colors.white, HexColor('#E1C3FF')]);
 final example01 = ExamplePage(
   viewModel: viewModel01,
@@ -164,6 +166,7 @@ final viewModel05 = ExampleViewModel(
     min: 0,
     max: 86400,
     value: 67459,
+    minMaxSlideGap: 10,
     pageColors: [Colors.black, Colors.black87]);
 final example05 = ExamplePage(
   viewModel: viewModel05,
