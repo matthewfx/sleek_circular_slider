@@ -278,27 +278,32 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         : 25.0;
     if (isPointAlongCircle(
         position, _painter!.center!, _painter!.radius, touchWidth)) {
-      var selectedAngle = coordinatesToRadians(_painter!.center!, position);
-
-      if(widget.minMaxSlideGap == null || !_isMinMaxSlide(selectedAngle)) {
-        _selectedAngle = selectedAngle;
-        // setup painter with new angle values and update onChange
-        _setupPainter(counterClockwise: widget.appearance.counterClockwise);
-        _updateOnChange();
-        setState(() {});
-      }
+      _selectedAngle = _getMinMaxSlideGapValue(coordinatesToRadians(_painter!.center!, position));
+      // setup painter with new angle values and update onChange
+      _setupPainter(counterClockwise: widget.appearance.counterClockwise);
+      _updateOnChange();
+      setState(() {});
     }
   }
 
-  bool _isMinMaxSlide(double selectedAngle) {
-    final newAngle = calculateAngle(
-        startAngle: _startAngle,
-        angleRange: _angleRange,
-        selectedAngle: selectedAngle,
-        defaultAngle: _getDefaultAngle(),
-        counterClockwise: widget.appearance.counterClockwise);
+  double _getMinMaxSlideGapValue(double selectedAngle) {
+    if(widget.minMaxSlideGap != null) {
+      final newAngle = calculateAngle(
+          startAngle: _startAngle,
+          angleRange: _angleRange,
+          selectedAngle: selectedAngle,
+          defaultAngle: _getDefaultAngle(),
+          counterClockwise: widget.appearance.counterClockwise);
 
-    return (newAngle - _currentAngle!).abs() >= _angleRange - widget.minMaxSlideGap!;
+      final diff = newAngle - _currentAngle!;
+
+      // Allow selection of 0° and 360°
+      if ((diff).abs() >= _angleRange - widget.minMaxSlideGap!) {
+        return degreeToRadians(diff > 0 ? _startAngle : (_startAngle - 0.001));
+      }
+    }
+
+    return selectedAngle;
   }
 
   bool _onPanDown(Offset details) {
