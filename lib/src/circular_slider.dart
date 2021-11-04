@@ -75,11 +75,9 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   @override
   void initState() {
     super.initState();
-    _sliderPainters = this.widget.painters ?? CircularSliderPainters();
     _currentValues = widget.values;
-
-    updateAngles();
-    recreatePainter();
+    _currentAngle = widget.initialAngle;
+    _sliderPainters = this.widget.painters ?? CircularSliderPainters();
 
     if (widget.settings.features.spinnerMode) {
       _spinManager = SpinAnimationManager(
