@@ -10,22 +10,23 @@ class ValueChangedAnimationManager {
   final double maxValue;
 
   ValueChangedAnimationManager({
-    @required this.tickerProvider,
-    @required this.minValue,
-    @required this.maxValue,
+    required this.tickerProvider,
+    required this.minValue,
+    required this.maxValue,
     this.durationMultiplier = 1.0,
-  }) : _animationController = AnimationController(vsync: tickerProvider);
+  });
 
-  Animation<double> _animation;
+  late Animation<double> _animation;
+  late AnimationController _animationController =
+      AnimationController(vsync: tickerProvider);
   bool _animationCompleted = false;
-  AnimationController _animationController;
 
   void animate({
-    double initialValue,
-    double oldValue,
-    double angle,
-    double oldAngle,
-    ValueChangeAnimation valueChangedAnimation,
+    required double initialValue,
+    double? oldValue,
+    required double angle,
+    double? oldAngle,
+    required ValueChangeAnimation valueChangedAnimation,
   }) {
     _animationCompleted = false;
 

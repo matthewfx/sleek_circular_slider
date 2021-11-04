@@ -8,8 +8,8 @@ class CurrentValuePainter extends CustomPainter {
   final CircularSliderSettings settings;
   final CircularSliderValues values;
 
-  double currentAngle;
-  Paint currentValuePaint;
+  late double currentAngle;
+  late Paint currentValuePaint;
 
   CurrentValuePainter(
     this.settings,

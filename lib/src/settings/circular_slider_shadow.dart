@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 
 class CircularSliderShadow {
   final bool hideShadow;
-  final double _shadowWidth;
+  final double? _shadowWidth;
   double getShadowWidth(double progressBarWidth) =>
       _shadowWidth ?? DefaultShadow.shadowWidth(progressBarWidth);
 
   final Color color;
   final double maxOpacity;
-  final double step;
+  final double? step;
 
   const CircularSliderShadow({
     this.hideShadow = DefaultShadow.hideShadow,
-    double shadowWidth,
+    double? shadowWidth,
     this.color = DefaultShadow.color,
     this.maxOpacity = DefaultShadow.maxOpacity,
     this.step,

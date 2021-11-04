@@ -8,16 +8,17 @@ import 'package:sleek_circular_slider/src/utilities/unit_conversions.dart';
 class ProgressBarPainter extends CustomPainter {
   final CircularSliderSettings settings;
   final CircularSliderValues values;
-  ShapePainter shapePainter;
 
-  double currentAngle;
-  double gradientRotationAngle;
-  double gradientStartAngle;
-  double gradientEndAngle;
-  List<Color> colors;
-  GradientRotation rotation;
-  Gradient gradient;
-  Paint progressBarPaint;
+  late double currentAngle;
+  late double gradientRotationAngle;
+  late double gradientStartAngle;
+  late double gradientEndAngle;
+  late List<Color> colors;
+  late GradientRotation rotation;
+  late Gradient gradient;
+  late Paint progressBarPaint;
+
+  late ShapePainter shapePainter;
 
   ProgressBarPainter(
     this.settings,

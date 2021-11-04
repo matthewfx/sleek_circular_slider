@@ -3,27 +3,27 @@ import 'package:flutter/material.dart';
 typedef String PercentageModifier(double percentage);
 
 class CircularSliderText {
-  final String topLabelText;
-  final String bottomLabelText;
+  final String? topLabelText;
+  final String? bottomLabelText;
 
-  final TextStyle _topLabelStyle;
+  final TextStyle? _topLabelStyle;
   TextStyle getTopLabelStyle(double size) =>
       _topLabelStyle ?? DefaultText.topLabelStyle(size);
 
-  final TextStyle _mainLabelStyle;
+  final TextStyle? _mainLabelStyle;
   TextStyle getMainLabelStyle(double size) =>
       _mainLabelStyle ?? DefaultText.mainLabelStyle(size);
 
-  final TextStyle _bottomLabelStyle;
+  final TextStyle? _bottomLabelStyle;
   TextStyle getBottomLabelStyle(double size) =>
       _bottomLabelStyle ?? DefaultText.bottomLabelStyle(size);
 
   final PercentageModifier modifier;
 
   const CircularSliderText({
-    TextStyle topLabelStyle,
-    TextStyle mainLabelStyle,
-    TextStyle bottomLabelStyle,
+    TextStyle? topLabelStyle,
+    TextStyle? mainLabelStyle,
+    TextStyle? bottomLabelStyle,
     this.topLabelText,
     this.bottomLabelText,
     this.modifier = DefaultText.percentageModifier,

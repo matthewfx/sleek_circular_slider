@@ -18,10 +18,10 @@ class CircularSliderPainters {
   CustomSliderPainter currentValuePainter;
 
   CircularSliderPainters({
-    CustomSliderPainter backgroundPainter,
-    CustomSliderPainter shadowPainter,
-    CustomSliderPainter progressBarPainter,
-    CustomSliderPainter currentValuePainter,
+    CustomSliderPainter? backgroundPainter,
+    CustomSliderPainter? shadowPainter,
+    CustomSliderPainter? progressBarPainter,
+    CustomSliderPainter? currentValuePainter,
   })  : this.backgroundPainter = backgroundPainter ??
             ((settings, values) => BackgroundPainter(settings, values)),
         this.shadowPainter = shadowPainter ??

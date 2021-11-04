@@ -5,12 +5,12 @@ class ExampleViewModel {
   final List<Color> pageColors;
   final CircularSliderSettings settings;
   final CircularSliderValues values;
-  final InnerWidget innerWidget;
+  final InnerWidget? innerWidget;
 
   ExampleViewModel({
-    @required this.pageColors,
-    @required this.settings,
-    @required this.values,
+    required this.pageColors,
+    required this.settings,
+    required this.values,
     this.innerWidget,
   });
 }
@@ -18,8 +18,8 @@ class ExampleViewModel {
 class ExamplePage extends StatelessWidget {
   final ExampleViewModel viewModel;
   const ExamplePage({
-    Key key,
-    @required this.viewModel,
+    Key? key,
+    required this.viewModel,
   }) : super(key: key);
 
   @override

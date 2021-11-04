@@ -8,8 +8,8 @@ class BackgroundPainter extends CustomPainter {
   final CircularSliderSettings settings;
   final CircularSliderValues values;
 
-  ShapePainter shapePainter;
-  Paint backgroundPaint;
+  late ShapePainter shapePainter;
+  late Paint backgroundPaint;
 
   BackgroundPainter(
     this.settings,
@@ -49,7 +49,7 @@ class BackgroundPainter extends CustomPainter {
         startAngle: degreeToRadians(settings.colors.trackGradientStartAngle),
         endAngle: degreeToRadians(settings.colors.trackGradientEndAngle),
         tileMode: TileMode.mirror,
-        colors: settings.colors.trackColors,
+        colors: settings.colors.trackColors!,
       );
       backgroundPaint
         ..shader = backgroundGradient.createShader(sliderRectangle);

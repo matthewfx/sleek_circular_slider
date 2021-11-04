@@ -8,10 +8,10 @@ class SliderLabel extends StatelessWidget {
   final CircularSliderSettings settings;
   final CircularSliderValues values;
   const SliderLabel({
-    Key key,
-    this.value,
-    this.values,
-    this.settings,
+    Key? key,
+    required this.value,
+    required this.values,
+    required this.settings,
   }) : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class SliderLabel extends StatelessWidget {
     var widgets = <Widget>[];
     if (settings.text.topLabelText != null) {
       widgets.add(Text(
-        settings.text.topLabelText,
+        settings.text.topLabelText!,
         style: settings.text.getTopLabelStyle(values.size),
       ));
     }
@@ -37,7 +37,7 @@ class SliderLabel extends StatelessWidget {
     ));
     if (settings.text.bottomLabelText != null) {
       widgets.add(Text(
-        settings.text.bottomLabelText,
+        settings.text.bottomLabelText!,
         style: settings.text.getBottomLabelStyle(values.size),
       ));
     }

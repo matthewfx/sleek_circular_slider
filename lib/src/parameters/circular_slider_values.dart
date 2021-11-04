@@ -10,15 +10,15 @@ class CircularSliderValues {
   final double currentAngle;
   final double angleRange;
 
-  final double _progressBarWidth;
+  final double? _progressBarWidth;
   double get progressBarWidth =>
       _progressBarWidth ?? DefaultValues.progressBarWidth(size);
 
-  final double _trackWidth;
+  final double? _trackWidth;
   double get trackWidth =>
       _trackWidth ?? DefaultValues.trackWidth(progressBarWidth);
 
-  final double _handlerSize;
+  final double? _handlerSize;
   double get handlerSize =>
       _handlerSize ?? DefaultValues.handlerSize(progressBarWidth);
 
@@ -33,13 +33,10 @@ class CircularSliderValues {
     this.startAngle = DefaultValues.startAngle,
     this.currentAngle = DefaultValues.startAngle,
     this.angleRange = DefaultValues.angleRange,
-    double trackWidth,
-    double progressBarWidth,
-    double handlerSize,
-  })  : assert(initialValue != null),
-        assert(minimumValue != null),
-        assert(maximumValue != null),
-        assert(minimumValue <= maximumValue),
+    double? trackWidth,
+    double? progressBarWidth,
+    double? handlerSize,
+  })  : assert(minimumValue <= maximumValue),
         assert(initialValue >= minimumValue && initialValue <= maximumValue),
         _trackWidth = trackWidth,
         _progressBarWidth = progressBarWidth,

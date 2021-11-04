@@ -558,7 +558,7 @@ String printDuration(Duration duration) {
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   _HomePageState createState() => _HomePageState();
 }

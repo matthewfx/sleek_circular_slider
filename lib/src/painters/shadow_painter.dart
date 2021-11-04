@@ -9,14 +9,14 @@ class ShadowPainter extends CustomPainter {
   final CircularSliderSettings settings;
   final CircularSliderValues values;
 
-  double shadowWidth;
-  double shadowStep;
-  double maxOpacity;
-  int repetitions;
-  double opacityStep;
+  late double shadowWidth;
+  late double shadowStep;
+  late double maxOpacity;
+  late int repetitions;
+  late double opacityStep;
 
-  ShapePainter shapePainter;
-  Paint shadowPaint;
+  late ShapePainter shapePainter;
+  late Paint shadowPaint;
 
   ShadowPainter(
     this.settings,
@@ -24,9 +24,8 @@ class ShadowPainter extends CustomPainter {
   ) {
     shadowWidth = settings.shadow.getShadowWidth(values.progressBarWidth);
 
-    shadowStep = settings.shadow.step != null
-        ? settings.shadow.step
-        : math.max(1, (shadowWidth - values.progressBarWidth) / 10);
+    shadowStep = settings.shadow.step ??
+        math.max(1, (shadowWidth - values.progressBarWidth) / 10);
 
     maxOpacity = math.min(1.0, settings.shadow.maxOpacity);
 
@@ -35,7 +34,7 @@ class ShadowPainter extends CustomPainter {
 
     opacityStep = maxOpacity / repetitions;
 
-    shadowPaint = Paint()
+    this.shadowPaint = Paint()
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 

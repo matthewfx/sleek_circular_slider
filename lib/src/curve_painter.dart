@@ -9,13 +9,13 @@ class _CurvePainter extends CustomPainter {
   final CircularSliderValues values;
 
   _CurvePainter({
-    this.backgroundPainter,
-    this.shadowPainter,
-    this.progressBarPainter,
-    this.currentValuePainter,
-    this.settings,
-    this.values,
-  }) : assert(settings != null);
+    required this.backgroundPainter,
+    required this.shadowPainter,
+    required this.progressBarPainter,
+    required this.currentValuePainter,
+    required this.settings,
+    required this.values,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {

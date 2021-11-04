@@ -11,18 +11,17 @@ class SpinAnimationManager {
   final TickerProvider tickerProvider;
   final Duration duration;
   final SpinAnimation spinAnimation;
-  SpinAnimationManager({
-    @required this.spinAnimation,
-    @required this.duration,
-    @required this.tickerProvider,
-  })  : assert(duration != null),
-        assert(tickerProvider != null),
-        assert(spinAnimation != null);
 
-  Animation<double> _animation1;
-  Animation<double> _animation2;
-  Animation<double> _animation3;
-  AnimationController _animController;
+  SpinAnimationManager({
+    required this.spinAnimation,
+    required this.duration,
+    required this.tickerProvider,
+  });
+
+  late Animation<double> _animation1;
+  late Animation<double> _animation2;
+  late Animation<double> _animation3;
+  late AnimationController _animController;
 
   void spin() {
     _animController =

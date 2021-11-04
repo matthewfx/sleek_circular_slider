@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CircularSliderColors {
   final Color trackColor;
-  final List<Color> trackColors;
+  final List<Color>? trackColors;
   final Color dotColor;
   final List<Color> barColors;
 
