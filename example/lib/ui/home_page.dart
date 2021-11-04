@@ -11,34 +11,14 @@ final values01 = CircularSliderValues(
   initialValue: 60,
   minimumValue: 0,
   maximumValue: 100,
-  startAngle: 180,
-  angleRange: 270,
-  size: 300.0,
-  trackWidth: 40,
-  progressBarWidth: 30,
 );
 
-final shadow01 = CircularSliderShadow(
-  shadowWidth: 50,
-  step: 0.1,
-  maxOpacity: 0.5,
-  color: Colors.pink,
-);
-
-final colors01 = CircularSliderColors(
-  trackColor: Colors.white,
-  barColors: BarColorHelper.createBarColorList(Colors.white),
-);
-
-final settings01 = CircularSliderSettings(
-  shadow: shadow01,
-  colors: colors01,
-);
+final settings01 = CircularSliderSettings();
 
 final viewModel01 = ExampleViewModel(
   settings: settings01,
   values: values01,
-  pageColors: [Colors.white, Colors.white],
+  pageColors: [Colors.white, HexColor('#E1C3FF')],
 );
 
 final example01 = ExamplePage(
