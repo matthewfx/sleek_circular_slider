@@ -173,8 +173,10 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     var defaultAngle = _currentAngle ?? widget.angle;
     if (_oldWidgetAngle != null) {
       if (_oldWidgetAngle != widget.angle) {
-        _selectedAngle = null;
-        defaultAngle = widget.angle;
+        _selectedAngle = null;        
+        if(_animationManager == null) {
+          defaultAngle = widget.angle;
+        }
       }
     }
 
