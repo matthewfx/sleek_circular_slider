@@ -24,6 +24,7 @@ class SleekCircularSlider extends StatefulWidget {
   final OnChange? onChangeStart;
   final OnChange? onChangeEnd;
   final InnerWidget? innerWidget;
+  final bool shouldUpdateOutsideOfBounds;
   static const defaultAppearance = CircularSliderAppearance();
 
   double get angle {
@@ -39,6 +40,7 @@ class SleekCircularSlider extends StatefulWidget {
       this.onChange,
       this.onChangeStart,
       this.onChangeEnd,
+      this.shouldUpdateOutsideOfBounds = false,
       this.innerWidget})
       : assert(min <= max),
         assert(initialValue >= min && initialValue <= max),
@@ -263,7 +265,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     }
     RenderBox renderBox = context.findRenderObject() as RenderBox;
     var position = renderBox.globalToLocal(details);
-    final double touchWidth = widget.appearance.progressBarWidth >= 25.0
+    final double touchWidth = widget.shouldUpdateOutsideOfBounds ? double.infinity : widget.appearance.progressBarWidth >= 25.0
         ? widget.appearance.progressBarWidth
         : 25.0;
     if (isPointAlongCircle(
