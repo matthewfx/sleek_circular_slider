@@ -20,6 +20,7 @@ class SleekCircularSlider extends StatefulWidget {
   final double min;
   final double max;
   final CircularSliderAppearance appearance;
+  final double minimumTouchWidth;
   final OnChange? onChange;
   final OnChange? onChangeStart;
   final OnChange? onChangeEnd;
@@ -36,6 +37,7 @@ class SleekCircularSlider extends StatefulWidget {
       this.min = 0,
       this.max = 100,
       this.appearance = defaultAppearance,
+      this.minimumTouchWidth = 25.0,
       this.onChange,
       this.onChangeStart,
       this.onChangeEnd,
@@ -263,9 +265,10 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     }
     RenderBox renderBox = context.findRenderObject() as RenderBox;
     var position = renderBox.globalToLocal(details);
-    final double touchWidth = widget.appearance.progressBarWidth >= 25.0
-        ? widget.appearance.progressBarWidth
-        : 25.0;
+    final double touchWidth =
+        widget.appearance.progressBarWidth >= widget.minimumTouchWidth
+            ? widget.appearance.progressBarWidth
+            : widget.minimumTouchWidth;
     if (isPointAlongCircle(
         position, _painter!.center!, _painter!.radius, touchWidth)) {
       _selectedAngle = coordinatesToRadians(_painter!.center!, position);
@@ -293,9 +296,10 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
       return false;
     }
 
-    final double touchWidth = widget.appearance.progressBarWidth >= 25.0
-        ? widget.appearance.progressBarWidth
-        : 25.0;
+    final double touchWidth =
+        widget.appearance.progressBarWidth >= widget.minimumTouchWidth
+            ? widget.appearance.progressBarWidth
+            : widget.minimumTouchWidth;
 
     if (isPointAlongCircle(
         position, _painter!.center!, _painter!.radius, touchWidth)) {
