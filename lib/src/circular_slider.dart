@@ -62,6 +62,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   SpinAnimationManager? _spinManager;
   ValueChangedAnimationManager? _animationManager;
   late int _appearanceHashCode;
+  late final StrokeCap _strokeCap;
 
   bool get _interactionEnabled => (widget.onChangeEnd != null ||
       widget.onChange != null && !widget.appearance.spinnerMode);
@@ -72,6 +73,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     _startAngle = widget.appearance.startAngle;
     _angleRange = widget.appearance.angleRange;
     _appearanceHashCode = widget.appearance.hashCode;
+    _strokeCap = widget.appearance.strokeCap;
 
     if (!widget.appearance.animationEnabled) {
       return;
@@ -186,10 +188,12 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
         counterClockwise: counterClockwise);
 
     _painter = _CurvePainter(
-        startAngle: _startAngle,
-        angleRange: _angleRange,
-        angle: _currentAngle! < 0.5 ? 0.5 : _currentAngle!,
-        appearance: widget.appearance);
+      startAngle: _startAngle,
+      angleRange: _angleRange,
+      angle: _currentAngle! < 0.5 ? 0.5 : _currentAngle!,
+      appearance: widget.appearance,
+      strokeCap: _strokeCap,
+    );
     _oldWidgetAngle = widget.angle;
     _oldWidgetValue = widget.initialValue;
   }
