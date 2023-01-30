@@ -24,6 +24,7 @@ class SleekCircularSlider extends StatefulWidget {
   final OnChange? onChangeStart;
   final OnChange? onChangeEnd;
   final InnerWidget? innerWidget;
+  final bool isConstValue;
   static const defaultAppearance = CircularSliderAppearance();
 
   double get angle {
@@ -39,7 +40,8 @@ class SleekCircularSlider extends StatefulWidget {
       this.onChange,
       this.onChangeStart,
       this.onChangeEnd,
-      this.innerWidget})
+      this.innerWidget,
+      this.isConstValue = false})
       : assert(min <= max),
         assert(initialValue >= min && initialValue <= max),
         super(key: key);
@@ -144,6 +146,12 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
     if (_painter == null || _appearanceHashCode != widget.appearance.hashCode) {
       _appearanceHashCode = widget.appearance.hashCode;
       _setupPainter();
+    }
+
+    if (widget.isConstValue) {
+      return _buildRotatingPainter(
+          rotation: _rotation,
+          size: Size(widget.appearance.size, widget.appearance.size));
     }
     return RawGestureDetector(
         gestures: <Type, GestureRecognizerFactory>{
