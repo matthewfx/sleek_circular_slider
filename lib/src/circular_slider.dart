@@ -297,9 +297,11 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
       return false;
     }
 
-    final double touchWidth = widget.appearance.progressBarWidth >= 25.0
-        ? widget.appearance.progressBarWidth
-        : 25.0;
+    final double touchWidth = widget.shouldUpdateOutsideOfBounds
+        ? double.infinity
+        : widget.appearance.progressBarWidth >= 25.0
+            ? widget.appearance.progressBarWidth
+            : 25.0;
 
     if (isPointAlongCircle(
         position, _painter!.center!, _painter!.radius, touchWidth)) {
