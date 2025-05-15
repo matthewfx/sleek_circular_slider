@@ -3,7 +3,7 @@ library circular_slider;
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:sleek_circular_slider/src/slider_animations.dart';
+import 'package:sleek_circular_slider_cheebeez/src/slider_animations.dart';
 import 'utils.dart';
 import 'appearance.dart';
 import 'slider_label.dart';
