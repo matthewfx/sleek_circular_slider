@@ -141,7 +141,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   @override
   Widget build(BuildContext context) {
     /// _setupPainter excution when _painter is null or appearance has changed.
-    if (_painter == null || _appearanceHashCode != widget.appearance.hashCode) {
+    if (_painter == null) {
       _appearanceHashCode = widget.appearance.hashCode;
       _setupPainter();
     }
