@@ -46,10 +46,13 @@ class CircularSliderAppearance {
   double? get _customProgressBarWidth => customWidths?.progressBarWidth;
   double? get _customShadowWidth => customWidths?.shadowWidth;
   double? get _customHandlerSize => customWidths?.handlerSize;
+  double? get _customInnerHandlerSize => customWidths?.innerHandlerSize;
 
   double get trackWidth => _customTrackWidth ?? progressBarWidth / 4.0;
   double get progressBarWidth => _customProgressBarWidth ?? size / 10.0;
   double get handlerSize => _customHandlerSize ?? progressBarWidth / 5.0;
+  double get innerHandlerSize =>
+      _customInnerHandlerSize ?? progressBarWidth / 10.0;
   double get shadowWidth => _customShadowWidth ?? progressBarWidth * 1.4;
 
   Color? get _customTrackColor => customColors?.trackColor;
@@ -58,14 +61,17 @@ class CircularSliderAppearance {
       if (customColors!.progressBarColors != null) {
         return customColors!.progressBarColors;
       } else if (customColors!.progressBarColor != null) {
-        return [customColors!.progressBarColor!, customColors!.progressBarColor!];
+        return [
+          customColors!.progressBarColor!,
+          customColors!.progressBarColor!
+        ];
       }
     }
     return null;
   }
 
   List<Color>? get _customTrackColors {
-  	return customColors?.trackColors;
+    return customColors?.trackColors;
   }
 
   double? get _gradientStartAngle => customColors?.gradientStartAngle;
@@ -77,6 +83,8 @@ class CircularSliderAppearance {
   double? get _customShadowMaxOpacity => customColors?.shadowMaxOpacity;
   double? get _customShadowStep => customColors?.shadowStep;
   Color? get _customDotColor => customColors?.dotColor;
+  Color? get _customInnerDotColor => customColors?.innerDotColor;
+
   bool? get _hideShadow => customColors?.hideShadow;
 
   Color get trackColor => _customTrackColor ?? _defaultTrackColor;
@@ -97,6 +105,7 @@ class CircularSliderAppearance {
       _customShadowMaxOpacity ?? _defaultShadowMaxOpacity;
   double? get shadowStep => _customShadowStep;
   Color get dotColor => _customDotColor ?? _defaultDotColor;
+  Color? get innerDotColor => _customInnerDotColor;
 
   String? get _topLabelText => infoProperties?.topLabelText;
   String? get _bottomLabelText => infoProperties?.bottomLabelText;
@@ -110,24 +119,27 @@ class CircularSliderAppearance {
   String? get infoTopLabelText => _topLabelText;
   String? get infoBottomLabelText => _bottomLabelText;
   TextStyle get infoMainLabelStyle {
-    return _mainLabelStyle ?? TextStyle(
-        fontWeight: FontWeight.w100,
-        fontSize: size / 5.0,
-        color: Color.fromRGBO(30, 0, 59, 1.0));
+    return _mainLabelStyle ??
+        TextStyle(
+            fontWeight: FontWeight.w100,
+            fontSize: size / 5.0,
+            color: Color.fromRGBO(30, 0, 59, 1.0));
   }
 
   TextStyle get infoTopLabelStyle {
-    return _topLabelStyle ?? TextStyle(
-        fontWeight: FontWeight.w600,
-        fontSize: size / 10.0,
-        color: Color.fromRGBO(147, 81, 120, 1.0));
+    return _topLabelStyle ??
+        TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: size / 10.0,
+            color: Color.fromRGBO(147, 81, 120, 1.0));
   }
 
   TextStyle get infoBottomLabelStyle {
-    return _bottomLabelStyle ?? TextStyle(
-        fontWeight: FontWeight.w600,
-        fontSize: size / 10.0,
-        color: Color.fromRGBO(147, 81, 120, 1.0));
+    return _bottomLabelStyle ??
+        TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: size / 10.0,
+            color: Color.fromRGBO(147, 81, 120, 1.0));
   }
 
   const CircularSliderAppearance(
@@ -148,12 +160,14 @@ class CustomSliderWidths {
   final double? trackWidth;
   final double? progressBarWidth;
   final double? handlerSize;
+  final double? innerHandlerSize;
   final double? shadowWidth;
 
   CustomSliderWidths(
       {this.trackWidth,
       this.progressBarWidth,
       this.handlerSize,
+      this.innerHandlerSize,
       this.shadowWidth});
 }
 
@@ -172,6 +186,7 @@ class CustomSliderColors {
   final double? shadowMaxOpacity;
   final double? shadowStep;
   final Color? dotColor;
+  final Color? innerDotColor;
 
   CustomSliderColors(
       {this.trackColor,
@@ -187,6 +202,7 @@ class CustomSliderColors {
       this.shadowMaxOpacity,
       this.shadowStep,
       this.dotColor,
+      this.innerDotColor,
       this.dynamicGradient = false});
 }
 

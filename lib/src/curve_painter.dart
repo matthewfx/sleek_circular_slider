@@ -11,7 +11,10 @@ class _CurvePainter extends CustomPainter {
   late double radius;
 
   _CurvePainter(
-      {required this.appearance, this.angle = 30, required this.startAngle, required this.angleRange});
+      {required this.appearance,
+      this.angle = 30,
+      required this.startAngle,
+      required this.angleRange});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -101,6 +104,12 @@ class _CurvePainter extends CustomPainter {
     Offset handler = degreesToCoordinates(
         center!, -math.pi / 2 + startAngle + currentAngle + 1.5, radius);
     canvas.drawCircle(handler, appearance.handlerSize, dotPaint);
+
+    // Draws the inner dot (smaller circle) if its color is specified.
+    if (appearance.innerDotColor != null) {
+      var innerDotPaint = Paint()..color = appearance.innerDotColor!;
+      canvas.drawCircle(handler, appearance.innerHandlerSize, innerDotPaint);
+    }
   }
 
   drawCircularArc(
