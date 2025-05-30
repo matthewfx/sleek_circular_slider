@@ -44,3 +44,6 @@
 
 ## [2.0.1] - 2021-6-27
 * Merged 2 PR's with bugs fixes
+
+## [2.1.0] - 2025-05-31
+* Updated code
