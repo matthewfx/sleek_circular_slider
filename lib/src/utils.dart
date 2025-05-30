@@ -39,7 +39,11 @@ bool isPointInsideCircle(Offset point, Offset center, double rradius) {
 }
 
 bool isPointAlongCircle(
-    Offset point, Offset center, double radius, double width) {
+  Offset point,
+  Offset center,
+  double radius,
+  double width,
+) {
   // distance is root(sqr(x2 - x1) + sqr(y2 - y1))
   // i.e., (7,8) and (3,2) -> 7.21
   var dx = math.pow(point.dx - center.dx, 2);
@@ -48,11 +52,12 @@ bool isPointAlongCircle(
   return (distance - radius).abs() < width;
 }
 
-double calculateRawAngle(
-    {required double startAngle,
-    required double angleRange,
-    required double selectedAngle,
-    bool counterClockwise = false}) {
+double calculateRawAngle({
+  required double startAngle,
+  required double angleRange,
+  required double selectedAngle,
+  bool counterClockwise = false,
+}) {
   double angle = radiansToDegrees(selectedAngle);
 
   double calcAngle = 0.0;
@@ -72,21 +77,23 @@ double calculateRawAngle(
   return calcAngle;
 }
 
-double calculateAngle(
-    {required double startAngle,
-    required double angleRange,
-    required selectedAngle,
-    required defaultAngle,
-    bool counterClockwise = false}) {
+double calculateAngle({
+  required double startAngle,
+  required double angleRange,
+  required selectedAngle,
+  required defaultAngle,
+  bool counterClockwise = false,
+}) {
   if (selectedAngle == null) {
     return defaultAngle;
   }
 
   double calcAngle = calculateRawAngle(
-      startAngle: startAngle,
-      angleRange: angleRange,
-      selectedAngle: selectedAngle,
-      counterClockwise: counterClockwise);
+    startAngle: startAngle,
+    angleRange: angleRange,
+    selectedAngle: selectedAngle,
+    counterClockwise: counterClockwise,
+  );
 
   if (calcAngle - angleRange > (360.0 - angleRange) * 0.5) {
     return 0.0;
@@ -97,22 +104,21 @@ double calculateAngle(
   return calcAngle;
 }
 
-bool isAngleWithinRange(
-    {required double startAngle,
-    required double angleRange,
-    required touchAngle,
-    required previousAngle,
-    bool counterClockwise = false}) {
+bool isAngleWithinRange({
+  required double startAngle,
+  required double angleRange,
+  required touchAngle,
+  required previousAngle,
+  bool counterClockwise = false,
+}) {
   double calcAngle = calculateRawAngle(
-      startAngle: startAngle,
-      angleRange: angleRange,
-      selectedAngle: touchAngle,
-      counterClockwise: counterClockwise);
+    startAngle: startAngle,
+    angleRange: angleRange,
+    selectedAngle: touchAngle,
+    counterClockwise: counterClockwise,
+  );
 
-  if (calcAngle > angleRange) {
-    return false;
-  }
-  return true;
+  return calcAngle <= angleRange;
 }
 
 int valueToDuration(double value, double previous, double min, double max) {
@@ -121,26 +127,25 @@ int valueToDuration(double value, double previous, double min, double max) {
 }
 
 double valueToPercentage(double value, double min, double max) {
-  return value / ((max - min) / 100);
+  if (max <= min) return 0;
+  return ((value - min) / (max - min)) * 100;
 }
 
 double valueToAngle(double value, double min, double max, double angleRange) {
-  return percentageToAngle(
-      valueToPercentage(value - min, min, max), angleRange);
+  return percentageToAngle(valueToPercentage(value, min, max), angleRange);
 }
 
 double percentageToValue(double percentage, double min, double max) {
-  return ((max - min) / 100) * percentage + min;
+  return min + (percentage / 100) * (max - min);
 }
 
 double percentageToAngle(double percentage, double angleRange) {
-  final step = angleRange / 100;
   if (percentage > 100) {
     return angleRange;
   } else if (percentage < 0) {
     return 0.5;
   }
-  return percentage * step;
+  return (percentage / 100) * angleRange;
 }
 
 double angleToValue(double angle, double min, double max, double angleRange) {
@@ -148,11 +153,11 @@ double angleToValue(double angle, double min, double max, double angleRange) {
 }
 
 double angleToPercentage(double angle, double angleRange) {
-  final step = angleRange / 100;
+  if (angleRange <= 0) return 0;
   if (angle > angleRange) {
     return 100;
-  } else if (angle < 0.5) {
+  } else if (angle <= 0.5) {
     return 0;
   }
-  return angle / step;
+  return (angle / angleRange) * 100;
 }
