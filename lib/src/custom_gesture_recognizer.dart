@@ -1,4 +1,4 @@
-part of circular_slider;
+part of 'circular_slider.dart';
 
 class _CustomPanGestureRecognizer extends OneSequenceGestureRecognizer {
   final Function onPanDown;
