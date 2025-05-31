@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'utils.dart';
 
-typedef void SpinAnimation(
-    double animation1, double animation2, double animation3);
+typedef SpinAnimation =
+    void Function(double animation1, double animation2, double animation3);
 
 class SpinAnimationManager {
   final TickerProvider tickerProvider;
@@ -20,22 +20,34 @@ class SpinAnimationManager {
   late AnimationController _animController;
 
   void spin() {
-    _animController = AnimationController(
-        vsync: tickerProvider, duration: duration)
-      ..addListener(() {
-        spinAnimation(_animation1.value, _animation2.value, _animation3.value);
-      })
-      ..repeat();
-    _animation1 = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+    _animController =
+        AnimationController(vsync: tickerProvider, duration: duration)
+          ..addListener(() {
+            spinAnimation(
+              _animation1.value,
+              _animation2.value,
+              _animation3.value,
+            );
+          })
+          ..repeat();
+    _animation1 = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
         parent: _animController,
-        curve: const Interval(0.5, 1.0, curve: Curves.linear)));
+        curve: const Interval(0.5, 1.0, curve: Curves.linear),
+      ),
+    );
     _animation2 = Tween<double>(begin: -80.0, end: 100.0).animate(
-        CurvedAnimation(
-            parent: _animController,
-            curve: const Interval(0, 1.0, curve: Curves.linear)));
-    _animation3 = Tween(begin: 0.0, end: 360.0).animate(CurvedAnimation(
+      CurvedAnimation(
         parent: _animController,
-        curve: const Interval(0.0, 1.0, curve: SpinnerCurve())));
+        curve: const Interval(0, 1.0, curve: Curves.linear),
+      ),
+    );
+    _animation3 = Tween(begin: 0.0, end: 360.0).animate(
+      CurvedAnimation(
+        parent: _animController,
+        curve: const Interval(0.0, 1.0, curve: SpinnerCurve()),
+      ),
+    );
   }
 
   void dispose() {
@@ -47,10 +59,11 @@ class SpinnerCurve extends Curve {
   const SpinnerCurve();
 
   @override
-  double transform(double tr) => (tr <= 0.5) ? 1.9 * tr : 1.85 * (1 - tr);
+  double transform(double t) => (t <= 0.5) ? 1.9 * t : 1.85 * (1 - t);
 }
 
-typedef void ValueChangeAnimation(double animation, bool animationFinished);
+typedef ValueChangeAnimation =
+    void Function(double animation, bool animationFinished);
 
 class ValueChangedAnimationManager {
   final TickerProvider tickerProvider;
@@ -66,22 +79,29 @@ class ValueChangedAnimationManager {
   });
 
   late Animation<double> _animation;
-  late AnimationController _animController = AnimationController(vsync: tickerProvider);
+  late final AnimationController _animController = AnimationController(
+    vsync: tickerProvider,
+  );
   bool _animationCompleted = false;
 
-
-  void animate(
-      {required double initialValue,
-      double? oldValue,
-      required double angle,
-      double? oldAngle,
-      required ValueChangeAnimation valueChangedAnimation}) {
+  void animate({
+    required double initialValue,
+    double? oldValue,
+    required double angle,
+    double? oldAngle,
+    required ValueChangeAnimation valueChangedAnimation,
+  }) {
     _animationCompleted = false;
 
-    final duration = (durationMultiplier *
-            valueToDuration(
-                initialValue, oldValue ?? minValue, minValue, maxValue))
-        .toInt();
+    final duration =
+        (durationMultiplier *
+                valueToDuration(
+                  initialValue,
+                  oldValue ?? minValue,
+                  minValue,
+                  maxValue,
+                ))
+            .toInt();
 
     _animController.duration = Duration(milliseconds: duration);
 

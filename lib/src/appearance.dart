@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-typedef String PercentageModifier(double percentage);
+typedef PercentageModifier = String Function(double percentage);
 
 class CircularSliderAppearance {
   static const double _defaultSize = 150.0;
@@ -58,14 +58,17 @@ class CircularSliderAppearance {
       if (customColors!.progressBarColors != null) {
         return customColors!.progressBarColors;
       } else if (customColors!.progressBarColor != null) {
-        return [customColors!.progressBarColor!, customColors!.progressBarColor!];
+        return [
+          customColors!.progressBarColor!,
+          customColors!.progressBarColor!,
+        ];
       }
     }
     return null;
   }
 
   List<Color>? get _customTrackColors {
-  	return customColors?.trackColors;
+    return customColors?.trackColors;
   }
 
   double? get _gradientStartAngle => customColors?.gradientStartAngle;
@@ -110,38 +113,45 @@ class CircularSliderAppearance {
   String? get infoTopLabelText => _topLabelText;
   String? get infoBottomLabelText => _bottomLabelText;
   TextStyle get infoMainLabelStyle {
-    return _mainLabelStyle ?? TextStyle(
-        fontWeight: FontWeight.w100,
-        fontSize: size / 5.0,
-        color: Color.fromRGBO(30, 0, 59, 1.0));
+    return _mainLabelStyle ??
+        TextStyle(
+          fontWeight: FontWeight.w100,
+          fontSize: size / 5.0,
+          color: Color.fromRGBO(30, 0, 59, 1.0),
+        );
   }
 
   TextStyle get infoTopLabelStyle {
-    return _topLabelStyle ?? TextStyle(
-        fontWeight: FontWeight.w600,
-        fontSize: size / 10.0,
-        color: Color.fromRGBO(147, 81, 120, 1.0));
+    return _topLabelStyle ??
+        TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: size / 10.0,
+          color: Color.fromRGBO(147, 81, 120, 1.0),
+        );
   }
 
   TextStyle get infoBottomLabelStyle {
-    return _bottomLabelStyle ?? TextStyle(
-        fontWeight: FontWeight.w600,
-        fontSize: size / 10.0,
-        color: Color.fromRGBO(147, 81, 120, 1.0));
+    return _bottomLabelStyle ??
+        TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: size / 10.0,
+          color: Color.fromRGBO(147, 81, 120, 1.0),
+        );
   }
 
-  const CircularSliderAppearance(
-      {this.customWidths,
-      this.customColors,
-      this.size = _defaultSize,
-      this.startAngle = _defaultStartAngle,
-      this.angleRange = _defaultAngleRange,
-      this.infoProperties,
-      this.animationEnabled = true,
-      this.counterClockwise = false,
-      this.spinnerMode = false,
-      this.spinnerDuration = 1500,
-      this.animDurationMultiplier = 1.0});
+  const CircularSliderAppearance({
+    this.customWidths,
+    this.customColors,
+    this.size = _defaultSize,
+    this.startAngle = _defaultStartAngle,
+    this.angleRange = _defaultAngleRange,
+    this.infoProperties,
+    this.animationEnabled = true,
+    this.counterClockwise = false,
+    this.spinnerMode = false,
+    this.spinnerDuration = 1500,
+    this.animDurationMultiplier = 1.0,
+  });
 }
 
 class CustomSliderWidths {
@@ -150,11 +160,12 @@ class CustomSliderWidths {
   final double? handlerSize;
   final double? shadowWidth;
 
-  CustomSliderWidths(
-      {this.trackWidth,
-      this.progressBarWidth,
-      this.handlerSize,
-      this.shadowWidth});
+  CustomSliderWidths({
+    this.trackWidth,
+    this.progressBarWidth,
+    this.handlerSize,
+    this.shadowWidth,
+  });
 }
 
 class CustomSliderColors {
@@ -173,21 +184,22 @@ class CustomSliderColors {
   final double? shadowStep;
   final Color? dotColor;
 
-  CustomSliderColors(
-      {this.trackColor,
-      this.progressBarColor,
-      this.progressBarColors,
-      this.gradientStartAngle,
-      this.gradientEndAngle,
-      this.trackColors,
-      this.trackGradientStartAngle,
-      this.trackGradientEndAngle,
-      this.hideShadow,
-      this.shadowColor,
-      this.shadowMaxOpacity,
-      this.shadowStep,
-      this.dotColor,
-      this.dynamicGradient = false});
+  CustomSliderColors({
+    this.trackColor,
+    this.progressBarColor,
+    this.progressBarColors,
+    this.gradientStartAngle,
+    this.gradientEndAngle,
+    this.trackColors,
+    this.trackGradientStartAngle,
+    this.trackGradientEndAngle,
+    this.hideShadow,
+    this.shadowColor,
+    this.shadowMaxOpacity,
+    this.shadowStep,
+    this.dotColor,
+    this.dynamicGradient = false,
+  });
 }
 
 class InfoProperties {
@@ -198,11 +210,12 @@ class InfoProperties {
   final String? topLabelText;
   final String? bottomLabelText;
 
-  InfoProperties(
-      {this.topLabelText,
-      this.bottomLabelText,
-      this.mainLabelStyle,
-      this.topLabelStyle,
-      this.bottomLabelStyle,
-      this.modifier});
+  InfoProperties({
+    this.topLabelText,
+    this.bottomLabelText,
+    this.mainLabelStyle,
+    this.topLabelStyle,
+    this.bottomLabelStyle,
+    this.modifier,
+  });
 }
