@@ -467,25 +467,102 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final controller = PageController(initialPage: 0);
+  int currentPage = 0;
+
+  final List<Widget> pages = [
+    example01,
+    example10,
+    RandomValuePage(),
+    example03,
+    example04,
+    example02,
+    example05,
+    example09,
+    example08,
+    example06,
+    example07,
+    Clock(),
+  ];
+
+  void _nextPage() {
+    if (currentPage < pages.length - 1) {
+      setState(() {
+        currentPage++;
+      });
+      controller.animateToPage(
+        currentPage,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  void _previousPage() {
+    if (currentPage > 0) {
+      setState(() {
+        currentPage--;
+      });
+      controller.animateToPage(
+        currentPage,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      controller: controller,
-      children: [
-        example01,
-        example10,
-        RandomValuePage(),
-        example03,
-        example04,
-        example02,
-        example05,
-        example09,
-        example08,
-        example06,
-        example07,
-        Clock(),
-      ],
+    return Scaffold(
+      body: PageView(
+        controller: controller,
+        physics: const NeverScrollableScrollPhysics(), // Disable swipe gestures
+        children: pages,
+        onPageChanged: (index) {
+          setState(() {
+            currentPage = index;
+          });
+        },
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          currentPage > 0
+              ? Padding(
+                padding: const EdgeInsets.only(left: 32.0),
+                child: Material(
+                  elevation: 8,
+                  color: Colors.transparent,
+                  shadowColor: Colors.grey.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(18),
+                  child: FloatingActionButton(
+                    onPressed: _previousPage,
+                    backgroundColor: Colors.white.withValues(alpha: 0.4),
+                    heroTag: "previous",
+                    elevation: 0,
+                    child: const Icon(Icons.arrow_back),
+                  ),
+                ),
+              )
+              : const SizedBox(
+                width: 88,
+              ), // Invisible placeholder (FAB width + padding)
+
+          if (currentPage < pages.length - 1)
+            Material(
+              elevation: 8,
+              color: Colors.transparent,
+              shadowColor: Colors.grey.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(18),
+              child: FloatingActionButton(
+                onPressed: _nextPage,
+                backgroundColor: Colors.white.withValues(alpha: 0.4),
+                heroTag: "next",
+                elevation: 0,
+                child: const Icon(Icons.arrow_forward),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }
