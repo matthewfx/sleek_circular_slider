@@ -284,7 +284,7 @@ class SleekCircularSliderState extends State<SleekCircularSlider>
     if (isPointAlongCircle(
       position,
       _painter!.center!,
-      _painter!.radius,
+      _painter!.radius!,
       touchWidth,
     )) {
       _selectedAngle = coordinatesToRadians(_painter!.center!, position);
@@ -321,7 +321,7 @@ class SleekCircularSliderState extends State<SleekCircularSlider>
     if (isPointAlongCircle(
       position,
       _painter!.center!,
-      _painter!.radius,
+      _painter!.radius!,
       touchWidth,
     )) {
       _isHandlerSelected = true;
