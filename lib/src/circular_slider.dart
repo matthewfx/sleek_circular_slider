@@ -3,9 +3,10 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:sleek_circular_slider/src/slider_animations.dart';
 import 'utils.dart';
 import 'appearance.dart';
+import 'curve_painter_helpers.dart';
+import 'slider_animations.dart';
 import 'slider_label.dart';
 import 'dart:math' as math;
 

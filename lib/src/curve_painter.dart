@@ -87,7 +87,7 @@ class _CurvePainter extends CustomPainter {
     }
   }
 
-  _ShadowConfig _calculateShadowConfig() {
+  ShadowConfig _calculateShadowConfig() {
     final step =
         appearance.shadowStep ??
         math.max(
@@ -101,7 +101,7 @@ class _CurvePainter extends CustomPainter {
     );
     final opacityStep = maxOpacity / repetitions;
 
-    return _ShadowConfig(
+    return ShadowConfig(
       step: step,
       maxOpacity: maxOpacity,
       repetitions: repetitions,
@@ -140,7 +140,7 @@ class _CurvePainter extends CustomPainter {
     );
   }
 
-  _GradientConfig _calculateGradientConfig() {
+  GradientConfig _calculateGradientConfig() {
     final currentAngle = _getCurrentAngle();
     final isDynamic = appearance.dynamicGradient;
     final isCounterClockwise = appearance.counterClockwise;
@@ -160,7 +160,7 @@ class _CurvePainter extends CustomPainter {
             ? (isCounterClockwise ? 360.0 : currentAngle.abs())
             : appearance.gradientStopAngle;
 
-    return _GradientConfig(
+    return GradientConfig(
       rotationAngle: rotationAngle,
       startAngle: gradientStartAngle,
       endAngle: gradientEndAngle,
@@ -212,52 +212,18 @@ class _CurvePainter extends CustomPainter {
     );
   }
 
-  _ArcConfig _calculateArcConfig(bool ignoreAngle, bool spinnerMode) {
+  ArcConfig _calculateArcConfig(bool ignoreAngle, bool spinnerMode) {
     if (spinnerMode) {
-      return _ArcConfig(startAngle: 0, sweepAngle: 360);
+      return ArcConfig(startAngle: 0, sweepAngle: 360);
     }
 
     final angleValue = ignoreAngle ? 0 : (angleRange - angle);
     final range = appearance.counterClockwise ? -angleRange : angleRange;
     final currentAngle = appearance.counterClockwise ? angleValue : -angleValue;
 
-    return _ArcConfig(startAngle: startAngle, sweepAngle: range + currentAngle);
+    return ArcConfig(startAngle: startAngle, sweepAngle: range + currentAngle);
   }
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
-}
-
-// Helper classes for better organization
-class _ShadowConfig {
-  final double step;
-  final double maxOpacity;
-  final int repetitions;
-  final double opacityStep;
-
-  const _ShadowConfig({
-    required this.step,
-    required this.maxOpacity,
-    required this.repetitions,
-    required this.opacityStep,
-  });
-}
-
-class _GradientConfig {
-  final double rotationAngle;
-  final double startAngle;
-  final double endAngle;
-
-  const _GradientConfig({
-    required this.rotationAngle,
-    required this.startAngle,
-    required this.endAngle,
-  });
-}
-
-class _ArcConfig {
-  final double startAngle;
-  final double sweepAngle;
-
-  const _ArcConfig({required this.startAngle, required this.sweepAngle});
 }
